@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="package_details_report">
+    <t t-call="report.html_container">
+        <t t-call="beauty_pos.internal_layout">
+             <div class="page">
+                 <div class="text-center">
+                    <br/>
+                    <br/>
+                     <center>
+                         <h2>Package details Report</h2>
+                         <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Period From</strong></td>
+                                        <td>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Period To</strong></td>
+                                        <td>: <span t-esc="date_stop" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Customer</strong></td>
+                                        <td>:
+                                            <t t-if="partner_name">
+                                                <span t-esc="partner_name"/>
+                                            </t>
+                                            <t t-else="">
+                                                All
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Package type</strong></td>
+                                        <td>:
+                                            <t t-if="package_type_name">
+                                                <span t-esc="package_type_name"/>
+                                            </t>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table class="table table-striped">
+                                <colgroup>
+                                    <col width='4%'/>
+                                    <col width='8%'/>
+                                    <col width='18%'/>
+                                    <col width='35%'/>
+                                    <col width='8%'/>
+                                    <col width='13%'/>
+                                    <col width='6%'/>
+                                    <col width='6%'/>
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <tr>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card No</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Package</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Phone</th>
+                                        <!--<th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Service</th>-->
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">No of session</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Amount</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Purchased date</th>
+                                        <th t-if="is_detailed" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Redeemed date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="appointment_tbody" >
+                                    <t t-set="i" t-value="1" />
+                                    <t t-foreach="card_list" t-as="cards">
+                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                <span t-esc="i"/><t t-set="i" t-value="i+1"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                <span t-esc="cards.name"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                <span t-esc="cards.package_combo_item.name"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                <span t-esc="cards.partner_id.name"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                <span t-esc="cards.partner_id.phone"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                <span t-esc="len(cards.combo_session_ids)"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                <span t-esc="cards.package_card_amount"/>
+                                            </td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                <span t-esc="cards.purchased_date" t-options='{"widget": "date"}'/>
+                                            </td>
+                                            <td t-if="is_detailed" style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                            </td>
+                                        </tr>
+                                        <t t-if="is_detailed">
+                                            <t t-foreach="combo_session_lines" t-as="session_line">
+                                                <t t-if="cards.id == session_line.package_card_id.id">
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td/>
+                                                        <td colspan="3" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                            <span t-esc="session_line.product_id.name"/>
+                                                        </td>
+                                                        <td colspan="3" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                                            <span t-esc="session_line.order_line_id.staff_assigned_id.name"/>
+                                                        </td>
+                                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                                            <!--<span t-esc="session_line.package_card_id.purchased_date" t-options='{"widget": "date"}'/>-->
+                                                        </td>
+                                                        <td t-if="is_detailed" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                                            <span t-esc="session_line.redeemed_date" t-options='{"widget": "date"}'/>
+                                                        </td>
+                                                        <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">-->
+                                                            <!--1-->
+                                                        <!--</td>-->
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                     </center>
+                 </div>
+             </div>
+        </t>
+        </t>
+    </template>
+
+    <report id="report_package_details_report"
+            model="stock.move"
+            string="Package details Report"
+            report_type="qweb-pdf"
+            name="report_package_details.package_details_report"
+            file="report_package_details.package_details_report"
+            menu="False"
+    />
+
+    <record id="report_package_details_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    
+
+</odoo>

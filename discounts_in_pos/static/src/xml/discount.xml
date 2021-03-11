@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_extend_template" inherit_id="point_of_sale.template">
+
+<t t-extend="NumpadWidget">
+
+<t t-jquery="div.numpad" t-operation="inner">
+
+            <button class="input-button number-char">1</button>
+            <button class="input-button number-char">2</button>
+            <button class="input-button number-char">3</button>
+            <button class="mode-button" data-mode='quantity'>Qty</button>
+            <br />
+            <button class="input-button number-char">4</button>
+            <button class="input-button number-char">5</button>
+            <button class="input-button number-char">6</button>
+            <button class="mode-button" data-mode='discount'>Disc</button>
+            <br />
+            <button class="input-button number-char">7</button>
+            <button class="input-button number-char">8</button>
+            <button class="input-button number-char">9</button>
+            <button class="mode-button" data-mode='price'>Price</button>
+            <br />
+            <button class="input-button numpad-minus" >+/-</button>
+            <button class="input-button number-char">0</button>
+            <button class="input-button number-char">.</button>
+            <button class="input-button numpad-backspace">
+                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" />
+            </button>
+            <br />
+            <!--<button class="mode-button" data-mode='discount_fixed' style="width:100%;height:45px;">Disc.Fixed</button>-->
+            <!--<button class="mode-button" data-mode='discount_percent' style="width:40%;height:45px;">Disc(Total %)</button>-->
+            <!--<br />-->
+            <!--<button class="mode-button" data-mode='discount_total' style="width:60%;height:45px;">Dis.Fixed(Total)</button>-->
+
+            <button class="mode-button" data-mode='discount_total' style="width:60%;height:45px;">Dis.Total(Fixed)</button>
+            <button class="mode-button" data-mode='discount_percent' style="width:40%;height:45px;">Dis.Total(%)</button>
+
+
+</t>
+
+</t>
+
+<t t-name="Orderline">
+        <li t-attf-class="orderline #{ line.selected ? 'selected' : '' }">
+            <span class="product-name">
+                <t t-esc="line.get_product().display_name"/>
+            </span>
+            <span class="price">
+                <t t-esc="widget.format_currency(line.get_display_price())"/>
+            </span>
+            <ul class="info-list">
+                <t t-if="line.get_quantity_str() !== '1' || line.selected ">
+                    <li class="info">
+                        <em>
+                            <t t-esc="line.get_quantity_str()" />
+                        </em>
+                        <t t-esc="line.get_unit().name" />
+                        at
+                        <t t-esc="widget.format_currency(line.get_unit_display_price(),'Product Price')" />
+                        /
+                        <t t-esc="line.get_unit().name" />
+                    </li>
+                </t>
+                <t t-if="line.get_discount()">
+                    <li class="info">
+                        With a
+                        <em>
+                            <t t-esc="line.get_discount()" />%
+                        </em>
+                        discount
+                    </li>
+                </t>
+                <t t-if="line.get_discount_fixed()">
+                    <li class="info">
+                        With a
+                        <em>
+                            <t t-esc="widget.format_currency(line.get_discount_fixed())"/>
+                        </em>
+                        discount
+                    </li>
+                </t>
+            </ul>
+        </li>
+    </t>
+
+    <t t-name="OrderWidget">
+        <div class="order-container">
+            <div class="order-scroller touch-scrollable">
+                <div class="order">
+                    <t t-if="orderlines.length === 0" >
+                        <div class='order-empty'>
+                            <i class='fa fa-shopping-cart' />
+                            <h1>Your shopping cart is empty</h1>
+                        </div>
+                    </t>
+                    <t t-if="orderlines.length > 0">
+                        <ul class="orderlines"></ul>
+                        <div class="summary clearfix">
+                            <div class="line">
+                                <div class='entry total'>
+                                    <span class="label">Total: </span> <span class="value">0.00 €</span>
+                                    <div class='subentry'>Taxes: <span class="value">0.00€</span></div>
+
+                                    <div class='subentry'><span class="value_discount_total"></span></div>
+                                    <div class='subentry'><span class="value_discount_percent"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+
+    <t t-extend="PosTicket">
+        <t t-jquery=".receipt-total" t-operation="replace">
+            <table class='receipt-total'>
+                <tr>
+                    <td><b>Subtotal:</b></td>
+                    <td class="pos-right-align">
+                        <!--<t t-esc="widget.format_currency(order.get_total_without_tax())"/>-->
+                        <b><t t-esc="widget.format_currency(sub_total)"/></b>
+                    </td>
+                </tr>
+                <!--<t t-foreach="order.get_tax_details()" t-as="taxdetail">-->
+                    <!--<tr>-->
+                        <!--<td><t t-esc="taxdetail.name" /></td>-->
+                        <!--<td class="pos-right-align">-->
+                            <!--<t t-esc="widget.format_currency(taxdetail.amount)" />-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</t>-->
+
+                <!--start-->
+                <!--<tr t-if="order.get_discount_total_order()">-->
+                    <!--<td><b>Disc.Fixed(Total):</b></td>-->
+                    <!--<td class="pos-right-align">-->
+                        <!--<b><t t-esc="widget.format_currency(order.get_discount_total_order())"/></b>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr t-if="order.get_discount_percent_order()">-->
+                    <!--<td><b>Disc.Percent(Total):</b></td>-->
+                    <!--<td class="pos-right-align">-->
+                        <!--<b>-->
+                            <!--<t t-esc="order.get_discount_percent_order()"/> %-->
+                        <!--</b>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <tr>
+                    <td><b>Discount:</b></td>
+                    <td class="pos-right-align">
+                        <b><t t-esc="widget.format_currency(order.get_total_discount())"/></b>
+                    </td>
+                </tr>
+                <!--stop-->
+                <tr class="emph">
+                    <td><b>Total:</b></td>
+                    <td class="pos-right-align">
+                        <b><t t-esc="widget.format_currency(order.get_total_with_tax())"/></b>
+                    </td>
+                </tr>
+            </table>
+        </t>
+  </t>
+</templates>

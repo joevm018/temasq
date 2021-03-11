@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="combo_pack_product_form">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="list_price" position="attributes">
+                    <attribute name="attrs">{'invisible':[('combo_pack', '=', True)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                <field name="barcode" position="after">
+                    <field name="valid_period" invisible="1"/>
+                    <!--<field name="valid_period" attrs="{'invisible': [('combo_pack', '=', False)]}"/>-->
+                    <field name="start_date" attrs="{'required':[('valid_period', '=', True)],
+                    'invisible':[('valid_period', '=', False)]}"/>
+                    <field name="end_date" attrs="{'required':[('valid_period', '=', True)],
+                    'invisible':[('valid_period', '=', False)]}"/>
+                    <field name="update_active" invisible="1"/>
+                </field>
+
+                <page name="notes1" position="before">
+                    <page name="sub_items" string="Combo Items"  attrs="{'invisible': [('combo_pack', '=', False)]}">
+                        <field name="combo_pack" invisible="1"/>
+                        <field name="pack_ids">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="name" invisible="1"/>
+                                <field name="count"/>
+                                <field name="price" force_save="1"/>
+                                <field name="subtotal" sum="Total Sale Price"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+            </data>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="combo_pack_tree">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="name" position="after">
+                    <field name="update_active" invisible="1"/>
+                </field>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_combo_packs">
+        <field name="name">Combo Packs</field>
+        <field name="res_model">product.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('combo_pack', '=', 1)]</field>
+        <field name="context">{'default_combo_pack':1, 'default_type':'service'}</field>
+        <field name="view_id" ref="product.product_template_tree_view"/>
+    </record>
+
+    <record id="action_combo_packs_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="product.product_template_tree_view"/>
+        <field name="act_window_id" ref="action_combo_packs"/>
+    </record>
+
+    <record id="action_combo_packs_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="combo_pack_product_form"/>
+        <field name="act_window_id" ref="action_combo_packs"/>
+    </record>
+
+    <menuitem id="menu_combo_packs" name="Combo Packs" parent="beauty_soft.menu_items" sequence="25"
+              groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" action="action_combo_packs"/>
+
+    <record model="ir.actions.act_window" id="beauty_soft.action_services">
+           <field name="name">Services</field>
+           <field name="res_model">product.template</field>
+           <field name="view_type">form</field>
+           <field name="view_mode">tree,form</field>
+           <field name="domain">[('type', '=', 'service'), ('combo_pack', '=', False)]</field>
+           <field name="context">{'default_type':'service'}</field>
+           <field name="view_id" ref="product.product_template_tree_view"/>
+       </record>
+
+        <record model="ir.ui.view" id="product_template_form_view_procurement_button">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <data>
+                <page name="staffs_for_services" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('type', '!=', 'service'), ('combo_pack', '=', True)]}</attribute>
+                </page>
+            </data>
+        </field>
+    </record>
+
+</odoo>

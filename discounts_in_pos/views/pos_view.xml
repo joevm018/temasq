@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_pos_config_form_extended">
+            <field name="name">pos.config.extend</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sequence_id']" position="after">
+                    <field name="discount_account"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_pos_new_form_extended">
+                <field name="name">pos.order.extend</field>
+                <field name="model">pos.order</field>
+                <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+                <field name="arch" type="xml">
+                    <!--<xpath expr="//field[@name='qty']" position="replace">-->
+                        <!--<field name="qty"/>-->
+                    <!--</xpath>-->
+                    <!--<xpath expr="//field[@name='price_unit']" position="replace">-->
+                        <!--<field name="price_unit"/>-->
+                    <!--</xpath>-->
+                    <!--<xpath expr="//field[@name='discount']" position="replace">-->
+                        <!--<field name="discount" widget="monetary"/>-->
+                    <!--</xpath>-->
+                    <!--<xpath expr="//field[@name='discount']" position="after">-->
+                        <!--<field name="discount_fixed" widget="monetary"/>-->
+                    <!--</xpath>-->
+                    <xpath expr="//field[@name='price_subtotal_incl']" position="after">
+                        <field name="after_global_disc_subtotal" invisible="1"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='amount_tax']" position="after">
+                        <field name="amt_before_discount" />
+                        <field name="discount_total" />
+                        <field name="discount_percent" />
+                        <field name="amt_discount" />
+                    </xpath>
+                </field>
+        </record>
+    </data>
+</openerp>

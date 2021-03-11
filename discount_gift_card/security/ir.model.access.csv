@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_customer_card,pos_customer_card,model_pos_customer_card,,1,1,1,1
+access_combo_lines,access_combo_lines,model_combo_lines,,1,1,1,1
+access_combo_session,access_combo_session,model_combo_session,,1,1,1,1

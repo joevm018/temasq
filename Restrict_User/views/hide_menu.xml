@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.menu" id="base.menu_management">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="base.menu_translation">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="base.menu_custom">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="base_setup.menu_config">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="web_settings_dashboard.web_dashboard_menu">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="base.menu_action_res_company_form">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="base.menu_action_res_groups">
+        <field name="groups_id" eval="[(6,0,[ref('group_user_security')])]"/>
+    </record>
+
+
+    <record id="res_user_view_inheritted" model="ir.ui.view">
+        <field name="name">res.users.form.inherited</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="attributes" >
+                <attribute name="groups">Restrict_User.group_user_security</attribute>
+            </xpath>
+        </field>
+     </record>
+
+</odoo>

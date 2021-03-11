@@ -1,0 +1,23 @@
+{
+    "name": "Category Report Excel",
+    "version": "1.0",
+    "author": "Al Kidhma Group",
+    "website": "",
+    "category": "Point of Sale",
+    "license": "LGPL-3",
+    "summary": "Category Report Excel",
+    "description": """ """,
+    "depends": ['beauty_pos', 'point_of_sale'],
+    "data": [
+        "views/category_wizard.xml",
+    ],
+    "demo": [],
+    "test": [],
+    "images": [],
+    'qweb': ['static/src/xml/*.xml'],
+    "css": [],
+    "sequence": 1,
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}

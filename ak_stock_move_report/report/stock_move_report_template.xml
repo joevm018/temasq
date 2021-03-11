@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="stock_move_report">
+
+    <t t-call="report.html_container">
+                    <t t-call="beauty_pos.internal_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                <br/>
+                                <br/>
+                                <br/>
+                                 <div >
+                                     <h2><b>Stock Report</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                                <tr>
+                                                    <td><strong>Period From</strong></td>
+                                                    <td>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                                    <td><strong>Period To</strong></td>
+                                                    <td>: <span t-esc="date_stop" t-options='{"widget": "date"}'/></td>
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                <table class="table table-striped" name="category">
+                                        <colgroup>
+                                            <col width='6%'/>
+                                            <col width='10%'/>
+                                            <col width='13%'/>
+                                            <col width='25%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='22%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Product</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Sale Qty</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Purchase Qty</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Current Total Stock</th>
+                                              
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                                <tr t-foreach="count_list" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="l['product']"/></td>
+                                                    <!-- <tr t-foreach="doc" t-as="o"> -->
+                                                        
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="l['total_sale_count']"/>
+                                                        </td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="l['total_purchase_count']"/>
+                                                        </td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="l['total_current_stock']"/>
+                                                        </td>
+                                                        
+                                                    
+                                                </tr>
+                                            <!-- </tr> -->
+                                            <!-- </tr> -->
+                                        </tbody>
+
+                                    </table>
+                               
+                        
+                                  <br/>
+                                  <div class="pull-right">
+                                    
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <strong>Authorized Signature</strong>
+                                </div>
+                                 </center>
+                                
+                             </div>
+                         </div>
+                    </t>
+                </t>
+
+    </template>
+
+    <report id="stock_move_report1"
+            model="stock.move"
+            string="Stock Moves Report"
+            report_type="qweb-pdf"
+            name="ak_stock_move_report.stock_move_report"
+            file="ak_stock_move_report.stock_move_report"
+            menu="True"
+    />
+    
+
+</odoo>

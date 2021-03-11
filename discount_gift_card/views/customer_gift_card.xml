@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_customer_gift_card_search" model="ir.ui.view">
+            <field name="name">pos.customer.card.search.view</field>
+            <field name="model">pos.customer.card</field>
+            <field name="arch" type="xml">
+                <search string="Card">
+                    <field name="name"/>
+                    <field name="purchased_date"/>
+                    <field name="partner_id"/>
+                    <field name="state"/>
+                    <filter string="Zero card" name="zero" domain="[('is_zeroo_card','=',True)]"/>
+                    <filter string="Active card" name="non_zero" domain="[('is_zeroo_card','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="customer_gift_card_tree" model="ir.ui.view">
+            <field name="name">view.pos.customer.card.tree</field>
+            <field name="model">pos.customer.card</field>
+            <field name="arch" type="xml">
+                <tree edit="0" delete="0">
+                    <field name="name"/>
+                    <field name="is_zeroo_card" invisible="1"/>
+                    <field name="card_no" password="True"/>
+                    <field name="purchased_date"/>
+                    <field name="partner_id"/>
+                    <field name="discount_gift_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" invisible="not context.get('show_discount_gift_card', False)"/>
+                    <field name="remaining_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" invisible="not context.get('show_discount_gift_card', False)"/>
+                    <field name="package_combo_item" invisible="not context.get('show_package_card', False)"/>
+                    <field name="qatar_university_id" invisible="not context.get('show_student_card', False)"/>
+                    <field name="university_expiry_date" invisible="not context.get('show_student_card', False)"/>
+                    <field name="package_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" invisible="not context.get('show_package_card', False)"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="customer_gift_card_form" model="ir.ui.view">
+            <field name="name">pos.customer.card</field>
+            <field name="model">pos.customer.card</field>
+            <field name="arch" type="xml">
+                <form string="Card" edit="0" delete="0">
+                    <header>
+                        <button name="action_cancel" string="Cancel" type="object" states="new,active"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,active"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+							<h1>
+								<field name="name"/>
+							</h1>
+						</div>
+                        <group>
+                            <group>
+                                <field name="card_no" password="True"/>
+                                <field name="partner_id" attrs="{'invisible':[('partner_id','=', False)]}"/>
+                                <field name="discount_gift_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_discount_gift_card')]}"/>
+                                <field name="package_combo_item" options="{'no_create': True, 'no_open':True}" attrs="{'invisible':[('type','!=','type_package_card')],'required':[('type','=','type_package_card')]}"/>
+                                <field name="is_wellness_card" attrs="{'invisible':[('type','!=','type_package_card')]}"/>
+                                <field name="qatar_university_id" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_student_card')]}"/>
+                            </group>
+                            <group>
+                                <field name="purchased_date" attrs="{'invisible':[('purchased_date','=',False)]}"/>
+                                <field name="type" invisible="1"/>
+                                <field name="package_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_package_card')]}"/>
+                                <field name="remaining_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_discount_gift_card')]}"/>
+                                <field name="package_combo_wellness_ids" widget="many2many_tags" options="{'no_create': True, 'no_open':True}" attrs="{'invisible':['|',('type','!=','type_package_card'),('is_wellness_card','!=',True)],'required':[('is_wellness_card','=',True)]}"/>
+                                <field name="university_expiry_date" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_student_card')]}"/>
+                                <field name="is_zeroo_card"  invisible="1"/>
+                            </group>
+                        </group>
+                        <label for="transaction_orders" string="Transaction details" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_discount_gift_card')]}"/>
+                        <field name="transaction_orders" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_discount_gift_card')]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="date_order"/>
+                                <field name="partner_id"/>
+                                <field name="redeemed_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                            </tree>
+                        </field>
+                        <label for="combo_session_ids" string="Combo sessions" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_package_card')]}"/>
+                        <field name="combo_session_ids" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_package_card')]}">
+                            <tree create="0" delete="0" colors="green:state=='done'" decoration-info="state == 'draft'"
+                                  decoration-muted="state in ('cancel')">
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="price" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                <field name="original_price" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                <field name="redeemed_date"/>
+                                <field name="order_id" string="Redeemed Order"/>
+                                <!--<field name="order_line_id" string="Redeemed Order line"/>-->
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                        <label for="transaction_package_orders" string="Transaction details" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_package_card')]}"/>
+                        <field name="transaction_package_orders" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_package_card')]}">
+                            <tree>
+                                <field name="order_id" string="Order Ref"/>
+                                <field name="product_id"/>
+                                <field name="staff_assigned_id"/>
+                                <field name="procedure_start"/>
+                                <field name="procedure_stop"/>
+                            </tree>
+                        </field>
+                        <label for="transaction_student_orders" string="Transaction details" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_student_card')]}"/>
+                        <field name="transaction_student_orders" attrs="{'invisible':['|', ('partner_id','=',False),('type','!=','type_student_card')]}">
+                            <tree>
+                                <field name="order_id" string="Order Ref"/>
+                                <field name="product_id"/>
+                                <field name="staff_assigned_id"/>
+                                <field name="procedure_start"/>
+                                <field name="procedure_stop"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_customer_gift_card" model="ir.actions.act_window">
+            <field name="name">Discount Gift Card</field>
+            <field name="res_model">pos.customer.card</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="domain">[('type', '=', 'type_discount_gift_card'),('is_zeroo_card','=',False)]</field>-->
+            <field name="domain">[('type', '=', 'type_discount_gift_card')]</field>
+           <field name="context">{'default_type':'type_discount_gift_card', 'show_discount_gift_card': True, "search_default_non_zero":1}</field>
+            <field name="search_view_id" ref="view_customer_gift_card_search"/>
+        </record>
+
+        <record id="action_customer_package_card" model="ir.actions.act_window">
+            <field name="name">Package Card</field>
+            <field name="res_model">pos.customer.card</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'type_package_card')]</field>
+            <!--<field name="domain">[('type', '=', 'type_package_card'),('is_zeroo_card','=',False)]</field>-->
+           <field name="context">{'default_type':'type_package_card', 'show_package_card': True, "search_default_non_zero":1}</field>
+            <field name="search_view_id" ref="view_customer_gift_card_search"/>
+        </record>
+
+        <record id="action_student_card" model="ir.actions.act_window">
+            <field name="name">Student Card</field>
+            <field name="res_model">pos.customer.card</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'type_student_card')]</field>
+            <!--<field name="domain">[('type', '=', 'type_student_card'),('is_zeroo_card','=',False)]</field>-->
+           <field name="context">{'default_type':'type_student_card', 'show_student_card': True, "search_default_non_zero":1}</field>
+            <field name="search_view_id" ref="view_customer_gift_card_search"/>
+        </record>
+
+        <menuitem id="menu_pos_cards" name="Cards" parent="point_of_sale.menu_point_root" sequence="66"
+                  groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user,beauty_pos.group_help_desk"/>
+        <menuitem id="menu_customer_gift_card" name="Discount Gift Card" action="action_customer_gift_card"
+                  parent="menu_pos_cards" sequence="1"/>
+        <menuitem id="menu_customer_package_card" name="Package Card" action="action_customer_package_card"
+                  parent="menu_pos_cards" sequence="2"/>
+        <menuitem id="menu_student_card" name="Student Card" action="action_student_card"
+                  parent="menu_pos_cards" sequence="3"/>
+
+    </data>
+</odoo>

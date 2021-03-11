@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_checkin_template">
+            <t t-call="report.html_container">
+                    <t t-call="beauty_pos.internal_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div >
+                                     <h1><b>CUSTOMER CHECKIN REPORT</b></h1>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='50%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody width="100%" class="patient_invoice_tbody">
+                                                <tr>
+                                                    <td class="text-left"><strong>Period From</strong>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                                    
+                                                     <td class="text-center" ><strong>Report Date</strong>: <span t-esc="report_date"/></td>
+                                                     
+                                                    <td align="right"><strong>Period To</strong>: <span t-esc="date_end" t-options='{"widget": "date"}'/></td>
+                                                   
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table width="100%" class="table table-striped">
+                                    	<h3><b>CHECKED-IN</b></h3>
+                                                <thead >
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Reference</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Date</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Related Staff</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">State</th>
+                                           
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="i" t-value="1" />
+                                                        <tr t-foreach="checkedin" t-as="doc" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <t t-foreach="doc['order']" t-as='order'>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t  t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="order.name"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="order.date_order"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order.partner_id.name"/></td>
+                                                            <td  style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                            	<t t-foreach="order.staff_ids" t-as='l'>
+                                                            		<t t-esc="l.name"/>,
+                                                            	</t></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="order.amount_total"/></td>                     
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="{'draft': 'Appointment','paid': 'Paid','cancel': 'Cancelled','done': 'Posted','invoiced':'Invoiced'}[order.state]" /></td>
+                                                    </t>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                  <table width="100%" class="table table-striped">
+                                    	<h3><b>UNCHECKED</b></h3>
+                                                <thead >
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Reference</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Date</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Related Staff</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">State</th>
+                                           
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="i" t-value="1" />
+                                                        <tr t-foreach="not_checkedin" t-as="N_doc" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <t t-foreach="N_doc['order']" t-as='N_order'>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t  t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="N_order.name"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="N_order.date_order"/></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="N_order.partner_id.name"/></td>
+                                                            <td  style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                            	<t t-foreach="N_order.staff_ids" t-as='n'>
+                                                            		<t t-esc="n.name"/>,
+                                                            	</t></td>
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="N_order.amount_total"/></td>                     
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="{'draft': 'Appointment','paid': 'Paid','cancel': 'Cancelled','done': 'Posted','invoiced':'Invoiced'}[N_order.state]" /></td>
+                                                    </t>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                  <br/>
+                                  <br/>
+                                  <br/>
+                                 <div class="pull-right">
+                                    <strong>Signature  </strong>
+                                </div>
+                                 </center>
+                                
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

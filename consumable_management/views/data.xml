@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_location_int_used" model="stock.location">
+        <field name="name">Used</field>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="usage">internal</field>
+        <field name="company_id"></field>
+    </record>
+
+    <record id="picking_type_int_transfer" model="stock.picking.type">
+        <field name="name">Internal Transfers</field>
+        <field name="sequence_id" ref="stock.seq_picking_internal"/>
+        <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        <field name="default_location_dest_id" ref="stock_location_int_used"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">internal</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        
+    <record id="form_todays_registration" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_type']" position="replace">
+                        <field name="company_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
+                    </xpath>
+                    <xpath expr="//div[@class='o_row']" position="replace">
+                        <field name="parent_id"
+                                placeholder="Company"
+                                domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': supplier, 'default_customer': customer}"
+                                attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
+                                <field name="company_name" invisible='1' />
+                                <field name="file_no" placeholder="File No"/>
+                                <field name="arabic_name" placeholder="Arabic Name"/>
+                                <button name="create_company" type="object" string="Create company" class="btn btn-sm oe_edit_only fa fa-external-link btn btn-link " attrs="{'invisible': ['|', '|', ('is_company','=', True), ('company_name', '=', ''), ('company_name', '=', False)]}"/>
+
+                    </xpath>
+                    <xpath expr="//field[@name='website']" position="replace">
+                        <field name="sex" widget="radio"  class="oe_edit_only" options="{'horizontal': true}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='category_id']" position="replace">
+                        <field name="dob"/>
+                    </xpath>
+                    <xpath expr="//field[@name='function']" position="replace">
+                        <!--<field name="dob"/>-->
+                    </xpath>
+                    <xpath expr="//field[@name='fax']" position="replace">
+                        <!--<field name="dob"/>-->
+                    </xpath>
+                    <xpath expr="//field[@name='title']" position="replace">
+                        <!--<field name="dob"/>-->
+                    </xpath>
+<!--                <form string="Patient Registration">
+                    <group >
+
+                       <div class="oe_title">
+                        <h1>
+                            <field name="name"  default_focus="1" placeholder="Name" />
+                        </h1>
+                        </div>
+
+                    </group>
+                    <group col="8" colspan='4'>
+                        <field name="file_no"/>
+                        <field name="date"/>
+                        <field name="sex" widget='radio'/>
+                        <field name="dob"/>
+                        <field name="phone"/>
+                        <field name="mobile"/>
+                        <field name="identity_no" String='QID'/>
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="country_id"/>
+                        <field name="email"/>
+                        <field name="active"/>
+                        <field name="notes"/>
+                        <field name="type" invisible="1"/>
+                        <field name="sale_warn" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                    </group>
+
+                </form>-->
+            </field>
+        </record>
+            
+        
+
+    <record id="view_todays_registration" model="ir.ui.view">
+            <field name="name">res.partner.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree string="Todays Registration">
+                    <field name="name"/>
+                    <field name="file_no"/>
+                    <field name="date"/>
+                    <field name="phone"/>
+                     <field name="type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_today_registration_search" model="ir.ui.view">
+            <field name="name">view Registration search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Open a Window">
+                    <field name="phone" filter_domain="[('phone','ilike',self)]" string="Phone"/>
+                    <field name="name" filter_domain="[('name','ilike',self)]" string="Name"/>
+                    <field name="file_no" filter_domain="[('name','ilike',self)]" string="File No"/>
+
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_beauty_soft">
+            <field name="name">Todays Registration</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+             <field name="domain">[('customer','=','True')]</field>
+            <field name="view_id" ref="view_todays_registration"/>
+            <field name="search_view_id" ref="view_today_registration_search"/>
+        </record>
+
+        <menuitem id="menu_beauty_soft" name="Appointment Scheduler"
+                  groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" parent=""  sequence="50" />
+
+        <record model="ir.ui.menu" id="point_of_sale.menu_point_root">
+            <field name="name">Beauty Soft</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_pos_order_filter">
+            <field name="name">pos.order.list.select</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_order_filter" />
+            <field name="arch" type="xml">
+                 <xpath expr="//filter[1]" position="after">
+                     <field name="state"/>
+                     <filter string="Today" name="today" domain="[('date_order','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59))), ('date_order','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                 </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="point_of_sale.action_pos_pos_form">
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="context">{"search_default_today":1}</field>
+        </record>
+
+        <menuitem id="sub_menu_master" name="Master" sequence="11" parent="point_of_sale.menu_point_root" />
+            <menuitem  id="module_customer" name="Customer" parent="sub_menu_master" action="action_beauty_soft" sequence="55" />
+
+        <record model='ir.ui.menu' id='mail.mail_channel_menu_root_chat'>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
+        </record>
+
+        <record model='ir.ui.menu' id='stock.menu_stock_root'>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_system'),ref('stock.group_stock_manager')])]"/>
+        </record>
+
+        <record model='ir.ui.menu' id='hr.menu_hr_root'>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_system'),ref('hr.group_hr_manager'),ref('hr.group_hr_user')])]"/>
+        </record>
+
+        <record model='ir.ui.menu' id='point_of_sale.menu_pos_session_all'>
+            <field name="groups_id" eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('point_of_sale.group_pos_user')])]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,211 @@
+.pos .pos-branding .delivery_mode{
+    float:right;
+    color:red;
+    font-size:16px;
+    margin-right:32px;
+    line-height: 48px;
+    font-style:italic;
+    cursor: pointer;
+
+}
+.pos .modal-dialog{
+    margin: 30px auto;
+}
+.pos .modal-dialog.modal-lg .popup{
+    width: 900px;
+    width: 95% !important;
+    height: auto !important;
+    position: initial;
+    background-color:
+}
+
+.thumbs-flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 85%;
+}
+.thumb-item {
+    width: 175px;
+    max-width: 100%;
+    margin: 0 22px 22px;
+}
+.thumb-inner{
+    min-height: 12px;
+    box-sizing: border-box;
+    padding: 8px;
+    cursor: pointer;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position: top center;
+    padding-top: 1px;
+}
+.thumb-text span {
+    display: block;
+}
+.thumb-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px 0 2px;
+}
+.img-responsive{
+    max-width: 100%;
+}
+
+
+  .items-outer{
+    height: 75vh;
+    overflow-y: scroll;
+    padding: 0 20px;
+  }
+  .items-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+   .items-wrapper-down {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+       border: solid 1px #cac8c8;
+    padding-top: 12px;
+  }
+  .popup-subtitle {
+    margin-bottom: 20px;
+    padding-top: 12px;
+}
+.popup-subtitle span {
+    display: inline-block;
+    font-size: 20px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+  .pizza-item {
+      margin: 0 15px 15px 0;
+  }
+  .pizza-item > label {
+      border: solid 1px #ccc;
+      width: 150px;
+      height: 60px;
+      margin-bottom: 20px;
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell;
+      cursor: pointer;
+  }
+  .pizza-item.noTopping{
+    background-color:red;
+  }
+  .pizza-item.noTopping label{
+    color: #fff;
+    position: relative;
+  }
+  .pizza-item.normalTopping{
+    background-color:blue;
+  }
+  .pizza-item.normalTopping label{
+    color: #fff;
+    position: relative;
+  }
+
+
+  .pizza-item > input[type="radio"]{
+    display: none;
+  }
+  .pizza-item > input[type="radio"]:checked + label{
+    background-color: green;
+    color: #fff;
+  }
+   .pizza-item > input[type="checkbox"]{
+    display: none;
+  }
+
+  .pizza-item > input[type="checkbox"]:checked + label:before{
+    content: '';
+    width: 0;
+	height: 0;
+	border-bottom: 30px solid green;
+	border-left: 30px solid transparent;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.pizza-item > input[type="checkbox"]:checked + label:after{
+    content: '\2713';
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+  .btn {
+    display: inline-block !important;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+    padding: 10px 16px !important;
+    font-size: 18px !important;
+    line-height: 1.3333333;
+    border-radius: 6px !important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7 !important;
+    border-color: #2e6da4 !important;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.btn-primary-add-topping {
+    color: #fff;
+    background-color: #337ab7 !important;
+    border-color: #2e6da4 !important;
+}
+.btn-primary-add-topping:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.pos .modal-lg .searchbox input {
+    width: 200px;
+    border: 1px solid #cecbcb;
+    padding: 10px 20px;
+    padding-left: 38px;
+    margin: 6px;
+    background: url("../img/search.png") no-repeat 15px;
+    background-color: white;
+    border-radius: 20px;
+    font-family: "Lato","Lucida Grande", Helvetica, Verdana, Arial;
+    font-size: 13px;
+}
+.pos .modal-lg .searchbox input:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px rgb(153, 153, 255) inset;
+    color: rgb(153, 153, 255);
+}
+.pos .modal-lg .searchclear {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 11px;
+    left: 11px;
+    cursor: pointer;
+}
+
+/*  b) the search box */
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="id_cust_statement_report"
+            string="Customer/Vendor Statement Report"
+            model="cust.statement.report"
+            report_type="qweb-pdf"
+            file="report_cust_statement.cust_statement_report_pdf"
+            name="report_cust_statement.cust_statement_report_pdf"
+            menu="False"
+            />
+    </data>
+</odoo>

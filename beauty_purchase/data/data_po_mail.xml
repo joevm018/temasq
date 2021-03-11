@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'purchase'), ('name', '=', 'email_template_edi_purchase_done')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="purchase.email_template_edi_purchase_done" model="mail.template">
+            <field name="name">Purchase Order - Send by Email</field>
+            <field name="email_from">${(object.create_uid.email and '%s &lt;%s&gt;' % (object.create_uid.name, object.create_uid.email) or '')|safe}</field>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field name="report_name">PO_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>
+                Good Day! <br/>
+                Dear sir/Madam
+            ,</p>
+            <p>
+                Thank you for your Quotation (QTN NO: <strong>${object.name} </strong> Dated <strong>${object.date_order} </strong>).
+                A pleasure to business with you. <br/>
+                We would like to order (materials/product/cosmetics )as per below purchase order. <br/>
+                Please Confirm order and send us delivery as soon as possible <br/><br/>
+                I appreciate your prompt service in this regard. <br/>
+
+                Have a nice day!<br/><br/>
+                Thank you<br/>
+                Best regards,<br/>
+                <br/><br/>
+            </p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>
+

@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <record id="near_expiry_tree_view" model="ir.ui.view">
+            <field name="name">stock.production.lot.tree</field>
+            <field name="model">stock.production.lot</field>
+            <field name="arch" type="xml">
+                <tree string="Near expiry Lots">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                    <field name="expiry_alert" invisible="1"/>
+                    <field name="life_date"/>
+                    <field name="alert_date" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_near_expiry">
+            <field name="name">Near Expiry Lots</field>
+            <field name="res_model">stock.production.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+		    <field name="domain">[('expiry_alert','=', True), ('product_qty', '>', 0)]</field>
+            <field name="view_id" ref="near_expiry_tree_view"/>
+        </record>
+
+        <menuitem id="menu_beautysoft_inventory" name="Inventory" sequence="12" parent="point_of_sale.menu_point_root"
+            groups="point_of_sale.group_pos_manager,stock.group_stock_manager"/>
+
+        <menuitem id="menu_lots" name="Lots/Serial Numbers" action="stock.action_production_lot_form"
+                  groups="stock.group_production_lot"
+                  parent="menu_beautysoft_inventory" sequence="64"/>
+        <menuitem id="menu_near_expiry" name="Near Expiry Lots" action="action_near_expiry"
+                  groups="stock.group_production_lot"
+                  parent="menu_beautysoft_inventory" sequence="65"/>
+        <menuitem action="action_near_expiry" id="menu_production_lot_form"
+        parent="stock.menu_stock_inventory_control" groups="stock.group_production_lot"
+        sequence="111"/>
+
+
+    </data>
+</odoo>

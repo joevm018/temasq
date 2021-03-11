@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="staff_commission_report_wizard" model="ir.ui.view">
+            <field name="name">staff.commission.wizard</field>
+            <field name="model">staff.commission.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Staff Commission Report Wizard">
+                    <group>
+                        <group>
+                            <field name="date_start" />
+							<field name="date_end" />
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <!--<field name="employee_id"/>-->
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="staff_commission_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_staff_commission_report" model="ir.actions.act_window">
+                <field name="name">Staff Commission Report Wizard</field>
+                <field name="res_model">staff.commission.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="staff_commission_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_staff_commission_report" name="Staff Commission Report" action="action_staff_commission_report"
+                  parent="point_of_sale.menu_point_rep" sequence="15"
+                  groups="point_of_sale.group_pos_manager,hr_payroll.group_hr_payroll_manager"
+        />
+
+    </data>
+</odoo>

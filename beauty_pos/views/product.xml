@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model = "ir.ui.view" id = "pdt_search_enhanced">
+        <field name="name">product.product.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='attribute_value_ids']" position="after">
+                <filter string="Consumables"
+                        name="consumables"
+                        domain="[('type', '=', 'consu')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model = "ir.ui.view" id = "pdttemplate_search_enhanced">
+        <field name="name">product.template.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='services']" position="after">
+                <filter string="Consumables"
+                        name="consumables"
+                        domain="[('type', '=', 'consu')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model = "ir.ui.view" id="product_form_view_procurement_buttonf">
+        <field name="name">product.product.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model = "ir.ui.view" id="view_stock_product_template_tree">
+        <field name="name">product.template.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+        <field name="arch" type="xml">
+            <field name="virtual_available" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="product.product_template_tree_view" model="ir.ui.view">
+        <field name="name">product.template.product.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="Product">
+                <field name="sequence" widget="handle" invisible="1"/>
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="list_price"/>
+                <field name="standard_price" invisible="1"/>
+                <field name="categ_id" invisible="1"/>
+                <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="purchase.view_product_template_purchase_buttons_from" model="ir.ui.view">
+        <field name="name">product.template.purchase.button.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+               <button class="oe_stat_button" name="%(purchase.action_purchase_line_product_tree)d"
+                   type="action" icon="fa-shopping-cart" groups="purchase.group_purchase_manager">
+                   <field string="Purchases" name="purchase_count" widget="statinfo"/>
+               </button>
+            </div>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="type" position="replace"/>
+                <field name="default_code" position="replace"/>
+                <field name="pos_categ_id" position="replace"/>
+                <field name="barcode" position="replace"/>
+                <field name="list_price" position="replace"/>
+                <label for="standard_price" position="replace"/>
+                <div name="standard_price_uom" position="replace"/>
+                 <field name="property_account_expense_id" position="replace"/>
+                <field name="property_account_income_id" position="replace"/>
+                <field name="tracking" position="replace"/>
+                <label for="name" position="replace"/>
+                <field name="name" position="replace"/>
+                <div name="options" position="attributes">
+                     <attribute name="invisible">1</attribute>
+                </div>
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <group >
+                            <field name="list_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="standard_price" widget='monetary' options="{'currency_field': 'currency_id'}" groups="base.group_user"/>
+                            <field name="duration_in_min" attrs="{'invisible': [('type', '!=', 'service')]}"/>
+                            <field name="default_code" string="Code"/>
+                        </group>
+                        <group >
+                            <field name="type"/>
+                            <field name="pos_categ_id" string="POS Category"/>
+                            <field name="barcode" attrs="{'invisible': [('type', '=', 'service')]}"/>
+                            <!--<field name="barcode" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>-->
+                        </group>
+                    </group>
+                </xpath>
+                <page name="general_information" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <page name="sales" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <page name="invoicing" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <page name="notes" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+
+                <xpath expr="//notebook/page[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <page name="general_information" position="before">
+                    <page name="notes1" string="Notes">
+                        <field name="notes_new"/>
+                    </page>
+                    <page name="Inventory1" string="Inventory">
+                        <group>
+                            <group>
+                                <field name="tracking" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="property_account_income_id"
+                                    domain="[('internal_type','=','other'),('deprecated','=',False)]"
+                                    groups="account.group_account_user"/>
+                                <field name="property_account_expense_id"
+                                    domain="[('internal_type','=','other'),('deprecated','=',False)]"
+                                    groups="account.group_account_user"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Staffs" name="staffs_for_services" attrs="{'invisible': [('type', '!=', 'service')]}">
+                        <field name="staff_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="employee_no"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+                <div name="button_box" position="before">
+                    <label class="oe_edit_only" for="name" string="Product Name"/>
+                    <h1><field name="name" placeholder="Product Name"/></h1>
+                </div>
+                <header position="inside" >
+                    <button name="%(stock.action_view_change_product_quantity)d" string="Update Qty On Hand" type="action" attrs="{'invisible': [('type', '=', 'service')]}"/>
+                    <button string="Procurement Request" name="%(stock.act_make_procurement)d" type="action" attrs="{'invisible': [('type', '!=', 'product')]}"/>
+                </header>
+                <div name="button_box" position="inside">
+                    <button type="object"
+                        name="action_open_quants"
+                        attrs="{'invisible':[('type', '=', 'service')]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <field name="qty_available" widget="statinfo" string="On Hand"/>
+                    </button>
+                    <button type="action"
+                        name="%(stock.action_stock_level_forecast_report_template)d"
+                        attrs="{'invisible':[('type', '!=', 'product')]}"
+                        class="oe_stat_button" icon="fa-building-o"
+                        groups="purchase.group_purchase_manager">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value"><field name="virtual_available" widget="integer"/>
+                                <span attrs="{'invisible':[('outgoing_qty', '=', 0),('incoming_qty','=',0)]}" groups="base.group_no_one">
+                                    (-<field name="outgoing_qty" widget="integer"/>+<field name="incoming_qty" widget="integer"/>)
+                                </span>
+                            </span>
+                            <span class="o_stat_text">Forecasted</span>
+                        </div>
+                    </button>
+                    <button string="Traceability" type="object"
+                        name= "action_view_stock_moves"
+                        attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                        class="oe_stat_button" icon="fa-arrows-v"
+                        groups="stock.group_stock_user"/>
+                    <button type="object"
+                        name="action_view_orderpoints"
+                        attrs="{'invisible':['|',('type', '!=', 'product'),('nbr_reordering_rules', '==', 1)]}"
+                        class="oe_stat_button"
+                        icon="fa-refresh">
+                        <field name="nbr_reordering_rules" widget="statinfo"/>
+                     </button>
+                    <button type="object"
+                        name="action_view_orderpoints"
+                        attrs="{'invisible':['|',('type', '!=', 'product'),('nbr_reordering_rules', '!=', 1)]}"
+                        class="oe_stat_button" icon="fa-refresh">
+                        <div class="o_form_field o_stat_info mr4">
+                            <span class="o_stat_text">Min:</span>
+                            <span class="o_stat_text">Max:</span>
+                        </div>
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value"><field name="reordering_min_qty"/></span>
+                            <span class="o_stat_value"><field name="reordering_max_qty"/></span>
+                        </div>
+                    </button>
+                    <button string="Routes" type="object"
+                        name="action_view_routes"
+                        attrs="{'invisible':[('type', '!=', 'product')]}"
+                        class="oe_stat_button" icon="fa-cogs"
+                        groups="stock.group_adv_location"/>
+                </div>
+
+                <!-- change attrs of fields added in view_template_property_form
+                to restrict the display for templates -->
+                <xpath expr="//label[@for='weight']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@name='weight']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='volume']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@name='volume']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+
+            </data>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="stock.product_form_view_procurement_button">
+            <field name="name">product.product.procurement</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <header position="inside">
+                        <button string="Update Qty On Hand"
+                            type="action"
+                            name="%(stock.action_view_change_product_quantity)d"
+                            attrs="{'invisible': [('type', '=', 'service')]}"/>
+                        <button string="Procurement Request"
+                            type="action"
+                            name="%(stock.act_make_procurement)d"
+                            attrs="{'invisible': [('type', '!=', 'product')]}"/>
+                    </header>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button"
+                               name="%(stock.product_open_quants)d"
+                               icon="fa-building-o"
+                               type="action" attrs="{'invisible':[('type', '=', 'service')]}">
+                            <field name="qty_available" widget="statinfo" string="On Hand"/>
+                        </button>
+                        <button type="action"
+                            name="%(stock.action_stock_level_forecast_report_product)d"
+                            attrs="{'invisible':[('type', '!=', 'product')]}"
+                            class="oe_stat_button" icon="fa-building-o">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value"><field name="virtual_available" widget="statinfo" nolabel="1"/>
+                                    <span attrs="{'invisible':[('outgoing_qty', '=', 0),('incoming_qty','=',0)]}">
+                                        (-<field name="outgoing_qty" widget="statinfo" nolabel="1"/>
+                                        +<field name="incoming_qty" widget="statinfo" nolabel="1"/>)
+                                    </span>
+                                </span>
+                                <span class="o_stat_text">Forecasted</span>
+                            </div>
+                        </button>
+                       <button string="Traceability"
+                            type="action"
+                            name= "%(stock.act_product_stock_move_open)d"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            class="oe_stat_button" icon="fa-arrows-v"
+                            groups="stock.group_stock_user"/>
+                       <button type="action"
+                            name="%(stock.product_open_orderpoint)d"
+                            attrs="{'invisible':['|',('type', '!=', 'product'),('nbr_reordering_rules', '==', 1)]}"
+                            class="oe_stat_button" icon="fa-refresh">
+                            <field name="nbr_reordering_rules" widget="statinfo"/>
+                        </button>
+                        <button name="%(stock.product_open_orderpoint)d" type="action"
+                            attrs="{'invisible':['|',('type', 'not in', ['product', 'consu']),('nbr_reordering_rules', '!=', 1)]}"
+                            class="oe_stat_button" icon="fa-refresh">
+                            <div class="o_form_field o_stat_info mr4">
+                                <span class="o_stat_text">Min :</span>
+                                <span class="o_stat_text">Max:</span>
+                            </div>
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value"><field name="reordering_min_qty"/></span>
+                                <span class="o_stat_value"><field name="reordering_max_qty"/></span>
+                            </div>
+                        </button>
+                       <button string="Routes" type="object"
+                            name="action_view_routes"
+                            attrs="{'invisible':[('type', '!=', 'product')]}"
+                            class="oe_stat_button" icon="fa-cogs" groups="stock.group_adv_location"/>
+                    </div>
+                </data>
+            </field>
+        </record>
+
+
+
+</odoo>

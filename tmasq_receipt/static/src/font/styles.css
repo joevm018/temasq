@@ -1,0 +1,14 @@
+@font-face {
+font-family: 'calibri';
+font-style: normal;
+font-weight: normal;
+src: local('calibri'), url('Calibri.ttf') format('ttf');
+}
+
+
+@font-face {
+font-family: 'times-new-roman';
+font-style: normal;
+font-weight: normal;
+src: local('times-new-roman'), url('times-new-roman.ttf') format('ttf');
+}

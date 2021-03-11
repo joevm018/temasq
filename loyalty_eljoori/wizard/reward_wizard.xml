@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_reward_wizard_inherit">
+        <field name="name">reward.wizard.form</field>
+        <field name="model">reward.wizard</field>
+        <field name="inherit_id" ref="loyalty_in_pos.view_reward_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reward_id']" position="before">
+                <field name="card_no" password="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

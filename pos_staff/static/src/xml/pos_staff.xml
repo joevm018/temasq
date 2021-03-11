@@ -1,0 +1,272 @@
+<templates id="template" xml:space="preserve">
+
+     <t t-name="ToppingButton">
+        <span class="control-button submit-topping">
+            Assign Staff
+        </span>
+    </t>
+    <t t-name="DmPopupWidget">
+        <div class="modal-dialog">
+            <div class="popup popup-alert">
+                <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                <p class="body"><t t-esc=" widget.options.body || '' "/></p>
+                <div class="footer">
+                    <div class="button cancel">
+                        Ok
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+     <t t-name="DeliveryModeSelectionPopupWidget">
+        <div class="modal-dialog modal-lg">
+            <div class="popup popup-selection">
+                <section id="popup_section">
+                    <div>
+                        <span class='button back'>
+                            <i class='fa fa-angle-double-left'></i>
+                            Cancel
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            <p class="title"><t t-esc=" widget.options.title || 'Select' " /></p>
+                        </span>
+                    </div>
+                    <div class="searchbox" style="width:30%">
+                        <input placeholder="Search Staffs"/>
+                        <span class="search-clear"></span>
+                    </div>
+                    <br/>
+                </section>
+
+                <div style="height: 75vh; overflow-y: scroll;">
+                    <div id="staff_list" class='thumbs-flex-wrapper'>
+                        <t t-foreach="widget.list || []" t-as="item">
+                            <div class='thumb-item'>
+                                <img t-att-src='item.image' style="border-radius: 50%;"/>
+                                <div class="thumb-inner" t-att-data-item-index='item_index'>
+                                    <t t-esc='item.label'/>
+                                </div>
+                                <input t-attf-id="{{item.id}}" placeholder="Job No" />
+                                <input class="start" name="start" type="time"/>
+                                <input class="stop" name="stop" type="time"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="Orderline">
+        <t t-jquery=".info-list" t-operation="append">
+            <t t-if="line.get_offer_string()">
+                 <t t-foreach="line.get_offer_string() || []" t-as="toppings">
+                     <t t-if="toppings">
+                        <li class="info orderline-note">
+                            <i class='fa fa-tag'/><t t-esc="line.get_offer_string()" />
+                        </li>
+                     </t>
+                 </t>
+            </t>
+            <t>
+                <li class="info time">
+                    <i class='fa fa-calendar-times-o'/><t t-esc="line.get_start_time()" /><i class="fa fa-arrows-h"></i><t t-esc="line.get_stop_time()" />
+                </li>
+            </t>
+
+        </t>
+    </t>
+
+    <t t-name="PosTicket">
+        <t t-jquery=".pos-sale-ticket" t-operation="replace">
+        <div class="pos-sale-ticket" style="font-weight: bold;color:black;font-family: 'Arial';">
+            <div class="header-main-company">
+                <div style="width: 55%; float: left; padding: 20px 0px;">
+                    <t t-if="widget.pos.company.name">
+                        <strong><t t-esc="widget.pos.company.name"/></strong><br />
+                    </t>
+                    <t t-if="order.get_client()">
+                        Customer: <t t-esc="order.get_client().name"/><br />
+                    </t>
+                    Cashier: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
+                    <t t-if="widget.pos.company.phone">
+                        Phone: <t t-esc="widget.pos.company.phone || ''"/><br />
+                    </t>
+                    <t t-if="widget.pos.company.wifi_pswd">
+                        Wifi Password: <t t-esc="widget.pos.company.wifi_pswd || ''"/><br />
+                    </t>
+                    <t t-esc="order.name"/>
+                    <t t-esc="moment().format('DD-MM-YYYY LT')"/>
+                </div>
+                <div style="width: 45%;float: left;">
+                    <img src='/web/binary/company_logo' style="width:100%;align:middle;"/>
+                </div>
+            </div>
+            <br />
+            <t t-if="receipt.header">
+                <div style='text-align:center'>
+                    <t t-esc="receipt.header" />
+                </div>
+                <br/>
+            </t>
+            <!--<table class='receipt-orderlines'>-->
+                <!--<colgroup>-->
+                    <!--<col width='50%' />-->
+                    <!--<col width='15%' />-->
+                    <!--<col width='35%' />-->
+                <!--</colgroup>-->
+                <!--<thead style="border-top: 1px solid black;border-bottom: 1px solid black;">-->
+                    <!--<tr>-->
+                        <!--<th>-->
+                            <!--<strong>Description</strong>-->
+                        <!--</th>-->
+                        <!--<th style='text-align:center'>-->
+                            <!--<strong>Qty</strong>-->
+                        <!--</th>-->
+                        <!--<th style='text-align:center'>-->
+                            <!--<strong>Amount</strong>-->
+                        <!--</th>-->
+                    <!--</tr>-->
+                <!--</thead>-->
+                <!--<tr t-foreach="orderlines" t-as="orderline">-->
+                    <!--<td>-->
+                        <!--<t t-if="orderline.get_product().default_code">-->
+                            <!--<t t-esc="orderline.get_product().display_name + '/' + orderline.get_product().default_code"/>-->
+                        <!--</t>-->
+                        <!--<t t-else="1">-->
+                            <!--<t t-esc="orderline.get_product().display_name"/>-->
+                        <!--</t>-->
+                        <!--<t t-if="orderline.get_discount() > 0">-->
+                            <!--<div class="pos-disc-font">-->
+                                <!--With a <t t-esc="orderline.get_discount()"/>% discount-->
+                            <!--</div>-->
+                        <!--</t>-->
+                    <!--</td>-->
+                    <!--<td class="pos-right-align">-->
+                        <!--<t t-esc="orderline.get_quantity_str()"/>-->
+                    <!--</td>-->
+                    <!--<td class="pos-right-align">-->
+                        <!--<t t-esc="widget.format_currency(orderline.get_display_price())"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+            <table class='receipt-orderlines'>
+                <colgroup>
+                    <col width='40%' />
+                    <col width='18%' />
+                    <col width='10%' />
+                    <col width='16%' />
+                    <col width='16%' />
+                </colgroup>
+                <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                    <tr>
+                        <th>
+                            <strong>Description</strong>
+                        </th>
+                        <th style='text-align:center'>
+                            <strong>Staff</strong>
+                        </th>
+                        <th style='text-align:center'>
+                            <strong>Qty</strong>
+                        </th>
+                        <th style='text-align:center'>
+                            <strong>Amt</strong>
+                        </th>
+                        <th style='text-align:center'>
+                            <strong>After Disc.</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <t t-set="sub_total" t-value="0" />
+                <tr t-foreach="orderlines" t-as="orderline" style="border-top: 1px solid grey;border-bottom:1px solid grey;">
+                    <td>
+                        <t t-if="orderline.get_product().default_code">
+                            <t t-esc="orderline.get_product().display_name + '/' + orderline.get_product().default_code"/>
+                        </t>
+                        <t t-else="1">
+                            <t t-esc="orderline.get_product().display_name"/>
+                        </t>
+                        <t t-if="orderline.get_discount() > 0">
+                            <div class="pos-disc-font">
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t>
+                    </td>
+                    <td class="pos-right-align">
+                       <t t-esc="orderline.get_staff_string()"/>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str()"/>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-set="sub_total" t-value="sub_total+ (orderline.get_new_get_unit_price_qty())"/>
+                        <t t-esc="orderline.get_new_get_unit_price_qty_decimal_2()"/>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_display_price_decimal_2()"/>
+                        <!--<t t-esc="widget.format_currency(orderline.get_display_price())"/>-->
+                    </td>
+                </tr>
+            </table>
+
+            <br />
+            <table class='receipt-total'>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.get_total_without_tax())"/>
+                    </td>
+                </tr>
+                <!--<t t-foreach="order.get_tax_details()" t-as="taxdetail">-->
+                    <!--<tr>-->
+                        <!--<td><t t-esc="taxdetail.name" /></td>-->
+                        <!--<td class="pos-right-align">-->
+                            <!--<t t-esc="widget.format_currency(taxdetail.amount)" />-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</t>-->
+                <tr>
+                    <td>Discount:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.get_total_discount())"/>
+                    </td>
+                </tr>
+                <tr class="emph">
+                    <td>Total:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.get_total_with_tax())"/>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table class='receipt-paymentlines'>
+                <t t-foreach="paymentlines" t-as="line">
+                  <tr>
+                      <td>
+                          <t t-esc="line.name"/>
+                      </td>
+                      <td class="pos-right-align">
+                          <t t-esc="widget.format_currency(line.get_amount())"/>
+                      </td>
+                  </tr>
+                </t>
+            </table>
+            <br />
+            <table class='receipt-change' t-if="order.is_paid_with_cash()">
+                <tr><td>Change:</td><td class="pos-right-align">
+                    <t t-esc="widget.format_currency(order.get_change())"/>
+                    </td></tr>
+            </table>
+            <t t-if="receipt.footer">
+                <br />
+                <div style='text-align:center'>
+                    <t t-esc="receipt.footer" />
+                </div>
+            </t>
+        </div>
+        </t>
+    </t>
+</templates>

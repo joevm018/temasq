@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_summary_wizard_flor" model="ir.ui.view">
+        <field name="name">summary.wizard.form</field>
+        <field name="model">summary.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sales Summary Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="partner_id"/>
+                        <field name="detailed"/>
+                        <field name="data" readonly="1" filename="name" attrs="{'invisible':[('state','=','choose')]}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="user_id"/>
+                        <field name="name" invisible="1"/>
+						<field name="state" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_excel_report" string="Excel" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_print_sales_summary_flor" model="ir.actions.act_window">
+        <field name="name">Sales Summary Report</field>
+        <field name="res_model">summary.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_print_sales_summary_flor"
+        name="Sales Summary Report"
+        parent="point_of_sale.menu_point_rep"
+        sequence="10"
+        action="action_print_sales_summary_flor"
+       />
+
+</odoo>

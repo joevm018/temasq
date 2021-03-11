@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_report_wizard" model="ir.ui.view">
+            <field name="name">salon.stock.report</field>
+            <field name="model">salon.stock.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Stock Report Wizard">
+                    <group>
+                        <group>
+                            <field name="company_id" options="{'no_create' : True}" groups="base.group_multi_company"/>
+                            <field name="start_date"/>
+                            <field name="pdt_ids" widget="many2many_tags"/>
+                            <field name="show_detailed"/>
+                            <field name="show_no_stock"/>
+                            <field name="data" readonly="1" filename="name"
+                                   attrs="{'invisible':[('state','=','choose')]}"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+<!--                            <field name="expiry_date"/>-->
+                            <field name="location_id"/>
+                            <field name="name" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="stock_report" string="Excel" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_report" model="ir.actions.act_window">
+            <field name="name">Report Wizard</field>
+            <field name="res_model">salon.stock.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stock_report" name="Stock Report" action="action_stock_report"
+                  parent="point_of_sale.menu_point_rep" sequence="3"/>
+
+    </data>
+</odoo>

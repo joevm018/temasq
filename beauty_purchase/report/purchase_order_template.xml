@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="custom_quotation">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page o_report_layout_boxed">
+                         <div class="text-center">
+                                     <h2><b>Purchase Order</b></h2>
+                        </div>
+                        <div class="oe_structure"/>
+
+                        <div class="container ">
+                            <div class="row mb4 " style="border: 2px solid black !important;">
+                                <div class="col-xs-7" style="border-right: 2px solid black !important;">
+                                    <div class="col-xs-5">
+                                    <img src='/web/binary/company_logo'/>
+                                    </div>
+                                    <div align="center">
+                                        <b>
+                                            <span style="font-size: 17px;" t-field="doc.company_id.name"/>
+                                        </b>
+                                        <br/>
+                                    </div>
+
+                                    <div align="center" style="font-size: 12px;">
+                                        <t t-if="doc.company_id.street">
+                                            <span t-field="doc.company_id.street"/>,
+
+                                        </t>
+                                        <t t-if="doc.company_id.street2">
+                                            <span t-field="doc.company_id.street2"/>
+
+                                        </t>
+                                        <br/>
+
+                                        <t t-if="doc.company_id.zip">
+                                            P.O Box
+                                            <span t-field="doc.company_id.zip"/>
+
+                                        </t>
+                                        <t t-if="doc.company_id.city">
+                                            -
+                                            <span t-field="doc.company_id.city"/>
+
+                                        </t>
+                                        <t t-if="doc.company_id.country_id">
+                                            ,
+                                            <span t-field="doc.company_id.country_id.name"/>
+
+                                        </t>
+                                        <br/>
+                                        <t t-if="doc.company_id.phone">
+                                            Tel:
+                                            <span t-field="doc.company_id.phone"/>
+
+                                        </t>
+                                        <br/>
+                                        <t t-if="doc.company_id.company_registry">
+                                            Fax :
+                                            <span t-field="doc.company_id.company_registry"/>
+
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5" >
+                                Order no:
+                                <t>
+                                    <b>
+                                        <span t-field="doc.origin"/>
+                                    </b>
+
+                                </t>
+                                 <br/>
+                                 <br/>
+                                
+                                <t >
+                                    Voucher no :
+                                    <b>
+                                        <span t-field="doc.number"/>
+                                    </b>
+
+                                </t>
+                                <br/>
+                                <br/>
+                                Date:
+                                <t t-if="doc.date_invoice">
+                                    <b>
+                                        <span t-field="doc.date_invoice" t-options='{"format": "dd-MMMM-yyyy"}'/>
+                                    </b>
+
+                                </t>
+                                 <br/>
+                                 <br/>
+                                Term of payment :
+                                <t>
+                                    <b>
+                                        <!-- <span t-field=".payment_term_id.name"/> -->
+                                    </b>
+                                </t>
+                                <br/>
+                                <br/>
+                                Vendor/Other Reference :
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row mb4 " style="border: 2px solid black !important;">
+
+                            <div class="col-xs-7" style="border-right: 2px solid black !important;">
+                                Supplier :
+                                <div align="center" style="font-size: 17px;">
+                                <t t-if="doc.partner_id.name">
+                                    <b>
+                                        <span t-field="doc.partner_id.name"/>
+                                    </b>
+
+                                </t>
+                                <br/>
+                                        <t t-if="doc.partner_id.street">
+                                            <span t-field="doc.partner_id.street"/>,
+
+                                        </t>
+                                        <t t-if="doc.partner_id.street2">
+                                            <span t-field="doc.partner_id.street2"/>
+
+                                        </t>
+                                        <br/>
+
+                                        <t t-if="doc.partner_id.zip">
+                                            P.O Box
+                                            <span t-field="doc.partner_id.zip"/>
+
+                                        </t>
+                                        <t t-if="doc.partner_id.city">
+                                            -
+                                            <span t-field="doc.partner_id.city"/>
+
+                                        </t>
+                                        <t t-if="doc.partner_id.country_id">
+                                            ,
+                                            <span t-field="doc.partner_id.country_id.name"/>
+
+                                        </t>
+                                        <br/>
+                                        <t t-if="doc.partner_id.phone">
+                                            Tel:
+                                            <span t-field="doc.partner_id.phone"/>
+
+                                        </t>
+                                        <br/>
+                                       
+                                    </div>
+                            </div>
+
+                            <div class="col-xs-5" >
+                                 Due Date:
+                                <t >
+                                    <b>
+                                        <span t-field="doc.date_due" t-options='{"format": "dd-MMMM-yyyy"}'/>
+                                    </b>
+
+                                </t>
+                                <br/>
+                                Accounting Date:
+                                <t >
+                                    <b>
+                                        <span t-field="doc.date" t-options='{"format": "dd-MMMM-yyyy"}'/>
+                                    </b>
+
+                                </t>
+                                <br/>
+                                Destination :
+                                <t>
+                                    <b>
+                                        <span t-field="doc.company_id.name"/>
+                                    </b>
+
+                                </t>
+                            </div>
+                        </div>
+                        <div class="oe_structure"/>
+                        <t >
+                            <div class="clearfix">
+                                <div class="container">
+                                    <div class="row" style="font-size: 13x;clear:both;">
+                                        <table class="table table-bordered o_boxed_table"
+                                               style="border: 2px solid black !important;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl.No</th>
+                                                    <th>Description</th>
+                                                     <th class="text-right">Due On</th>
+                                                    <th class="text-right">Quantity</th>
+                                                    <th class="text-right">Rate</th>
+                                                    <th class="text-right" groups="sale.group_show_price_subtotal">
+                                                        Amount
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="sale_tbody">
+                                                    <!-- Lines associated -->
+                                                   
+                                                    <t >
+                                                         <t t-set="i" t-value="1" />
+                                                        <tr t-foreach="doc.invoice_line_ids" t-as="l">
+                                                            <td >
+                                                                <span t-esc="i"/><t t-set="i" t-value="i+1"/>
+                                                            </td>
+                                                            <td>
+                                                                <span t-field="l.product_id.name"/>
+                                                            </td>
+
+                                                            <td>
+                                                                <span t-field="doc.date_due"/>
+                                                            </td>
+                                                             
+                                                            <td class="text-right">
+                                                                <span t-field="l.quantity"/>
+
+                                                            </td>
+                                                            <td class="text-right">
+
+                                                                <span t-field="l.price_unit"/>
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <span t-field="l.price_subtotal"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
+                                <p style="page-break-before:always;"/>
+                            </t>
+                        </t>
+                        <div class="row" name="total">
+                            <div class="col-xs-4 pull-right">
+                                <table class="table table-condensed"
+                                       style="border:2px solid #000000;min-width: 200px;max-width: 350px;">
+                                    <tr class="border-black">
+                                        <td>
+                                            <strong>Total QAR</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.amount_total"
+                                                  />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <div class="pull-right">
+                                    <strong>For Organic Beauty Center And Spa  </strong>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <strong>Signature  </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" style="position:relative;page-break-inside: avoid;">
+                            <div class="row" style="font-size:10px;color:black;border: 1px solid black !important;">
+                                
+                            </div>
+                            <div class="row"
+                                 style="color:gray;text-align:center;font-size:10px;color:black;border: 1px solid black !important;">
+                                <div class="col-xs-12">
+                                    <span t-field="doc.company_id.name" />
+                                </div>
+                            </div>
+                            <div class="row" style="color:black;text-align:center;font-size:10px;color:black;border: 1px solid black !important;">
+                                <div class="col-xs-12">
+                                    By signing this offer you understand &amp; agree to Organic sales terms &amp;
+                                    conditions
+                                    <br/>
+                                    We hope our offer meets your approval If you have any clarifications please feel
+                                    free to contact us
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </t>
+        </template>
+
+
+<!-- Base Invoice -->
+        <template id="report_invoice_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@class='page']" position="inside">
+                 <div class="pull-right">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <strong>Authorized Signature</strong>
+                 </div>
+            </xpath>
+        </template>
+<!-- Stock Picking Template INHERIT -->
+<!-- Delivery Slip -->
+        <template id="report_deliveryslip_inherit" inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[@class='page']" position="inside">
+                 <div class="pull-right">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <strong>Authorized Signature</strong>
+                 </div>
+            </xpath>
+        </template>
+
+
+<!-- Picking Operations -->
+
+        <template id="report_picking_inherit" inherit_id="stock.report_picking">
+            <xpath expr="//div[@class='page']" position="inside">
+                 <div class="pull-right">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <strong>Authorized Signature</strong>
+                 </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

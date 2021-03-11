@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="income_report_pdf">
+            <t t-call="report.html_container">
+                <t t-set="data_report_margin_top" t-value="12"/>
+                <t t-set="data_report_header_spacing" t-value="9"/>
+                <t t-set="data_report_dpi" t-value="110"/>
+                    <t t-call="report.internal_layout">
+                         <div class="page" style="font-family: 'Arial';font-size: 12px;">
+                             <div class="text-center" >
+                                 <h2>Income Report</h2>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <tbody class="master_tbody">
+                                            <tr>
+                                                <td><strong>Period From</strong></td>
+                                                <td>:
+                                                    <t t-if="period_start">
+                                                        <span t-esc="period_start" t-options='{"widget": "date"}'/>
+                                                    </t>
+                                                    <t t-else="">All</t>
+                                                </td>
+                                                <td><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Period To</strong></td>
+                                                <td>:
+                                                    <t t-if="period_stop">
+                                                        <span t-esc="period_stop" t-options='{"widget": "date"}'/>
+                                                    </t>
+                                                    <t t-else="">All</t>
+                                                </td>
+                                                <td ><strong>Partner</strong></td>
+                                                <td >:
+                                                    <t t-if="partner_id">
+                                                        <span t-esc="partner_id[1]"/>
+                                                    </t>
+                                                    <t t-else="">All</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td ><strong>Account</strong></td>
+                                                <td >:
+                                                    <t t-if="account_id">
+                                                        <span t-esc="account_id[1]"/>
+                                                    </t>
+                                                    <t t-else="">All</t>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <tbody class="master_tbody">
+                                            <tr>
+                                                <td><strong>Opening balance</strong></td>
+                                                <td>:<span t-esc="opening_balance" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></td>
+                                                <td><strong>Debit Total</strong></td>
+                                                <td>:<span t-esc="here_debit_sum" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Current balance</strong></td>
+                                                <td>:<span t-esc="current_balance" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></td>
+                                                <td><strong>Credit Total</strong></td>
+                                                <td>:<span t-esc="here_credit_sum" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Closing balance</strong></td>
+                                                <td>:<span t-esc="closing_balance" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></td>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="account_payments">
+                                        <colgroup>
+                                            <col width='4%'/>
+                                            <col width='5%'/>
+                                            <col width='6%'/>
+                                            <col width='14%'/>
+                                            <col width='35%'/>
+                                            <col width='7%'/>
+                                            <col width='7%'/>
+                                            <col width='7%'/>
+                                            <col width='19%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Doc No</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Narration</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Ref</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Debit</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Credit</th>
+                                                <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Balance</th>
+                                                <th t-if="not partner_id" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Partner</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="orders_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <t t-set="debit_sum" t-value="debit_opening" />
+                                            <t t-set="credit_sum" t-value="credit_opening" />
+                                            <t t-set="debit_credit_sum" t-value="opening_balance" />
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Opening balance </td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="debit_opening" /></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="credit_opening" /></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="opening_balance" /></td>
+                                                <td t-if="not partner_id" style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>
+                                            </tr>
+                                            <tr t-foreach="income_records" t-as="income_rec" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="income_rec.date" t-options='{"widget": "date"}'/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="income_rec.move_id.name"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="income_rec.name"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="income_rec.ref"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><span t-esc="income_rec.debit"/><t t-set="debit_sum" t-value="debit_sum+income_rec.debit"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><span t-esc="income_rec.credit"/><t t-set="credit_sum" t-value="credit_sum+income_rec.credit"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-set="debit_credit_sum" t-value="debit_credit_sum+(income_rec.debit-income_rec.credit)"/><span t-esc="debit_credit_sum"/></td>
+                                                <td t-if="not partner_id" style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><span t-esc="income_rec.partner_id.name"/></td>
+                                            </tr>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td colspan="5" style="border-right: 1px solid black;border-top: 1px solid black;" class="text-right"><strong>Closing Balance  : </strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><strong><span t-esc="debit_sum" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><strong><span t-esc="credit_sum" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><strong><span t-esc="debit_credit_sum" t-options="{'widget': 'monetary', 'display_currency': currency_id}"/></strong></td>
+                                                <td t-if="not partner_id" style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

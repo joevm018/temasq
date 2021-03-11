@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_buy_gift_card_wizard" model="ir.ui.view">
+            <field name="name">buy.gift.card.wizard</field>
+            <field name="model">buy.gift.card.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Enter details">
+                    <group>
+                        <group>
+                            <field name="card_no" password="True"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="discount_gift_card_amount" attrs="{'invisible':[('type','!=','type_discount_gift_card')],'required':[('type','=','type_discount_gift_card')]}"/>
+                            <field name="package_combo_item" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible':[('type','!=','type_package_card')],'required':[('type','=','type_package_card')]}"/>
+                            <field name="package_card_amount" attrs="{'invisible':[('type','!=','type_package_card')],'required':[('type','=','type_package_card')]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Purchase Card" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_buy_gift_card_wizard" model="ir.actions.act_window">
+            <field name="name">Buy Cards</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">buy.gift.card.wizard</field>
+            <field name="view_mode">form</field>
+             <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

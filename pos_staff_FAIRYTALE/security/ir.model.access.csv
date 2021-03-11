@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_staff_pos_staff,pos_staff.pos_staff,model_pos_staff_pos_staff,,1,0,0,0

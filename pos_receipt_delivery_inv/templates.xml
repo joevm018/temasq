@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_frontend" inherit_id="web.assets_common">
+          <xpath expr="." position="inside">
+              <script type="text/javascript" src="/pos_receipt_delivery_inv/static/src/js/delivery_pos.js"/>
+          </xpath>
+        </template>
+
+        <!--<template id="assets_pos" inherit_id="point_of_sale.assets">-->
+          <!--<xpath expr="." position="inside">-->
+              <!--<link rel="stylesheet" href="/pos_receipt_delivery_inv/static/src/css/pos_receipt.css" id="pos-stylesheet"/>-->
+          <!--</xpath>-->
+        <!--</template>-->
+
+
+    </data>
+</openerp>

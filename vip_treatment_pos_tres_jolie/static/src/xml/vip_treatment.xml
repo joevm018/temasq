@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_extend_template" inherit_id="point_of_sale.template">
+
+<t t-extend="ActionpadWidget">
+    <t t-jquery="div.actionpad" t-operation="inner">
+        <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+            <i class='fa fa-user' />
+            <t t-if="widget.pos.get_client()">
+                <t t-esc="widget.pos.get_client().name" />
+            </t>
+            <t t-if="!widget.pos.get_client()">
+                Customer
+            </t>
+        </button>
+        <button class='button pay'>
+            <div class='pay-circle'>
+                <i class='fa fa-chevron-right' />
+            </div>
+            Payment
+        </button>
+        <button class="vip_treatment" style="width:100%;height:45px;">VIP Treatment</button>
+    </t>
+</t>
+
+<t t-name="VipPercentagePopupWidget">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput">
+                <p class="title">VIP Treatment</p>
+                <input type='text' t-att-value="widget.options.value || '20'">  %</input>
+                <div class="footer">
+                    <div class="button confirm">
+                        Confirm
+                    </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="OrderWidget">
+        <t t-jquery="div.subentry" t-operation="after">
+            <div class='subentry'><span class="value_vip_percent"></span></div>
+        </t>
+    </t>
+
+    <t t-extend="PosTicket">
+        <t t-jquery="tr.emph" t-operation="before">
+            <tr>
+                <td><b>VIP Treatment:</b></td>
+                <td class="pos-right-align">
+                    <b><t t-esc="widget.format_currency(order.get_vip_total())"/></b>
+                </td>
+            </tr>
+        </t>
+  </t>
+</templates>

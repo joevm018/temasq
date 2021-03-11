@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    
+
+        <report
+            id="report_custom_purchase"
+            model="account.invoice"
+            string="Invoice"
+            report_type="qweb-pdf"
+            paperformat="paperformat_custom"
+            name="beauty_purchase.custom_quotation"
+            file="beauty_purchase.custom_quotation"
+          />
+
+</odoo>

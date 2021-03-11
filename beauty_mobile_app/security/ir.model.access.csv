@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_website_cart,website_cart,model_website_cart,,1,1,1,1
+access_website_cart_line,website_cart_line,model_website_cart_line,,1,1,1,1
+access_website_wishlist,website_wishlist,model_website_wishlist,,1,1,1,1
+access_website_wishlist_line,website_wishlist_line,model_website_wishlist_line,,1,1,1,1

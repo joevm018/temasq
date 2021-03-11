@@ -1,0 +1,235 @@
+input.customer_name, input.notes_remarks,input.customer_new_name,input.customer_new_phone,select.customer_new_dob_day,select.customer_new_dob_month,input.customer_type,select.staff,select.services,input.duration,select.modal_scheduler_hour,select.modal_scheduler_minute {
+    border: 2px solid blue;
+}
+input[type=checkbox] {
+  border: 2px solid blue;
+}
+div.first_service{
+  display:inline-block;
+  float:left;
+  color:#fff;
+}
+.add_icon_class{
+    width:50px;
+    height:100px;
+    float:left;
+    height: 135px;
+    padding-top: 100px;
+}
+.border_class{
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-color: grey;
+    width:500px;
+    height:125px;
+}
+button.add_new_customer,button.delete_new_customer_class{
+    background-color: white;
+      border: none;
+}
+button.add_new_order{
+    background-color: white;
+      border: none;
+      }
+button.delete_order{
+    background-color: white;
+    border: none;
+    margin-top: 6px;
+    margin-right: 6px;
+    float:right;
+    height: 25px;
+}
+img.close_icon{
+    background-color: white;
+    border: none;
+    margin-top: 3px;
+    margin-right: 3px;
+    float:right;
+    max-width:15px;
+    max-height: 15px;
+}
+input.sl_no{
+    border-radius: 1rem;
+    padding: 15px;
+    width: 40px;
+    height: 2px;
+    border-color: #a79f9f;
+    color: #0909af;
+    font-weight: 600;
+    float: left;
+}
+.service_start_t{
+    margin-left: 0px;
+    height:50px;
+}
+.one{
+    display:inline-block;
+    float:left;
+    color:#fff;
+    width:500px;
+    height:100px;
+    background:white;
+    margin-bottom: 43px;
+}
+.two{
+    display:inline-block;
+  float:right;
+  color:#fff;
+  width:290px;
+  height:145px;
+  text-align: center;
+  background:white;
+}
+.service_start, .staff_service{
+    margin-left: 0px;
+    height:20px;
+}
+.duration_div {
+    width: 39%;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+.create_new_customer_class {
+        color:black;
+        margin-bottom: 3px;
+        border: 2px solid blue;
+}
+.start_div {
+    width: 39%;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+input.customer_type,.customer_new_name,.customer_new_phone,.customer_new_dob_day,.customer_new_dob_month,.delete_new_customer_class,.create_new_customer_class{
+    visibility:hidden;
+}
+.customer_new_name,.customer_new_phone{
+    margin-bottom: 3px;
+}
+.customer_new_dob_month{
+    width: 61%;
+    float: left;
+}
+.customer_new_dob_day{
+    width: 35%;
+    float: right;
+}
+.customer_new_dob_month,.customer_new_dob_day{
+    margin-left: 2px;
+    margin-bottom: 3px;
+    border: 2px solid blue;
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+}
+.exist_cust_div{
+    width: 5%;
+    float: left;
+    margin-left: 10px;
+}
+.service_div {
+    width: 39%;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+.existing_cust_div {
+    width: 87%;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+.start_icon_div,.existing_service_icon,.staff_icon_div,.duration_icon_div {
+    float: left;
+    margin-left: 10px;
+}
+.staff_div {
+    width: 39%;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+.resource_div {
+    width: 30%;
+    float: left;
+    margin-left: 10px;
+}
+.customer_div {
+    width: 40%;
+    float: left;
+    margin-left: 0px;
+}
+.update_time {
+    text-transform: uppercase;
+    font-weight: 501;
+    border-radius: 0px;
+    background: #94b53b;
+    color: black;
+    transition: all 0.5s ease;
+    text-align: center;
+    height: 31px;
+}
+.update_time:hover {
+    background: #d9f4a3;
+}
+.duration_start, .duration_end {
+    border-radius: 0px;
+}
+select.services, input.duration, select.staff, input.customer_name, input.notes_remarks, input.customer_new_name, input.customer_new_phone,select.customer_new_dob_day,select,customer_new_dob_month, input.customer_type {
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+}
+.o_calendar_quick_create {
+padding:59px;}
+input.notes_remarks { width: 250px; height: 70px;  }
+select.modal_scheduler_hour{
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+    width: 46%;
+    float: left;
+}
+select.modal_scheduler_minute{
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+    width: 46%;
+    float: right;
+}
+.select2-choices {
+    width: 253px;
+    margin-top: 0px !important;
+    border-radius: 2px !important;
+    background: white !important;
+    border: 2px solid blue  !important;
+}
+.staff{
+    width: 100%;
+    float: right;
+    margin-bottom: 3px;
+    border: 2px solid blue;
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+}
+.services{
+    width: 100%;
+    float: left;
+    margin-bottom: 3px;
+    border: 2px solid blue;
+    border-radius: 0px;
+    height: 34px;
+    background: white;
+}
+@media only screen and (max-width: 824px) {
+    .o_calendar_sidebar_container.hidden-xs {
+        margin-top: 354px;
+        position: absolute !important;
+        display: block !important;
+        margin-left: 5%;
+    }
+}

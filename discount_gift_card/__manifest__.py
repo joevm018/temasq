@@ -1,0 +1,45 @@
+{
+    "name"          : "Discount Gift Card + Package Card",
+    "version"       : "1.0",
+    "author"        : "Al Kidhma Group",
+    "website"       : "",
+    "category"      : "Point of Sale",
+    "license"       : "LGPL-3",
+    "summary"       : "Discount Gift Card + Package Card",
+    "description"   : """
+        Discount Gift Card  + Package Card
+    """,
+    "depends"       : [
+        "calendar_scheduler",
+        "discounts_in_pos",
+        "pos_staff",
+        "student_card",
+    ],
+    "data"          : [
+        # 'templates.xml',
+        "data/point_of_sale_data.xml",
+        'security/ir.model.access.csv',
+        "wizard/buy_gift_card.xml",
+        "wizard/redeem_gift_card.xml",
+        "wizard/report_card_status.xml",
+        "views/combo_product.xml",
+        "views/combo_session.xml",
+        "views/pos_order.xml",
+        "views/invoice.xml",
+        "views/customer_gift_card.xml",
+        "reports/order_report_template.xml",
+        "reports/report_card_status.xml",
+        "reports/reports.xml",
+    ],
+    "demo"          : [],
+    "test"          : [],
+    "images"        : [],
+    'qweb': [
+        # 'static/src/xml/discount_card.xml'
+        ],
+    "css"           : [],
+    "sequence"   : 1,
+    "application"   : True,
+    "installable"   : True,
+    "auto_install"  : False,
+}

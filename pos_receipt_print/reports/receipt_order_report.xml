@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_pos_receipt" inherit_id="beauty_pos.report_pos_receipt">
+            <xpath expr="//tr[@class='emph']" position="after">
+                <tr class="advance_paid" t-if="o.total_advance and o.total_balance">
+                    <td colspan="2">&#160;</td>
+                </tr>
+                <tr class="advance_paid" t-if="o.total_advance and o.total_balance">
+                    <td><b>Advance:</b></td>
+                    <td class="text-right">
+                        <b><t t-esc="o.total_advance" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                    </td>
+                </tr>
+                <tr class="advance_paid" t-if="o.total_advance and o.total_balance">
+                    <td><b>Due:</b></td>
+                    <td class="text-right">
+                        <b><t t-esc="o.total_balance" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                    </td>
+                </tr>
+            </xpath>
+            <xpath expr="//t[@t-if='o.session_id.config_id.receipt_footer']" position="before">
+                <div style='text-align:center'>
+                    Receipt no: <t t-esc="o.pos_reference"/><br />
+                    <t t-if="o.date_order">
+                        Date:<t t-esc="o.date_order" t-options="{'widget': 'datetime'}"/><br />
+                    </t>
+                    <br/>
+                    We loved having you at Organique<br/>
+                    Refunds must be made within 7 days<br/>
+                    More Details:www.organique.qa<br/>
+                </div>
+            </xpath>
+            <xpath expr="//table[@class='receipt-paymentlines']" position="replace">
+                <table class='receipt-paymentlines' style="width: 100%;font-weight: bold;">
+                    <t t-foreach="o.statement_ids" t-as="line">
+                        <tr t-if="line.amount&gt;0">
+                            <td>
+                                <t t-if="line.journal_id">
+                                    <t t-esc="line.journal_id.name"/>
+                                </t>
+                            </td>
+                            <td class="text-right" t-if="o.total_advance">
+                                <t t-esc="line.date"  t-options='{"widget": "date"}'/>
+                            </td>
+                            <td class="text-right">
+                                <t t-esc="line.amount" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                <br/>
+                <table class='receipt-change-paymentlines' style="width: 100%;font-weight: bold;">
+                    <t t-foreach="o.statement_ids" t-as="change_line">
+                        <tr t-if="change_line.amount&lt;0">
+                            <td>
+                                Change:
+                            </td>
+                            <td class="text-right">
+                                <t t-esc="-1*change_line.amount" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </xpath>
+            <xpath expr="//table[@class='receipt-orderlines']" position="replace">
+                <table class='receipt-orderlines' style="width: 100%;font-weight: bold;">
+                    <colgroup>
+                        <col width='36%' />
+                        <col width='14%' />
+                        <col width='12%' />
+                        <col width='19%' />
+                        <col width='19%' />
+                    </colgroup>
+                    <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <strong>Description</strong>
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <strong>Staff</strong>
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <strong>Qty</strong>
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <strong>Amt</strong>
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <strong>After Disc.</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-set="sub_total" t-value="0" />
+                    <t t-foreach="o.lines" t-as="orderline">
+                        <tr>
+                            <td style="text-align:left;" colspan="5">
+                                <t t-if="orderline.product_id.default_code">
+                                    <t t-esc="orderline.product_id.name+ '/' + orderline.product_id.default_code"/>
+                                </t>
+                                <t t-else="1">
+                                    <t t-esc="orderline.product_id.name"/>
+                                </t>
+                                <t t-if="orderline.discount > 0">
+                                    <div class="pos-disc-font">
+                                        With a <t t-esc="orderline.discount"/>% discount
+                                    </div>
+                                </t>
+                            </td>
+                        </tr>
+                        <!--<tr style="border-bottom:1px solid grey;">-->
+                        <tr >
+                            <td style="text-align:left;" colspan="2">
+                                <t t-esc="orderline.staff_assigned_id.name"/>
+                            </td>
+                            <td style="text-align:center;">
+                                <t t-esc="int(orderline.qty)"/>
+                            </td>
+                            <td style="" class="text-right">
+                                <t t-set="sub_total" t-value="sub_total+ (orderline.qty*orderline.price_unit)"/>
+                                <t t-esc="orderline.qty*orderline.price_unit"/>
+                            </td>
+                            <td style="" class="text-right">
+                                <t t-esc="orderline.price_subtotal_incl"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </xpath>
+            <xpath expr="//div[@class='page']/div" position="replace">
+                <div style="text-align: center;">
+                    <div style="width: 100%;text-align: center;">
+                        <img src='/web/binary/company_logo' style="width:35%;align:center;vertical-align:center;"/>
+                    </div>
+                    <div style="width: 100%; text-align: center;">
+                        <t t-if="o.company_id.name">
+                            <strong><t t-esc="o.company_id.name"/></strong><br />
+                        </t>
+                        <t t-if="o.company_id.phone">
+                            Phone: <t t-esc="o.company_id.phone"/><br />
+                        </t>
+                        <t t-if="o.partner_id">
+                            Customer: <t t-esc="o.partner_id.name"/><br />
+                        </t>
+                        <t t-if="o.cashier_name">
+                            Cashier: <t t-esc="o.cashier_name.name"/>
+                        </t>
+                        <t t-if="o.company_id.wifi_pswd">
+                            <br />Wifi Password: <t t-esc="o.company_id.wifi_pswd"/>
+                        </t>
+                        <!--<t t-esc="o.pos_reference"/><br />-->
+                        <!--<t t-if="o.date_order">-->
+                            <!--<t t-esc="o.date_order" t-options="{'widget': 'datetime'}"/><br />-->
+                        <!--</t>-->
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

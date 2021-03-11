@@ -1,0 +1,35 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+        <record id="view_service_count_report_wizard" model="ir.ui.view">
+            <field name="name">service.count.report.wizard.form</field>
+            <field name="model">service.count.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Service Count Report ">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="staff_assigned_id" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                            <field name="product_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="action_service_count_report" model="ir.actions.act_window">
+        <field name="name">Service Count Report</field>
+        <field name="res_model">service.count.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="service_count_report_menu" name="Service Count Report" action="action_service_count_report"
+                  parent="point_of_sale.menu_point_rep" sequence="6" groups="point_of_sale.group_pos_manager"/>
+
+</odoo>

@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_hammam_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Hammam
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h1" string="Muscular / Joint"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h1"/>
+                        </td>
+                        <td>
+                            <label for="h1"/>
+                        </td>
+                        <td>
+                            <field name="h2"/>
+                        </td>
+                        <td>
+                            <label for="h2"/>
+                        </td>
+                        <td>
+                            <field name="h3"/>
+                        </td>
+                        <td>
+                            <label for="h3"/>
+                        </td>
+                        <td>
+                            <field name="h4"/>
+                        </td>
+                        <td>
+                            <label for="h4"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h5" string="Illness / Tension"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h5"/>
+                        </td>
+                        <td>
+                            <label for="h5"/>
+                        </td>
+                        <td>
+                            <field name="h6"/>
+                        </td>
+                        <td>
+                            <label for="h6"/>
+                        </td>
+                        <td>
+                            <field name="h7"/>
+                        </td>
+                        <td>
+                            <label for="h7"/>
+                        </td>
+                        <td>
+                            <field name="h8"/>
+                        </td>
+                        <td>
+                            <label for="h8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h9"/>
+                        </td>
+                        <td>
+                            <label for="h9"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h10" string="High Risk"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h10"/>
+                        </td>
+                        <td>
+                            <label for="h10"/>
+                        </td>
+                        <td>
+                            <field name="h11"/>
+                        </td>
+                        <td>
+                            <label for="h11"/>
+                        </td>
+                        <td>
+                            <field name="h12"/>
+                        </td>
+                        <td>
+                            <label for="h12"/>
+                        </td>
+                        <td>
+                            <field name="h13"/>
+                        </td>
+                        <td>
+                            <label for="h13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h14"/>
+                        </td>
+                        <td>
+                            <label for="h14"/>
+                        </td>
+                        <td>
+                            <field name="h15"/>
+                        </td>
+                        <td>
+                            <label for="h15"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h16" string="Circulatory"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td>
+                            <field name="h16"/>
+                        </td>
+                        <td>
+                            <label for="h16"/>
+                        </td>
+                        <td>
+                            <field name="h17"/>
+                        </td>
+                        <td>
+                            <label for="h17"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h18" string="BODY SECTION"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td>
+                            <field name="h18"/>
+                        </td>
+                        <td>
+                            <label for="h18"/>
+                        </td>
+                        <td>
+                            <field name="h19"/>
+                        </td>
+                        <td>
+                            <label for="h19"/>
+                        </td>
+                        <td>
+                            <field name="h20"/>
+                        </td>
+                        <td>
+                            <label for="h20"/>
+                        </td>
+                        <td>
+                            <field name="h21"/>
+                        </td>
+                        <td>
+                            <label for="h21"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h22"/>
+                        </td>
+                        <td>
+                            <label for="h22"/>
+                        </td>
+                        <td>
+                            <field name="h23"/>
+                        </td>
+                        <td>
+                            <label for="h23"/>
+                        </td>
+                        <td>
+                            <field name="h24"/>
+                        </td>
+                        <td>
+                            <label for="h24"/>
+                        </td>
+                        <td>
+                            <field name="h25"/>
+                        </td>
+                        <td>
+                            <label for="h25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="h26"/>
+                        </td>
+                        <td>
+                            <label for="h26"/>
+                        </td>
+                        <td>
+                            <field name="h27"/>
+                        </td>
+                        <td>
+                            <label for="h27"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h29"/>
+                </h2>
+                <field name="h29" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="h30" attrs="{'invisible':[('h29', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h31"/>
+                </h2>
+                <field name="h31" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="h32" attrs="{'invisible':[('h31', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h52"/>
+                </h2>
+                <field name="h52" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h53"/>
+                </h2>
+                <field name="h53" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h54"/>
+                </h2>
+                <field name="h54" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h55"/>
+                </h2>
+                <field name="h55" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h56"/>
+                </h2>
+                <field name="h56" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h57" string="Health status الحالة الصحية"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h57"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h57" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h58"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h58" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h59"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h59" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h60"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h60" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h61"/>
+                            </h2>
+                        </td>
+                        <td style="width: 8%;"/>
+                        <td>
+                            <field name="h61" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h62"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h62" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h63"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h63" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h64"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h64" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h65" string="Available types of Hammam أنواع الحمام المتوفرة"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h65"/>
+                            </h2>
+                        </td>
+                        <td style="width: 8%;"/>
+                        <td>
+                            <field name="h65" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h66"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h66" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h67"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h67" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h68"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h68" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;">
+                                <label for="h681"/>
+                            </h2>
+                        </td>
+                        <td/>
+                        <td>
+                            <field name="h681" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h682"/>
+                </h2>
+                <field name="h682" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="h69"/>
+                </h2>
+                <field name="h69" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    Special box for customers:
+                    <br/>
+                    <br/>
+                    I confirm that all the information I have obtained is correct.
+                    <br/>
+                    I confirm that the therapist gave me all the required information regarding the bathroom.
+                    <br/>
+                    I confirm that I agree to operate the bathroom at my full responsibility.
+                    <br/>
+                    I confirm that all the information I have provided about my health condition is correct.
+                    <br/>
+                </h4>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    خانة خاصة بالزبائن:
+                    <br/>
+                    <br/>
+                    أؤكد أن جميع المعلومات التي حصلت عليها صحيحة.
+                    <br/>
+                    أؤكد أن المعالج قد أعطاني كل المعلومات المطلوبة فيما يتعلق بالحمام.
+                    <br/>
+                    أؤكد على موافقتي على عمل الحمام على مسؤوليتي الكاملة.
+                    <br/>
+                    أؤكد أن جميع المعلومات التي قدمتها عن حالتي الصحية صحيحة.
+                    <br/>
+                    <br/>
+                </h4>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="h70"/>
+                        </td>
+                        <td>
+                            <field name="h70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="h71"/>
+                        </td>
+                        <td>
+                            <field name="h71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_hammam" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_hammam_wizard"/>
+        <field name="context">{'default_type':'hammam'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_hammam" name="HAMMAM" action="action_consent_hammam"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

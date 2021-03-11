@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model = "ir.ui.view" id = "view_order_form_foc">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="make_helpdesk_invisible" position="after">
+                    <field name="make_advance_visible" invisible="1"/>
+                </field>
+                <xpath expr="//button[@name='print_bill']" position="after">
+                    <button name="print_deposit_receipt" string="Print Deposit Bill(Big)" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('make_helpdesk_invisible','=',False),('make_advance_visible','=',False)]}"/>
+                    <button name="print_deposit_receipt_small" string="Print Deposit Bill(Small)" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('make_helpdesk_invisible','=',False),('make_advance_visible','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_consent_tips_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Customer Tips
+                    </h1>
+                </div>
+                <field name="type" invisible="1"/>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    عزيزتي اليك بعض النصائح التي من شانها الحفاظ على رموشك المركبة خلال الوقت الافتراضي بعد تركيبها
+                    <br/>
+                    Dear, here are some tips that keep your lashes in good shape during their life span
+                    <br/>
+                    <br/>
+                    • Do not get your lashes extensions wet within the 24 hours after application.
+                    <br/>
+                    يجب عدم غسل الوجه او تعريض الرموش المركبة للمياه مباشرة خلال 24 ساعة بعد التطبيق.
+                    <br/>
+                    <br/>
+
+                    • Do not use any cosmetic product or cleanser containing oil and remove makeup with caution also.
+                    <br/>
+                    لا تستخدمي اي منتج تجميلي او منظف يحتوي على زيت كما يجب ازالة المكياج بحذر.
+                    <br/>
+                    <br/>
+
+                    • Do not use any kind of mascara because it can shorten the life span of the extensions.
+                    <br/>
+                    يمنع منعا باتا استخدام استخدام اي نوع من المسكارا لان استخدامها قد يقصر العمر الافتراضي للرموش
+                    المركبة.
+                    <br/>
+                    <br/>
+
+                    • Do not use a lash curler.
+                    <br/>
+                    لا تستخدمي اداة ثني الرموش.
+                    <br/>
+                    <br/>
+
+                    • Avoid piking pulling or twisting your extensions.
+                    <br/>
+                    تجنبي شد او ثني او قطع الرموش المركبة.
+                    <br/>
+                    <br/>
+
+                    • Do avoid rubbing your eyes.
+                    <br/>
+                    تجنبي فرك عينيك.
+                    <br/>
+                    <br/>
+
+                    • Do visit your lash artist for touch-ups every 2-3 week.
+                    <br/>
+                    من المهم زيارة فني الرموش للمراجعة كل اسبوعين او ثلاثة اسابيع.
+                    <br/>
+                    <br/>
+
+                    • Sleep on your back.
+                    <br/>
+                    النوم على الظهر.
+                    <br/>
+
+                </h4>
+                <br/>
+                <br/>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_tips" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_tips_wizard"/>
+        <field name="context">{'default_type':'customer_tips'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_tips" name="CUSTOMER TIPS" action="action_consent_tips"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

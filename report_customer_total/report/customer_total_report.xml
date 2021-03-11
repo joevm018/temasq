@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="customer_total_report">
+    <t t-call="report.html_container">
+        <t t-call="beauty_pos.internal_layout">
+             <div class="page">
+                 <div class="text-center">
+                    <br/>
+                    <br/>
+                    <br/>
+                     <center>
+                         <h2>Customer Total Report</h2>
+                         <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Period From</strong></td>
+                                        <td>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Period To</strong></td>
+                                        <td>: <span t-esc="date_stop" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Type</strong></td>
+                                        <td>:
+                                            <t t-if="product_type_name">
+                                                <span t-esc="product_type_name"/>
+                                            </t>
+                                            <t t-else="">
+                                                All
+                                            </t>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table class="table table-striped" width="100%">
+                                <colgroup>
+                                    <col width='10%'/>
+                                    <col width='40%'/>
+                                    <col width='20%'/>
+                                    <col width='10%'/>
+                                    <col width='20%'/>
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <tr>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Phone</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Count</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total Money</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="appointment_tbody" >
+                                    <t t-set="i" t-value="1" />
+                                    <t t-set="tot_cust_amount" t-value="0" />
+                                    <t t-set="tot_cust_sales" t-value="0" />
+                                    <t t-foreach="count_list" t-as="each_customer">
+                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <t t-set="tot_cust_amount" t-value="tot_cust_amount+each_customer['total_cust_amount']" />
+                                            <t t-set="tot_cust_sales" t-value="tot_cust_sales+each_customer['total_cust_sales']" />
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center"><b><span t-esc="i"/></b><t t-set="i" t-value="i+1"/></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b><span t-esc="each_customer['customer']"/></b></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b><span t-esc="each_customer['customer_phone']"/></b></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="each_customer['total_cust_sales']"/></b></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="each_customer['total_cust_amount']"/></b></td>
+                                        </tr>
+                                        <t t-if="is_detailed">
+                                            <tr t-foreach="each_customer['list_order']" t-as="order_lines" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:right" />
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center" ><span t-esc="order_lines.name"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="order_lines.date_order"  t-options='{"widget": "datetime"}'/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:right" />
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:right"><span t-esc="order_lines.amount_total"/></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="3"><b>Total:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="tot_cust_sales"/></b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="tot_cust_amount"/></b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          <div class="pull-right">
+                            <strong>Authorized Signature</strong>
+                        </div>
+                     </center>
+                 </div>
+             </div>
+        </t>
+        </t>
+    </template>
+
+    <report id="report_customer_total_report"
+            model="stock.move"
+            string="Customer Total Report"
+            report_type="qweb-pdf"
+            name="report_customer_total.customer_total_report"
+            file="report_customer_total.customer_total_report"
+            menu="False"
+    />
+
+    <record id="report_customer_total_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    
+
+</odoo>

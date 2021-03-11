@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+
+        <record model="ir.sequence" id="seq_voucher_income">
+            <field name="name">Income Sequence</field>
+            <field name="code">voucher.income</field>
+            <field name="prefix">INC%(range_year)s</field>
+            <field name="padding">3</field>
+        </record>
+
+        <record model="ir.sequence" id="seq_voucher_expense">
+            <field name="name">Expense Sequence</field>
+            <field name="code">voucher.expense</field>
+            <field name="prefix">EXP%(range_year)s</field>
+            <field name="padding">3</field>
+        </record>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,38 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <data>
+        <record id="view_consumption_record_inherit" model="ir.ui.view">
+            <field name="name">consumption.record.search.inherit</field>
+            <field name="model">consumption.record</field>
+            <field name="inherit_id" ref="consumable_management.view_consumption_record_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='staff_id']" position="replace">
+                    <field name="staff_ids"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="consumption_record_tree_inherit" model="ir.ui.view">
+            <field name="name">consumption.record.tree.inherit</field>
+            <field name="model">consumption.record</field>
+            <field name="inherit_id" ref="consumable_management.consumption_record_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='staff_id']" position="replace">
+                    <field name="staff_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="consumption_record_form_inherit" model="ir.ui.view">
+            <field name="name">consumption.record.form.inherit</field>
+            <field name="model">consumption.record</field>
+            <field name="inherit_id" ref="consumable_management.consumption_record_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='staff_id']" position="replace">
+                    <field name="staff_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

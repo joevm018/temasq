@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="inherited_hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="beauty_soft.form_staff_registration"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="after">
+                <div class="oe_title">
+                    <h1>
+                        <field name="full_name" placeholder="Full Name"/>
+                    </h1>
+                </div>
+            </div>
+            <field name="name" position="attributes">
+                <attribute name="string">Short Name</attribute>
+            </field>
+            <field name="employee_no" position="attributes">
+                <attribute name="string">Employee No</attribute>
+            </field>
+            <field name="department_id" position="before">
+                <field name="job_id" string="Position"/>
+            </field>
+            <field name="mobile_phone" position="attributes">
+                <attribute name="string">Mobile No</attribute>
+            </field>
+            <field name="mobile_phone" position="after">
+                <field name="working_hours"/>
+                <field name="address_home_id"/>
+                <field name="bank_account_id" string="Bank Account No"/>
+            </field>
+            <field name="department_id" position="after">
+                <field name="joining_date"/>
+                <field name="visa_details_status"/>
+            </field>
+            <xpath expr="//form/sheet/notebook" position="inside">
+                <page name="documents" string="Documents">
+                        <field name="document_ids" context="{'default_employee_id': active_id}">
+                            <tree string="Documents" editable="bottom">
+                                 <field name="name" style="width:70%%" string="ID&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />
+                                 <field name="employee_id" invisible="1"/>
+                                 <field name="document_type" string="Description &#160;&#160;&#160;"/>
+                                 <field name="file_name" invisible="1"/>
+                                 <field name="docs" widget="binary" filename="file_name" string="File&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"/>
+                                 <field name="issue_date"/>
+                                 <field name="expiry_date" attrs="{'required':[('remind_x_day_before','&gt;',0)]}"/>
+                                 <field name="remind_x_day_before" />
+                             </tree>
+                            <form string="Documents">
+                                 <group>
+                                     <group>
+                                         <field name="name"/>
+                                         <field name="employee_id" invisible="1"/>
+                                         <field name="document_type"/>
+                                         <field name="file_name" invisible="1"/>
+                                         <field name="docs" filename="file_name"/>
+                                     </group>
+                                     <group>
+                                         <field name="issue_date"/>
+                                         <field name="expiry_date"/>
+                                         <field name="remind_x_day_before"/>
+                                     </group>
+                                 </group>
+                            </form>
+                        </field>
+                   </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

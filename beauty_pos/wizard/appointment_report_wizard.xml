@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="appointment_report_wizard" model="ir.ui.view">
+            <field name="name">appointment.report.wizard</field>
+            <field name="model">appointment.report.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Book Report">
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                            <field name="staff_assigned_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="appointment_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_appointment_report" model="ir.actions.act_window">
+                <field name="name">Appointment Book Report</field>
+                <field name="res_model">appointment.report.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="appointment_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem 
+            id="menu_appointment_book_report"
+            name="Appointment Book Report" 
+            action="action_appointment_report"
+            parent="point_of_sale.menu_point_rep" sequence="1"/>
+
+    </data>
+</odoo>

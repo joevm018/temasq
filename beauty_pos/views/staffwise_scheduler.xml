@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_scheduler_timeline" model="ir.ui.view">
+        <field name="model">pos.order.line</field>
+        <field name="type">timeline</field>
+        <field name="arch" type="xml">
+            <timeline date_start="procedure_start"
+                      date_stop="procedure_stop"
+                      default_group_by="staff_assigned_id"
+                      event_open_popup="true"
+                      colors="#ec7063: checkin == false; #2ecb71: checkin == true;"/>
+                     <!-- colors="#ec7063: user_id == false; #2ecb71: kanban_state == 'done';"-->
+        </field>
+    </record>
+
+    <record id="action_scheduler" model="ir.actions.act_window">
+        <field name="name">Staffwise Scheduler</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">timeline</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_works_search"/>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new work.
+            </p><p>
+                Use this menu to browse previous works. To record new
+                works.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_scheduler" parent="beauty_soft.sub_menu_master" action="action_scheduler" sequence="3"/>
+
+</odoo>

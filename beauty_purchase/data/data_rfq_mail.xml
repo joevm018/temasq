@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'purchase'), ('name', '=', 'email_template_edi_purchase')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="purchase.email_template_edi_purchase" model="mail.template">
+            <field name="name">RFQ - Send by Email</field>
+            <field name="email_from">${(object.create_uid.email and '%s &lt;%s&gt;' % (object.create_uid.name, object.create_uid.email) or '')|safe}</field>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="purchase.report_purchase_quotation"/>
+            <field name="report_name">RFQ_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+                        <field name="body_html"><![CDATA[
+            <p>
+                Good Day! <br/>
+                Dear sir/Madam
+            ,</p>
+            <p>
+                <!--We would like to request for quotation for L.P.O  <strong>${object.name}</strong>-->
+                <!--amounting in <strong>${object.amount_total} ${object.currency_id.name}</strong>-->
+                <!--from ${object.company_id.name}.<br/>-->
+
+                I would be grateful if you could send me a quote for the following Inquiry
+                 (INQ.NO: <strong>${object.name}</strong> Dated  <strong>${object.date_order} </strong> ) <br/>
+
+                Please send us best rate with quotations within 2-3 days. <br/><br/>
+                I appreciate your prompt service in this regard. <br/>
+
+                Have a nice day!<br/><br/>
+                Thank you<br/>
+                Best regards,<br/>
+                <br/><br/>
+
+                <!--............................<br/>-->
+                <!--Storekeeper<br/>-->
+                <!--${object.company_id.name}<br/>-->
+                <!--Tel: ${object.company_id.phone}<br/>-->
+                <!--Email: ${object.company_id.email}<br/>-->
+            </p>
+            <!--<p>If you have any question, do not hesitate to contact us.</p>-->
+
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>
+

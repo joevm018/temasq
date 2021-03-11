@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report
+            id="pos_deposit_receipt_record_small"
+            model="pos.order"
+            string="POS Receipt"
+            report_type="qweb-pdf"
+            name="deposit_receipt_zaza.report_pos_deposit_receipt_small"
+            file="deposit_receipt_zaza.report_pos_deposit_receipt_small"
+            attachment_use="False"
+            menu="False"
+            paperformat="beauty_pos.paperformat_pos_receipt"
+          />
+
+        <template id="report_pos_deposit_receipt_small">
+            <t t-call="deposit_receipt_zaza.external_pos_deposit_inv_layout">
+                <t t-call="report.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page"
+                             style="text-align: center;font-family:Georgia, 'Times New Roman', Times, serif !important; font-size: 18px;">
+                            <br/>
+                            <table name="table master" width="100%">
+                                <colgroup>
+                                    <col width='30%'/>
+                                    <col width='70%'/>
+                                </colgroup>
+                                <tbody>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #000;">
+                                            <strong>APPOINTMENT DATE</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.date_order" t-options='{"widget": "datetime"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #000;">
+                                            <strong>CUSTOMER NAME</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #000;">
+                                            <strong>CUSTOMER PHONE</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #000;">
+                                            <strong>BILL NUMBER</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #000;">
+                                            <strong>PRINTED ON</strong>
+                                        </td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 style="color: #000;">
+                                <b>INVOICE</b>
+                            </h3>
+                            <br/>
+                            <table class='table receipt-orderlines' width="100%">
+                                <colgroup>
+                                    <col width='5%'/>
+                                    <col width='45%'/>
+                                    <col width='15%'/>
+                                    <col width='16%'/>
+                                    <col width='10%'/>
+                                    <col width='16%'/>
+                                </colgroup>
+                                <thead style="border-top: 1px solid #000;border-bottom: 1px solid #000;">
+                                    <tr style="border-top: 1px solid #000;border-bottom:1px solid #000;">
+                                        <th style="border-top: 1px solid #000;color: #000; border-bottom:1px solid #000;vertical-align:middle;text-align:center">
+                                            <strong>Sl No.</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #000;color: #000; border-bottom:1px solid #000;vertical-align:middle;text-align:center">
+                                            <strong>Item Name</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #000;color: #000; border-bottom:1px solid #000;vertical-align:middle;text-align:center">
+                                            <strong>Staff</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #000;color: #000; border-bottom:1px solid #000;vertical-align:middle;text-align:center">
+                                            <strong>Units</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #000;color: #000; border-bottom:1px solid #000;vertical-align:middle;text-align:center">
+                                            <strong>Net Total</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-set="sl_no" t-value="0"/>
+                                <t t-set="sub_total" t-value="0"/>
+                                <tr t-foreach="o.lines" t-as="orderline">
+                                    <t t-set="sl_no" t-value="sl_no+1"/>
+                                    <td style="text-align:center">
+                                        <t t-esc="sl_no"/>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="orderline.product_id.name"/>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="orderline.staff_assigned_id.name"/>
+                                    </td>
+                                    <t t-set="sub_total" t-value="sub_total+ (orderline.qty*orderline.price_unit)"/>
+                                    <td style="text-align:center;">
+                                        <t t-esc="int(orderline.qty)"/>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="'%.2f'% orderline.price_subtotal_incl"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid #000;border-bottom:1px solid #000;">
+                                    <td/>
+                                    <td/>
+
+                                    <td colspan="2" style="text-align:center;color: #000;">
+                                        <b>: QAR</b>
+                                    </td>
+                                    <td style="text-align:center;color: #000;">
+                                        <b>
+                                            <t t-esc="'%.2f'% o.amount_total"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <table name="master" class='receipt-paymentlines' width="100%">
+                                <colgroup>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th/>
+                                        <th/>
+                                        <th/>
+                                        <th/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color: #000;">Received</td>
+                                        <td colspan="3">:
+                                            <span t-esc="'%.2f'% o.total_paid"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #000;">Balance</td>
+                                        <td colspan="3">:
+                                            <span t-esc="'%.2f'% o.total_balance"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="color: #000;">
+                                            <br/>
+                                            <b>Mode of Payment :</b>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr t-foreach="o.statement_ids" t-as="line">
+                                        <td style="color: #000;">
+                                            <t t-if="line.journal_id">
+                                                <t t-esc="line.journal_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td colspan="3">:
+                                            <t t-esc="'%.2f'% line.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <br/>
+
+                            <div class="text-center" style="border-top: 1px solid black;color: #000;">
+                                <br/>
+                                <p>
+                                    This amount of deposit is not refundable or replaced for other services amount
+                                    <br/>
+هذا العربون لا يسترجع في اي حال من الاحوال ولا يستبدل بأي خدمات اخرى
+                                </p>
+                                <!--<t t-esc="o.session_id.config_id.receipt_footer"/>-->
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

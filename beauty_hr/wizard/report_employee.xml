@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_employee_list_report_wizard" model="ir.ui.view">
+            <field name="name">employee.report.form</field>
+            <field name="model">employee.report</field>
+            <field name="arch" type="xml">
+                <form string="Employee Summary Report">
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group/>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_employee_list_report_details" model="ir.actions.act_window">
+            <field name="name">Employee Summary Report</field>
+            <field name="res_model">employee.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="menu_employee_list_main"
+            name="Employee Summary Report"
+            action="action_employee_list_report_details"
+            sequence="5"
+            parent="hr.menu_hr_root"
+            groups="hr.group_hr_user,hr.group_hr_manager"/>
+
+</odoo>

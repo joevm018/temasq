@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017-20 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_discount_form" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+					<button string="Generate Barcode" type="object" class="oe_highlight" name="generate_barcode"
+							attrs="{'invisible': ['|',('type', '=', 'service'),('barcode', 'not in',('', False))]}"/>
+					<button string="Print Barcode" type="object" class="oe_highlight" name="print_barcode"
+							attrs="{'invisible': ['|',('type', '=', 'service'),('barcode', 'in',('', False))]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

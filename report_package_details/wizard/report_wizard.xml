@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_package_details_report_wizard" model="ir.ui.view">
+            <field name="name">package.details.report.form</field>
+            <field name="model">package.details.report</field>
+            <field name="arch" type="xml">
+                <form string="Package details Report">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="partner_id"/>
+                            <field name="is_detailed"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                            <field name="package_type"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_package_details_report_details" model="ir.actions.act_window">
+            <field name="name">Package details Report</field>
+            <field name="res_model">package.details.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="menu_package_details_main"
+            name="Package details Report"
+            action="action_package_details_report_details"
+            sequence="5"
+            parent="point_of_sale.menu_point_rep"
+            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+
+</odoo>

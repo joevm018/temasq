@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_redeem_gift_card_wizard" model="ir.ui.view">
+            <field name="name">redeem.gift.card.wizard</field>
+            <field name="model">redeem.gift.card.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Enter Card details">
+                    <group>
+                        <group>
+                            <field name="card_no" password="True"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                        </group>
+                        <field name="balance_line_ids" readonly="1" attrs="{'invisible':[('type','!=','type_package_card')]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="product_id"/>
+                                <field name="price"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="action_show_balance" string="Show Balance" type="object" class="btn-primary"
+                                attrs="{'invisible':[('type','!=','type_discount_gift_card')]}"/>
+                        <button name="action_confirm" string="Redeem" type="object" class="btn-primary"/>
+                        or
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_redeem_gift_card_wizard" model="ir.actions.act_window">
+            <field name="name">Redeem Cards</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">redeem.gift.card.wizard</field>
+            <field name="view_mode">form</field>
+             <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

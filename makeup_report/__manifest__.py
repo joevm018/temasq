@@ -1,0 +1,23 @@
+{
+    "name": "Makeup report",
+    "version": "1.0",
+    "author": "Al Kidhma Group",
+    "website": "",
+    "category": "Point of Sale",
+    "license": "LGPL-3",
+    "summary": "Makeup Report",
+    "description": """ """,
+    "depends": ['beauty_pos'],
+    "data": [
+        "views/makeup_wizard.xml",
+    ],
+    "demo": [],
+    "test": [],
+    "images": [],
+    'qweb': [],
+    "css": [],
+    "sequence": 1,
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}

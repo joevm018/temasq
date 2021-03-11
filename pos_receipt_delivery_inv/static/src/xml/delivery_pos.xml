@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_extend_template" inherit_id="point_of_sale.template">
+
+<t t-extend="ActionpadWidget">
+    <t t-jquery="button.pay" t-operation="after">
+        <button class="enter_delivery_details mode-button" style="font-weight: bold;width:100%;height:45px;">Delivery details</button>
+    </t>
+</t>
+
+<t t-name="DeliveryNotePopupWidget">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput">
+                <p class="title">Enter Delivery Details</p>
+                <div class="graphs"  style="width:100%;">
+                    <div class="graph_bar_text" style="width:40%;float: left;">
+                        <p class="title1">Delivery Note:</p>
+                        <p class="title2">Category:</p>
+                    </div>
+                    <div class="graph_bar" style="width:60%;float:right;">
+                        <input type='text' t-att-value="widget.options.delivery_note"/>
+                        <br/>
+                        <br/>
+                        <select class="delivery_category" id="delivery_category" style="width:80%;">
+                            <option value="">Select...</option>
+                            <option value="HOME DELIVERY">HOME DELIVERY</option>
+                            <option value="SALES">SALES</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button confirm">
+                        Confirm
+                    </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="OrderWidget">
+        <t t-jquery="div.subentry" t-operation="after">
+            <div class='subentry'><span class="value_delivery_note"></span></div>
+            <div class='subentry'><span class="value_delivery_category"></span></div>
+        </t>
+    </t>
+
+    <t t-extend="PaymentScreenWidget">
+        <t t-jquery="div.js_set_customer" t-operation="after">
+            <t t-if='widget.pos.get_order()'>
+                <div t-attf-class='button js_print_bill #{ widget.pos.get_order().is_to_print_bill() ? "highlight" : ""} '>
+                    <i class='fa fa-file-text-o' /> Print Bill
+                </div>
+            </t>
+        </t>
+    </t>
+    <!--<t t-extend="PosTicket">-->
+        <!--<t t-jquery=".pos-sale-ticket" t-operation="replace">-->
+            <!--<div class="pos-sale-ticket" style="font-weight: bold;color:black;font-family: 'Arial';font-size: 10px;">-->
+                <!--<div class="header-main-company">-->
+                    <!--<div style="text-align: center;font-weight: bold;color:black;" class="header-main-company">-->
+                        <!--<div style="width: 100%;text-align: center;">-->
+                            <!--<img src='/web/binary/company_logo' style="width:35%;align:center;vertical-align:center;"/>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<div style="width: 100%; text-align: center;">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<t t-if="widget.pos.company.name">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<strong><t t-esc="widget.pos.company.name"/></strong><br />&ndash;&gt;-->
+                            <!--&lt;!&ndash;</t>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--<h2><b>INVOICE</b></h2>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<table name="master" width="100%">-->
+                    <!--<colgroup>-->
+                        <!--<col width='20%' />-->
+                        <!--<col width='20%' />-->
+                        <!--<col width='30%' />-->
+                        <!--<col width='30%' />-->
+                    <!--</colgroup>-->
+                    <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th/>-->
+                            <!--<th/>-->
+                            <!--<th/>-->
+                            <!--<th/>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td><strong>DATE</strong></td>-->
+                            <!--<td>: <t t-esc="moment().format('DD/MM/YYYY')"/></td>-->
+                            <!--&lt;!&ndash;<td>: <t t-esc="moment().format('DD-MM-YYYY LT')"/></td>&ndash;&gt;-->
+                            <!--<td><strong>INVOICE DELIVERY NOTE</strong></td>-->
+                            <!--<td>: <span t-esc="order.get_delivery_note_order()"/></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><strong>TELEPHONE</strong></td>-->
+                            <!--<td>:-->
+                                <!--<t t-if="widget.pos.get_client()">-->
+                                    <!--<t t-esc="widget.pos.get_client().phone || ''"/>-->
+                                <!--</t>-->
+                            <!--</td>-->
+                            <!--<td><strong>CATEGORY</strong></td>-->
+                            <!--<td>:-->
+                                <!--<span t-esc="order.get_delivery_category_order()"/>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                           <!--<td colspan="2"><strong>CLIENT</strong></td>-->
+                            <!--<td colspan="2">:-->
+                                <!--<t t-if="order.get_client()">-->
+                                    <!--<t t-esc="order.get_client().name"/>-->
+                                <!--</t>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="2"><strong>CONTACT PERSON</strong></td>-->
+                            <!--<td colspan="2">: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/></td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <!--<table class='receipt-orderlines'>-->
+                    <!--<colgroup>-->
+                        <!--<col width='18%' />-->
+                        <!--<col width='40%' />-->
+                        <!--<col width='10%' />-->
+                        <!--<col width='16%' />-->
+                        <!--<col width='16%' />-->
+                    <!--</colgroup>-->
+                    <!--<thead style="border-top: 1px solid black;border-bottom: 1px solid black;">-->
+                        <!--<tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+                            <!--<th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                                <!--<strong>SERIAL ITEM NO.</strong>-->
+                            <!--</th>-->
+                            <!--<th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                                <!--<strong>ITEM NAME</strong>-->
+                            <!--</th>-->
+                            <!--<th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                                <!--<strong>Value (QR)</strong>-->
+                            <!--</th>-->
+                            <!--<th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                                <!--<strong>No. of Units</strong>-->
+                            <!--</th>-->
+                            <!--<th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                                <!--<strong>Total (QR)</strong>-->
+                            <!--</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<t t-set="sub_total" t-value="0" />-->
+                    <!--<tr t-foreach="orderlines" t-as="orderline" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+                        <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center" >-->
+                        <!--</td>-->
+                        <!--<td class="pos-left-align" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >-->
+                           <!--<t t-esc="orderline.get_product().display_name"/>-->
+                        <!--</td>-->
+                        <!--<td class="pos-right-align" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >-->
+                            <!--<t t-set="sub_total" t-value="sub_total+ (orderline.get_new_get_unit_price_qty())"/>-->
+                            <!--<t t-esc="orderline.get_new_get_unit_price_qty_decimal_2()"/>-->
+                        <!--</td>-->
+                        <!--<td class="pos-right-align" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000" >-->
+                            <!--<t t-esc="orderline.get_quantity()"/>-->
+                        <!--</td>-->
+                        <!--<td class="pos-right-align" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000" >-->
+                            <!--&lt;!&ndash;<t t-esc="orderline.get_display_price()"/>&ndash;&gt;-->
+                            <!--<t t-esc="orderline.get_display_price_decimal_2()"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr >-->
+                        <!--<td />-->
+                        <!--<td class="pos-left-align"  >-->
+                           <!--TOTAL (QR)-->
+                        <!--</td>-->
+                        <!--<td  colspan="2"/>-->
+                        <!--<td class="pos-right-align" >-->
+                            <!--<t t-esc="order.get_total_with_tax()"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+
+                <!--<br />-->
+                <!--<table class='receipt-total'>-->
+                    <!--<tr>-->
+                        <!--<td>Prepared by:</td>-->
+                        <!--<td class="pos-right-align">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</t>-->
+  <!--</t>-->
+</templates>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.sequence" id="seq_appontment_salon">
+            <field name="name">Appontment Salon Sequence</field>
+            <field name="code">appontment.salon</field>
+            <field name="prefix">APPT</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

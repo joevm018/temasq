@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         
+        <record id="item_move_form_vieww" model="ir.ui.view">
+            <field name="name">item.move.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_internal_transfer" invisible="1"/>
+                    <field name="staff_id" attrs="{'invisible': [('is_internal_transfer','=',False)]}"/>
+                </xpath>
+                 <xpath expr="//field[@name='origin']" position="after">
+                    
+                    <field name="note" attrs="{'invisible': [('is_internal_transfer','=',False)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    
+                   <attribute name="attrs">{'invisible':[('is_internal_transfer', '=', True)]}</attribute>
+                </xpath>
+
+
+
+            </field>
+        </record>
+        
+        <record id="view_item_move_search" model="ir.ui.view">
+            <field name="name">stock.picking.internal.search</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <search string="Picking Lists">
+                    <field name="name" string="Picking List" filter_domain="['|',('name','ilike', self),('origin','ilike',self)]"/>
+                    <filter name="available" string="Ready" domain="[('state','in',('assigned', 'partially_available'))]" help="Assigned Moves"/>
+                    <filter name="waiting" string="Waiting Availability" domain="[('state','in', ('confirmed', 'waiting'))]" help="Waiting Moves"/>
+                    <filter name="confirmed" string="Confirmed" domain="[('state','in', ('confirmed', 'waiting', 'assigned'))]" help="Confirmed Moves"/>
+                    <filter name="done" string="Done" domain="[('state','=','done')]" help="Pickings already processed"/>
+                    <separator/>
+                    <filter name="late" string="Late" domain="[('min_date','&lt;', time.strftime('%%Y-%%m-%%d %%H:%%M:%%S'))]" help="Pickings that are late on scheduled time"/>
+                    <separator/>
+                    <filter name="backorder" string="Backorders" domain="[('backorder_id','&lt;&gt;', False)]" help="Remaining parts of picking partially processed"/>
+                     <field name="location_id" string="Source Location"/>
+                    <field name="staff_id" string="Staff" />
+                    <field name="product_id" string="Product"/>
+                    <field name="location_dest_id" string="Destination Location"/>
+                    <field name="note" string="Notes"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Order Date" domain="[]"  context="{'group_by':'date'}"/>
+                        <filter string="Expected Date" domain="[]"  context="{'group_by':'min_date'}"/>
+                        <filter string="Origin" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter name="picking_type" string="Picking Type" domain="[]" context="{'group_by':'picking_type_id'}"/>
+                        <filter string="Procurement Group" domain="[]" context="{'group_by':'group_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_item_move_all" model="ir.actions.act_window">
+            <field name="name">Stock Operations</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_internal_transfer','=',1)]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+                    'default_picking_type_id':5,
+            }
+            </field>
+            <field name="search_view_id" ref="view_item_move_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="all_item_move" 
+                name="Item Moves" 
+                parent="product_expiry_alert.menu_beautysoft_inventory" 
+                sequence="1" 
+                action="action_item_move_all" 
+                />
+
+
+
+
+  </data>
+ </odoo>   	

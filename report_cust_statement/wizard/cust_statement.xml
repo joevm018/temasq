@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cust_statement_wizard" model="ir.ui.view">
+            <field name="name">cust.statement.report</field>
+            <field name="model">cust.statement.report</field>
+            <field name="arch" type="xml">
+                <form string="Customer/Vendor Statement">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="partner_type" />
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="partner_ids" widget="many2many_tags" options="{'no_create': True}"
+                                attrs="{'invisible': [('partner_type', 'not in', ('Customer', 'Vendor'))]}"/>
+                                <!--attrs="{'invisible': [('partner_type', 'not in', ('Customer', 'Vendor'))],'required': [('partner_type', 'in', ('Customer', 'Vendor'))]}"/>-->
+                            <field name="account_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_cust_statement_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cust_statement" model="ir.actions.act_window">
+                <field name="name">Customer/Vendor Statement</field>
+                <field name="res_model">cust.statement.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="cust_statement_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_cust_statement_report" name="Customer/Vendor Statement" action="action_cust_statement"
+                  parent="account.menu_finance_legal_statement" sequence="1"/>
+
+    </data>
+</odoo>

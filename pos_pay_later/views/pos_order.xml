@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model = "ir.ui.view" id = "view_order_form_enhanced">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_check_in']" position="after">
+                        <button name="action_pos_order_validated_invoice" string="Invoice" type="object" states="paid"
+                                 class="oe_highlight"
+                                groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                                attrs="{'readonly': [('partner_id','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='negative_entry']" position="after">
+                    <field name="invoice_id" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                        attrs="{'invisible':[('state','!=','invoiced')]}" readonly="1"/>
+                    <field name="invoice_due_amt" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                           attrs="{'invisible': [('invoice_id','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pos_order_tree_inherited" model="ir.ui.view">
+            <field name="name">pos.order.tree</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="pos_daily_report.pos_order_tree_inherited"/>
+            <field name="arch" type="xml">
+                <field name="cash_amt" position="after">
+                    <field name="pay_later_amt" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

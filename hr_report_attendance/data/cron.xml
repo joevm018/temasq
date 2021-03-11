@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_attendance_report_mail_notification_today" model="ir.cron">
+            <field name="name">Todays Attendance Report Mail Notification </field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 19:00:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model">hr.employee</field>
+            <field name="function">attendance_report_alert_mail_today</field>
+            <field name="args" eval="'()'" />
+      </record>
+
+
+      <record id="ir_cron_attendance_report_mail_notification_yesterday" model="ir.cron">
+            <field name="name">Yesterday's Attendance Report Mail Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model">hr.employee</field>
+            <field name="function">attendance_report_alert_mail_yesterday</field>
+            <field name="args" eval="'()'" />
+      </record>
+
+
+    </data>
+</odoo>

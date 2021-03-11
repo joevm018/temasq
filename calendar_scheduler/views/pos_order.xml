@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model = "ir.ui.view" id = "view_works_form_enhanced">
+        <field name="name">pos.order.line.form</field>
+        <field name="model">pos.order.line</field>
+        <field name="inherit_id" ref="beauty_pos.view_works_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <notebook>
+                    <page string="Notes" >
+                        <field name="note"/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

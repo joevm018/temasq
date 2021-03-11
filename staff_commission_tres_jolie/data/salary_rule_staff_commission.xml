@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Adding a salary rule for staff commission-->
+	<data>
+		<record id="hr_rule_slab_staff_commission" model="hr.salary.rule">
+			<field name="name">Staff commission(Slab Wise)</field>
+			<field name="sequence" eval="50"/>
+			<field name="code">INCENTIVE</field>
+			<field name="category_id" ref="hr_payroll.ALW"/>
+			<field name="condition_select">none</field>
+			<field name="amount_select">code</field>
+			<field name="amount_python_compute">result = inputs.INCENTIVE and inputs.INCENTIVE.amount</field>
+		</record>
+
+		<!-- Rule Inputs -->
+
+        <record id="hr_rule_input_staff_commission" model="hr.rule.input">
+            <field name="code">INCENTIVE</field>
+            <field name="name">Staff Commission</field>
+            <field name="input_id" ref="hr_rule_slab_staff_commission"/>
+        </record>
+
+	</data>
+</odoo>

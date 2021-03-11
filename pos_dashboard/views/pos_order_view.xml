@@ -1,0 +1,88 @@
+<odoo>
+  <data>
+
+    <record id="view_pos_order_filter_inherit" model="ir.ui.view">
+        <field name="name">pos.order.search.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="date_order" position="after">
+                <filter string="Today" name="today" domain="[('date_order', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:01')), ('date_order', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]" help="Orders processed today"/>
+
+                <filter string="Cash Payment" name="cash" domain="[('is_cash_payment','=',True)]" help="Orders processed through cash"/>
+
+                <filter string="Bank Payment" name="bank" domain="[('is_bank_payment','=',True)]" help="Orders processed through bank"/>
+            </field>
+        </field>
+    </record>
+    <record id="action_pos_order_today_filter" model="ir.actions.act_window">
+        <field name="name">Today's POS Order</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_type">form</field>
+        <field name="search_view_id" ref="view_pos_order_filter_inherit"/>
+        <field name="context">{'search_default_today':1}</field>
+    </record>
+    <record id="action_pos_order_cash_filter" model="ir.actions.act_window">
+        <field name="name">Orders paid through cash</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('date_order', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')), ('date_order', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]</field>
+        <field name="search_view_id" ref="view_pos_order_filter_inherit"/>
+        <field name="context">{'search_default_cash':1}</field>
+    </record>
+    <record id="action_pos_order_bank_filter" model="ir.actions.act_window">
+        <field name="name">Orders paid through card</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('date_order', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')), ('date_order', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]</field>
+        <field name="search_view_id" ref="view_pos_order_filter_inherit"/>
+        <field name="context">{'search_default_bank':1}</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_pos_order_line_graph">
+        <field name="name">POS Order Line Graph</field>
+        <field name="model">pos.order.line</field>
+        <field name="arch" type="xml">
+            <graph string="POS Orders">
+                <field name="create_date"/>
+                <field name="price_subtotal_incl" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pos_order_line" model="ir.actions.act_window">
+        <field name="name">POS Order Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_pos_order_line_graph"/>
+        <field name="domain">[('create_date', '&gt;=', (context_today() - relativedelta(months=12)).strftime('%Y-%m-%d')), ('create_date', '&lt;=', (context_today().strftime('%Y-%m-%d')))]</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_pos_order_pie_graph">
+        <field name="name">POS Order Pie Graph</field>
+        <field name="model">pos.top.service</field>
+        <field name="arch" type="xml">
+            <graph string="POS Orders"  type="pie">
+                <field name="product_name"/>
+                <field name="no_of_products" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pos_order_pie" model="ir.actions.act_window">
+        <field name="name">POS Order Pie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.top.service</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_pos_order_pie_graph"/>
+    </record>
+    <!-- <menuitem
+        id="menu_pos_order_line"
+        action="action_pos_order_line"
+        parent="point_of_sale.menu_point_of_sale" sequence="4"/> -->
+
+  </data>
+</odoo>

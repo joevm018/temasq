@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_product_discount_gift_card" model="product.product">
+            <field name="name">Discount Gift Card</field>
+            <field name="standard_price">0.0</field>
+            <field name="list_price">0.0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <!--<field name="default_code">GIFT CARD</field>-->
+        </record>
+    </data>
+    <data>
+        <record id="product_product_student_card" model="product.product">
+            <field name="name">Student Card</field>
+            <field name="standard_price">0.0</field>
+            <field name="list_price">0.0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+        </record>
+
+        <record id="seq_discount_pos_card" model="ir.sequence">
+             <field name="name">customer pos Card</field>
+             <field name="code">pos.customer.card</field>
+             <field name="prefix">CARD_</field>
+             <field name="padding">4</field>
+             <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="appointment_report_wizard">
+            <field name="name">appointment.report.wizard</field>
+            <field name="model">appointment.report.wizard</field>
+            <field name="inherit_id" ref="beauty_pos.appointment_report_wizard"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state_appt"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

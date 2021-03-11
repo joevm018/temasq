@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_partner_details_wizard" model="ir.ui.view">
+            <field name="name">daily.collection.wizard.form</field>
+            <field name="model">daily.collection.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Daily Collection Report ">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="partner_id"/>
+                            <field name="show_details" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button name="email_report" string="Email Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="action_report_daily_collection" model="ir.actions.act_window">
+        <field name="name">Daily Collection Report</field>
+        <field name="res_model">daily.collection.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_daily_collection_report" name="Daily Collection Report" action="action_report_daily_collection"
+                  parent="point_of_sale.menu_point_rep" sequence="0" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+
+</odoo>

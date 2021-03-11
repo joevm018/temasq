@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="report_saledetails2">
+    <t t-call="report.html_container">
+    <t t-call="beauty_pos.internal_layout">
+    <div class="page">
+              <div class="text-center">
+                    <h2>Detailed Sale Details</h2>
+                    <strong><t t-esc="date_from"/> - <t t-esc="date_to"/></strong>
+                  <t t-if="user_id"><strong>Cashier : <t t-esc="user_id"/></strong></t>
+                </div>
+
+                <!-- Orderlines -->
+              <h3>Items</h3>
+              <table width="100%" class="table table-striped">
+                    <thead>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Item</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Quantity</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="consu" t-value="0"/>
+                        <t t-set="consu_total" t-value="0"/>
+                        <t t-set="product" t-value="0"/>
+                        <t t-set="product_total" t-value="0"/>
+                        <t t-set="service" t-value="0"/>
+                        <t t-set="service_total" t-value="0"/>
+                    <tr t-foreach='products' t-as='line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <t t-if="line['type'] == 'consu'">
+                            <t t-if="consu == 0">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Consumable Product</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                </tr>
+                            </t>
+                            <t t-set="consu" t-value="1"/>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="line['product_name']"/></td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc="line['quantity']" />
+                                <t t-if='line["uom"] != "Unit(s)"'>
+                                    <t t-esc='line["uom"]' />
+                                </t>
+                            </td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc='line["price_subtotal_incl"]' />
+                            </td>
+                            <t t-set="consu_total" t-value="consu_total + line['price_subtotal_incl']"/>
+                        </t>
+                    </tr>
+                        <t t-if="consu == 1">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Consumable Total</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;" class="text-right"><strong><t t-esc='consu_total'/></strong></td>
+                                </tr>
+                            </t>
+                    <tr t-foreach='products' t-as='line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <t t-if="line['type'] == 'product'">
+                            <t t-if="product == 0">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Retail Product</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                </tr>
+                            </t>
+                            <t t-set="product" t-value="1"/>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="line['product_name']" /></td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc="line['quantity']" />
+                                <t t-if='line["uom"] != "Unit(s)"'>
+                                    <t t-esc='line["uom"]' />
+                                </t>
+                            </td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc='line["price_subtotal_incl"]' />
+                            </td>
+                            <t t-set="product_total" t-value="product_total + line['price_subtotal_incl']"/>
+                        </t>
+                    </tr>
+                        <t t-if="product == 1">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Retail Total</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;" class="text-right"><strong><t t-esc='product_total'/></strong></td>
+                                </tr>
+                            </t>
+
+                    <tr t-foreach='products' t-as='line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <t t-if="line['type'] == 'service'">
+                            <t t-if="service == 0">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Service</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                </tr>
+                            </t>
+                            <t t-set="service" t-value="1"/>
+
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="line['product_name']" /></td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc="line['quantity']" />
+                                <t t-if='line["uom"] != "Unit(s)"'>
+                                    <t t-esc='line["uom"]' />
+                                </t>
+                            </td>
+                            <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                <t t-esc='line["price_subtotal_incl"]' />
+                                <t t-set="service_total" t-value="service_total + line['price_subtotal_incl']"/>
+                            </td>
+                        </t>
+                    </tr>
+                        <t t-if="service == 1">
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>Service Total</i></strong></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                                    <td style="border-top: 1px solid black;border-bottom: 1px solid black;" class="text-right"><strong><t t-esc='service_total'/></strong></td>
+                                </tr>
+                            </t>
+
+                    </tbody>
+                </table>
+
+
+                <br/>
+
+                <h3>Staff Summary</h3>
+                <table  width="100%" class="table table-striped">
+                    <thead>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Consumables Sale</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Retail Sale</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Service Sale</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr t-foreach='staff_summary' t-as='staff_line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="staff_line['name']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['consu_value']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['product_value']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['service_value']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['amount']" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+              <br/>
+                <h3>Payment Mode Summary</h3>
+                <table width="100%" class="table table-striped">
+                    <t t-set="payment_total" t-value="0"/>
+                    <thead>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr t-foreach='payments' t-as='payment' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <t t-set="payment_total" t-value="payment_total+payment['total']"/>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="payment['name']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% payment['total']" /></td>
+                    </tr>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><strong>Total</strong></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><strong><t t-esc="'%.2f'% payment_total" /></strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--<br/>-->
+
+                <!--<h3>Taxes</h3>-->
+                <!--<table width="100%" class="table table-striped">-->
+                    <!--<thead>-->
+                        <!--<tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+                            <!--<th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>-->
+                            <!--<th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr t-foreach='taxes' t-as='tax' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+                        <!--<td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="tax['name']" /></td>-->
+                        <!--<td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="tax['total']" /></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+
+                <br/>
+                <br/>
+
+                <strong>Total: <t t-esc='total_paid'/></strong>
+
+              </div>    </t>
+    </t>
+</template>
+</data>
+</openerp>

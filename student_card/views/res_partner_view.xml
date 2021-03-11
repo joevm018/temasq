@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_partner_form_view" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="beauty_soft.form_todays_registration"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dob']" position="after">
+               <field name="is_student"/>
+               <field name="qatar_university_id" attrs="{'invisible':[('is_student','=', False)]}"/>
+               <field name="university_expiry_date" attrs="{'invisible':[('is_student','=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

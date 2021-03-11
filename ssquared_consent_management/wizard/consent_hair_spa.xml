@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_hair_spa_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Hair Spa
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s1" string="Skin / Body"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s1"/>
+                        </td>
+                        <td>
+                            <label for="s1"/>
+                        </td>
+                        <td>
+                            <field name="s2"/>
+                        </td>
+                        <td>
+                            <label for="s2"/>
+                        </td>
+                        <td>
+                            <field name="s3"/>
+                        </td>
+                        <td>
+                            <label for="s3"/>
+                        </td>
+                        <td>
+                            <field name="s4"/>
+                        </td>
+                        <td>
+                            <label for="s4"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s5"/>
+                        </td>
+                        <td>
+                            <label for="s5"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s6" string="Scalp"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s6"/>
+                        </td>
+                        <td>
+                            <label for="s6"/>
+                        </td>
+                        <td>
+                            <field name="s7"/>
+                        </td>
+                        <td>
+                            <label for="s7"/>
+                        </td>
+                        <td>
+                            <field name="s8"/>
+                        </td>
+                        <td>
+                            <label for="s8"/>
+                        </td>
+                        <td>
+                            <field name="s9"/>
+                        </td>
+                        <td>
+                            <label for="s9"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s10" string="Hair"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s10"/>
+                        </td>
+                        <td>
+                            <label for="s10"/>
+                        </td>
+                        <td>
+                            <field name="s11"/>
+                        </td>
+                        <td>
+                            <label for="s11"/>
+                        </td>
+                        <td>
+                            <field name="s12"/>
+                        </td>
+                        <td>
+                            <label for="s12"/>
+                        </td>
+                        <td>
+                            <field name="s13"/>
+                        </td>
+                        <td>
+                            <label for="s13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s14"/>
+                        </td>
+                        <td>
+                            <label for="s14"/>
+                        </td>
+                        <td>
+                            <field name="s15"/>
+                        </td>
+                        <td>
+                            <label for="s15"/>
+                        </td>
+                        <td>
+                            <field name="s16"/>
+                        </td>
+                        <td>
+                            <label for="s16"/>
+                        </td>
+                        <td>
+                            <field name="s17"/>
+                        </td>
+                        <td>
+                            <label for="s17"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s18"/>
+                        </td>
+                        <td>
+                            <label for="s18"/>
+                        </td>
+                        <td>
+                            <field name="s19"/>
+                        </td>
+                        <td>
+                            <label for="s19"/>
+                        </td>
+                        <td>
+                            <field name="s20"/>
+                        </td>
+                        <td>
+                            <label for="s20"/>
+                        </td>
+                        <td>
+                            <field name="s21"/>
+                        </td>
+                        <td>
+                            <label for="s21"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s22"/>
+                        </td>
+                        <td>
+                            <label for="s22"/>
+                        </td>
+                        <td>
+                            <field name="s23"/>
+                        </td>
+                        <td>
+                            <label for="s23"/>
+                        </td>
+                        <td>
+                            <field name="s24"/>
+                        </td>
+                        <td>
+                            <label for="s24"/>
+                        </td>
+                        <td>
+                            <field name="s25"/>
+                        </td>
+                        <td>
+                            <label for="s25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s26"/>
+                        </td>
+                        <td>
+                            <label for="s26"/>
+                        </td>
+                        <td>
+                            <field name="s27"/>
+                        </td>
+                        <td>
+                            <label for="s27"/>
+                        </td>
+                        <td>
+                            <field name="s28"/>
+                        </td>
+                        <td>
+                            <label for="s28"/>
+                        </td>
+                        <td>
+                            <field name="s29"/>
+                        </td>
+                        <td>
+                            <label for="s29"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="s30"/>
+                        </td>
+                        <td>
+                            <label for="s30"/>
+                        </td>
+                        <td>
+                            <field name="s31"/>
+                        </td>
+                        <td>
+                            <label for="s31"/>
+                        </td>
+                        <td>
+                            <field name="s32"/>
+                        </td>
+                        <td>
+                            <label for="s32"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s38"/>
+                </h2>
+                <field name="s38" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="s39" attrs="{'invisible':[('s38', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s44"/>
+                </h2>
+                <field name="s44" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="s45" attrs="{'invisible':[('s44', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s46"/>
+                </h2>
+                <field name="s46" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="s47" attrs="{'invisible':[('s46', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s48"/>
+                </h2>
+                <field name="s48" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="s49" attrs="{'invisible':[('s48', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s50"/>
+                </h2>
+                <field name="s50" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="s51" attrs="{'invisible':[('s50', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s52"/>
+                </h2>
+                <field name="s52" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s53"/>
+                </h2>
+                <field name="s53" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s54"/>
+                </h2>
+                <field name="s54" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s55"/>
+                </h2>
+                <field name="s55" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s56"/>
+                </h2>
+                <field name="s56" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s57"/>
+                </h2>
+                <field name="s57" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s58"/>
+                </h2>
+                <field name="s58" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="s59"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="s59" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="s60"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="s60" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="s61"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="s61" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="s62"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="s62" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h4>
+                    استنادا الى المعلومات السابقة ووفقا للحالة الصحية يرجى تحديد العلاج المناسب :
+                    <br/>
+                    Based on the above information and according to the current hair condition please select the
+                    appropriate treatment
+                </h4>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s63"/>
+                </h2>
+                <field name="s63" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s64"/>
+                </h2>
+                <field name="s64" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s65"/>
+                </h2>
+                <field name="s65" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s66"/>
+                </h2>
+                <field name="s66" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s67"/>
+                </h2>
+                <field name="s67" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s68"/>
+                </h2>
+                <field name="s68" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="s69"/>
+                </h2>
+                <field name="s69" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+
+                    The information you got is correct.
+                    <br/>
+                    I confirm that the therapist gave me all the required information regarding the treatment.
+                    <br/>
+                    I confirm my commitment to all the advice given to me to get a better result.
+                    <br/>
+                    I agree to all of the above.
+                    <br/>
+                    I assure that I have given all the right information regarding my hair.
+                    <br/>
+
+                </h4>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    المعلوماتالتي حصلت عليها صحيحة.
+                    <br/>
+                    أؤكد أن المعالج قد أعطاني كل المعلومات المطلوبة فيما يتعلق بالعلاج.
+                    <br/>
+                    أؤكد التزامي بجميع النصائح التي أعطيت لي للحصول على نتيجة أفضل.
+                    <br/>
+                    أؤكد موافقتي على كل ما سبق .
+                    <br/>
+                    أؤكد بأنني أعطيت جميع المعلومات الصحيحة فيما يتعلق بشعري.
+                    <br/>
+
+                </h4>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="s70"/>
+                        </td>
+                        <td>
+                            <field name="s70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="s71"/>
+                        </td>
+                        <td>
+                            <field name="s71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_hair_spa" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_hair_spa_wizard"/>
+        <field name="context">{'default_type':'hair_spa'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_hair_spa" name="HAIR SPA" action="action_consent_hair_spa"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

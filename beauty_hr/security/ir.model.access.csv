@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_document,employee_document,model_employee_document,,1,1,1,1
+access_document_type,document_type,model_document_type,,1,1,1,1
+access_visa_status,visa_status,model_visa_status,,1,1,1,1

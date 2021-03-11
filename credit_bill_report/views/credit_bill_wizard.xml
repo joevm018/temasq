@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_credit_bill_wizard" model="ir.ui.view">
+        <field name="name">credit.bill.wizard.form</field>
+        <field name="model">credit.bill.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Credit Bill Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="partner_id"/>
+                        <field name="data" readonly="1" filename="name" attrs="{'invisible':[('state','=','choose')]}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="user_id"/>
+                        <field name="name" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_excel_report" string="Excel" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_print_sales_credit_bill" model="ir.actions.act_window">
+        <field name="name">Credit Bill Report</field>
+        <field name="res_model">credit.bill.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_print_sales_credit_bill"
+            name="Credit Bill Report"
+            parent="point_of_sale.menu_point_rep"
+            sequence="10"
+            action="action_print_sales_credit_bill"
+    />
+</odoo>

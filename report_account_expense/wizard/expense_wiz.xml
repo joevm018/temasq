@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="expense_report_wizard" model="ir.ui.view">
+            <field name="name">expense.account.report</field>
+            <field name="model">expense.account.report</field>
+            <field name="arch" type="xml">
+                <form string="Expense Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="account_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_expense_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_expense_report" model="ir.actions.act_window">
+                <field name="name">Expense report</field>
+                <field name="res_model">expense.account.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="expense_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_expense_report" name="Expense report" action="action_expense_report"
+                  parent="account.menu_finance_legal_statement" sequence="1"/>
+
+    </data>
+</odoo>

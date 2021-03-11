@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <template id="report_appointment_template">
+            <t t-call="report.html_container">
+                    <t t-call="beauty_pos.internal_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div >
+                                     <h2><b>APPOINTMENT REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                                <tr>
+                                                    <td><strong>Period From</strong></td>
+                                                    <td>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                                    <td><strong>Period To</strong></td>
+                                                    <td>: <span t-esc="date_end" t-options='{"widget": "date"}'/></td>
+
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <t t-if="state == 'all'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>ALL</strong>
+                                                        </td>
+                                                     </t>
+                                                    <t t-if="state == 'draft'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>Appointment</strong>
+                                                        </td>
+                                                     </t>
+                                                     <t t-if="state == 'cancel'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>Cancelled</strong>
+                                                        </td>
+                                                     </t>
+                                                     <t t-if="state == 'paid'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>Paid</strong>
+                                                        </td>
+                                                     </t>
+                                                    <t t-if="state == 'done'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>Done</strong>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="state == 'invoiced'" >
+                                                        <td><strong>Status</strong></td>
+                                                        <td>:
+                                                            <strong>Invoiced</strong>
+                                                        </td>
+                                                    </t>
+                                                    <td><strong>Report Date</strong></td>
+                                                    <td>: <span t-esc="report_date"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Staff</strong></td>
+                                                    <td>:
+                                                        <t t-if="staff_assigned_id_name">
+                                                            <span t-esc="staff_assigned_id_name"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            All
+                                                        </t>
+                                                    </td>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table width="100%" class="table table-striped">
+                                                <thead >
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Phone</th>
+                                                        <th t-if="not staff_assigned_id" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Procedure</th>
+                                                        <t t-if="state == 'all'">
+                                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Status</th>
+                                                        </t>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="i" t-value="1" />
+                                                    <tr t-foreach="appointments" t-as="order" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t  t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order.date_order" t-options="{'widget': 'datetime'}"/></td>
+                                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order.partner_id.name"/></td>
+                                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order.partner_id.phone"/></td>
+                                                        <td t-if="not staff_assigned_id" style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                        <t t-if="state == 'all'">
+                                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="{'draft': 'Appointment','paid': 'Paid','cancel': 'Cancelled','done': 'Posted','invoiced':'Invoiced'}[order.state]" /></td>
+                                                        </t>
+                                                        <t t-foreach="order.lines" t-as='order_l'>
+                                                            <tr t-if="order_l.product_id.type == 'service' and (not staff_assigned_id  or staff_assigned_id==order_l.staff_assigned_id.id)" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                                <td/>
+                                                                <td class="text-center" style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                    <t t-esc="order_l.procedure_start" t-options="{'widget': 'datetime'}"/>
+                                                                </td>
+                                                                <td colspan="2"/>
+                                                                <td t-if="not staff_assigned_id" style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                    <t t-esc="order_l.staff_assigned_id.name" />
+                                                                </td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                    <t t-esc="order_l.product_id.name" />
+                                                                </td>
+                                                                <t t-if="state == 'all'">
+                                                                    <td/>
+                                                                </t>
+                                                            </tr>
+                                                        </t>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                  <br/>
+                                 <div class="pull-right">
+                                    <strong>Signature  </strong>
+                                </div>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

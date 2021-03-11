@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+    <record id="service_count_report" model="ir.actions.report.xml">
+        <field name="name">Service count Report</field>
+        <field name="model">service.count.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">service_count_report.report_service_count</field>
+    </record>
+
+    <record id="service_count_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_massage_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Body Massage
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m1" string="Muscular / Joint"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m1"/>
+                        </td>
+                        <td>
+                            <label for="m1"/>
+                        </td>
+                        <td>
+                            <field name="m2"/>
+                        </td>
+                        <td>
+                            <label for="m2"/>
+                        </td>
+                        <td>
+                            <field name="m3"/>
+                        </td>
+                        <td>
+                            <label for="m3"/>
+                        </td>
+                        <td>
+                            <field name="m4"/>
+                        </td>
+                        <td>
+                            <label for="m4"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m41"/>
+                        </td>
+                        <td>
+                            <label for="m41"/>
+                        </td>
+                        <td>
+                            <field name="m42"/>
+                        </td>
+                        <td>
+                            <label for="m42"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m5" string="Illness / Tension"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m5"/>
+                        </td>
+                        <td>
+                            <label for="m5"/>
+                        </td>
+                        <td>
+                            <field name="m6"/>
+                        </td>
+                        <td>
+                            <label for="m6"/>
+                        </td>
+                        <td>
+                            <field name="m7"/>
+                        </td>
+                        <td>
+                            <label for="m7"/>
+                        </td>
+                        <td>
+                            <field name="m8"/>
+                        </td>
+                        <td>
+                            <label for="m8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m9"/>
+                        </td>
+                        <td>
+                            <label for="m9"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m10" string="High Risk"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m10"/>
+                        </td>
+                        <td>
+                            <label for="m10"/>
+                        </td>
+                        <td>
+                            <field name="m11"/>
+                        </td>
+                        <td>
+                            <label for="m11"/>
+                        </td>
+                        <td>
+                            <field name="m12"/>
+                        </td>
+                        <td>
+                            <label for="m12"/>
+                        </td>
+                        <td>
+                            <field name="m13"/>
+                        </td>
+                        <td>
+                            <label for="m13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m14"/>
+                        </td>
+                        <td>
+                            <label for="m14"/>
+                        </td>
+                        <td>
+                            <field name="m15"/>
+                        </td>
+                        <td>
+                            <label for="m15"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m16" string="Circulatory"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <field name="m16"/>
+                        </td>
+                        <td>
+                            <label for="m16"/>
+                        </td>
+                        <td>
+                            <field name="m17"/>
+                        </td>
+                        <td>
+                            <label for="m17"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m18" string="BODY SECTION"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <field name="m18"/>
+                        </td>
+                        <td>
+                            <label for="m18"/>
+                        </td>
+                        <td>
+                            <field name="m19"/>
+                        </td>
+                        <td>
+                            <label for="m19"/>
+                        </td>
+                        <td>
+                            <field name="m20"/>
+                        </td>
+                        <td>
+                            <label for="m20"/>
+                        </td>
+                        <td>
+                            <field name="m21"/>
+                        </td>
+                        <td>
+                            <label for="m21"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m22"/>
+                        </td>
+                        <td>
+                            <label for="m22"/>
+                        </td>
+                        <td>
+                            <field name="m23"/>
+                        </td>
+                        <td>
+                            <label for="m23"/>
+                        </td>
+                        <td>
+                            <field name="m24"/>
+                        </td>
+                        <td>
+                            <label for="m24"/>
+                        </td>
+                        <td>
+                            <field name="m25"/>
+                        </td>
+                        <td>
+                            <label for="m25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m26"/>
+                        </td>
+                        <td>
+                            <label for="m26"/>
+                        </td>
+                        <td>
+                            <field name="m27"/>
+                        </td>
+                        <td>
+                            <label for="m27"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m271" string="Body treatments"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <field name="m271"/>
+                        </td>
+                        <td>
+                            <label for="m271"/>
+                        </td>
+                        <td>
+                            <field name="m272"/>
+                        </td>
+                        <td>
+                            <label for="m272"/>
+                        </td>
+                        <td>
+                            <field name="m273"/>
+                        </td>
+                        <td>
+                            <label for="m273"/>
+                        </td>
+                        <td>
+                            <field name="m274"/>
+                        </td>
+                        <td>
+                            <label for="m274"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m275"/>
+                        </td>
+                        <td>
+                            <label for="m275"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m29" string="Does your main occupation include"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <field name="m28"/>
+                        </td>
+                        <td>
+                            <label for="m28"/>
+                        </td>
+                        <td>
+                            <field name="m29"/>
+                        </td>
+                        <td>
+                            <label for="m29"/>
+                        </td>
+                        <td>
+                            <field name="m30"/>
+                        </td>
+                        <td>
+                            <label for="m30"/>
+                        </td>
+
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m32" string="What type of massage would you prefer today"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m31"/>
+                        </td>
+                        <td>
+                            <label for="m31"/>
+                        </td>
+                        <td>
+                            <field name="m32"/>
+                        </td>
+                        <td>
+                            <label for="m32"/>
+                        </td>
+                        <td>
+                            <field name="m321"/>
+                        </td>
+                        <td>
+                            <label for="m321"/>
+                        </td>
+                        <td>
+                            <field name="m322"/>
+                        </td>
+                        <td>
+                            <label for="m322"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m323"/>
+                        </td>
+                        <td>
+                            <label for="m323"/>
+                        </td>
+                        <td>
+                            <field name="m24"/>
+                        </td>
+                        <td>
+                            <label for="m24"/>
+                        </td>
+                        <td>
+                            <field name="m325"/>
+                        </td>
+                        <td>
+                            <label for="m325"/>
+                        </td>
+                        <td>
+                            <field name="m326"/>
+                        </td>
+                        <td>
+                            <label for="m326"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="m327"/>
+                        </td>
+                        <td>
+                            <label for="m327"/>
+                        </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                    </tr>
+                </table>
+
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m33" string="Focus Areas"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <field name="m33"/>
+                        </td>
+                        <td>
+                            <label for="m33"/>
+                        </td>
+                        <td>
+                            <field name="m34"/>
+                        </td>
+                        <td>
+                            <label for="m34"/>
+                        </td>
+                        <td>
+                            <field name="m35"/>
+                        </td>
+                        <td>
+                            <label for="m35"/>
+                        </td>
+                        <td>
+                            <field name="m36"/>
+                        </td>
+                        <td>
+                            <label for="m36"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m37"/>
+                </h2>
+                <field name="m37" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m38"/>
+                </h2>
+                <field name="m38" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m381"/>
+                </h2>
+                <field name="m381" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m39"/>
+                </h2>
+                <field name="m39" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="m40" attrs="{'invisible':[('m39', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m52"/>
+                </h2>
+                <field name="m52" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m53"/>
+                </h2>
+                <field name="m53" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m54"/>
+                </h2>
+                <field name="m54" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m55"/>
+                </h2>
+                <field name="m55" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m56"/>
+                </h2>
+                <field name="m56" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m57"/>
+                </h2>
+                <field name="m57" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m58"/>
+                </h2>
+                <field name="m58" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="m59"/>
+                </h2>
+                <field name="m59" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    Special box for customers:
+                    <br/>
+                    <br/>
+
+                    I assure that all the information I have obtained is correct.
+                    <br/>
+                    I confirm that the therapist has given me all the required information regarding the treatment.
+                    <br/>
+                    I confirm my commitment to all the advice given to me to get a better result.
+                    <br/>
+                    I agree to all of the above.
+                    <br/>
+                    I assure that I have given all the correct information regarding my skin.
+                    <br/>
+                </h4>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    خانة خاصة بالزبائن:
+                    <br/>
+                    <br/>
+                    أؤكد أن جميع المعلومات التي حصلت عليها صحيحة.
+                    <br/>
+                    أؤكد أن المعالج قد أعطاني كل المعلومات المطلوبة فيما يتعلق بالعلاج.
+                    <br/>
+                    أؤكد التزامي بجميع النصائح التي أعطيت لي للحصول على نتيجة أفضل.
+                    <br/>
+                    أؤكد موافقتي على كل ما سبق.
+                    <br/>
+                    أؤكد بأنني أعطيت جميع المعلومات الصحيحة فيما يتعلق ببشرتي.
+
+                    <br/>
+                    <br/>
+                </h4>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="m70"/>
+                        </td>
+                        <td>
+                            <field name="m70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="m71"/>
+                        </td>
+                        <td>
+                            <field name="m71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_massage" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_massage_wizard"/>
+        <field name="context">{'default_type':'massage'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_massage" name="MASSAGE" action="action_consent_massage"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

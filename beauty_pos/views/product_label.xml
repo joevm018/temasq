@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_barcode" model="report.paperformat">
+            <field name="name">Paperformat Barcode</field>
+            <field name="format">custom</field>
+            <field name="page_height">50</field>
+            <field name="page_width">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">12</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="product.report_product_label" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="beauty_pos.paperformat_barcode"/>
+        </record>
+        <record id="product.report_product_template_label" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="beauty_pos.paperformat_barcode"/>
+        </record>
+        <template id="report_simple_label" inherit_id="product.report_simple_label">
+            <xpath expr="//div[@class='col-xs-4']" position="replace">
+                <center>
+                    <table style="border-spacing:0;margin-bottom:0;width:100%;">
+                        <thead style="width:100%;border-bottom:1px solid #000000;">
+                                    <tr style="width:100%;border-bottom:1px solid #000000;">
+                                        <td style="text-align: center;vertical-align: middle;border-bottom:1px solid #000000;font-size: 18px;"
+                                            colspan="2">
+                                            <span t-esc="res_company.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"
+                                    style="font-size: 18px;text-align: center;padding: 2px 0px; vertical-align: middle;letter-spacing: 6px;">
+                                    <img t-if="product.barcode"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', product.barcode, 600, 150)"
+                                         style="width:100%;height:50%;"/>
+                                    <b>
+                                        <span t-field="product.barcode"/>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr style="width:100%;font-size: 18px;">
+                                <td style="text-align: center;padding: 1px 1px; vertical-align: middle;" colspan="2">
+                                    <t t-if="product.default_code">
+                                        [<strong t-field="product.default_code"/>]
+                                    </t>
+                                    <strong t-esc="product.name"/>
+                                    <!--                                    <strong>-->
+                                    <!--                                        <span t-esc="', '.join(map(lambda x: x.name, product.attribute_value_ids))"/>-->
+                                    <!--                                    </strong>-->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right;width:50%;font-size: 18px;">
+                                    <strong t-field="product.company_id.currency_id.symbol"/>
+                                    <strong t-field="product.lst_price"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </xpath>
+        </template>
+
+        <template id="product.report_productlabel">
+            <t t-call="report.html_container">
+                <div class="page">
+                    <t t-foreach="docs" t-as="product">
+                        <t t-call="product.report_simple_label">
+                            <t t-set="product" t-value="product"/>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </template>
+        <template id="report_lot_barcode">
+            <t t-call="report.html_container">
+                <div class="page" style="font-size: 18px;">
+                    <t t-foreach="docs" t-as="lot">
+                        <center>
+                            <table style="border-spacing:0;margin-bottom:0;width:100%;">
+                                <thead style="width:100%;border-bottom:1px solid #000000;">
+                                    <tr style="width:100%;border-bottom:1px solid #000000;">
+                                        <td style="text-align: center;vertical-align: middle;border-bottom:1px solid #000000;font-size: 18px;"
+                                            colspan="2">
+                                            <span t-esc="res_company.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="font-size: 18px;text-align: center;padding: 2px 0px; letter-spacing: 6px; vertical-align: middle;">
+                                            <img t-if="lot.product_id.barcode"
+                                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', lot.product_id.barcode, 600, 150)"
+                                                 style="width:100%;height:50%;"/>
+                                            <b><span t-field="lot.product_id.barcode"/></b>
+                                        </td>
+                                    </tr>
+                                    <tr style="width:100%;">
+                                        <td style="text-align: center; vertical-align: middle;" colspan="2">
+                                            <t t-if="lot.product_id.default_code">
+                                                [<strong t-field="lot.product_id.default_code"/>]
+                                            </t>
+                                            <strong t-field="lot.product_id.name"/>
+<!--                                            <strong>-->
+<!--                                                <span t-esc="', '.join(map(lambda x: x.name, lot.product_id.attribute_value_ids))"/>-->
+<!--                                            </strong>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;width:50%;">
+<!--                                            PRD : <br/>-->
+                                            <t t-if="lot.life_date">
+                                                <strong>
+                                                    EXP : <span t-esc="lot.life_date" t-options='{"widget": "date"}'/>
+                                                </strong>
+                                            </t>
+                                        </td>
+                                        <td style="text-align: right;width:50%;">
+                                            <strong t-field="lot.product_id.company_id.currency_id.symbol"/>
+                                            <strong t-field="lot.product_id.lst_price"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </center>
+
+                    </t>
+                </div>
+            </t>
+        </template>
+
+        <report
+                id="report_lot_barcode_pdf"
+                string="Products Barcode"
+                model="stock.production.lot"
+                report_type="qweb-pdf"
+                name="beauty_pos.report_lot_barcode"
+                file="beauty_pos.report_lot_barcode"
+        />
+        <record id="report_lot_barcode_pdf" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="beauty_pos.paperformat_barcode"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <template id="report_service_count">
+        <t t-call="report.html_container">
+            <t t-call="beauty_pos.internal_layout">
+                <div class="page">
+                    <center>
+                        <h2>Service Count Report</h2>
+                        <table name="master" width="90%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <tbody class="patient_invoice_tbody">
+                                <tr>
+                                    <td><strong>Period From</strong></td>
+                                    <td>: <span t-esc="date_start" t-options='{"widget": "datetime"}'/></td>
+                                    <td><strong>Period To</strong></td>
+                                    <td>: <span t-esc="date_stop" t-options='{"widget": "datetime"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Staff</strong></td>
+                                    <td>:
+                                        <t t-if="staff_assigned_id">
+                                            <span t-esc="staff_assigned_id[1]"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td><strong>Report Date</strong></td>
+                                    <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Services</strong></td>
+                                    <td>:
+                                        <t t-if="product_id">
+                                            <span t-esc="product_id[1]"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table width="100%" class="table">
+                            <colgroup>
+                                <col width='15%'/>
+                                <col width='70%'/>
+                                <col width='15%'/>
+                            </colgroup>
+                            <thead >
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Service</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="0"/>
+                                <tr t-foreach="product_list" t-as='product' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="i+1"/><t t-set="i" t-value="i+1"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="product.name"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="service_count_dict[product]"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </center>
+                </div>
+            </t>
+        </t>
+    </template>
+</data>
+</openerp>

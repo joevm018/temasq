@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record id="paperformat_daily_collection_report" model="report.paperformat">
+            <field name="name">Daily Collection Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">58</field>
+            <field name="margin_bottom">14</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">54</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="partner_pos_details_report" model="ir.actions.report.xml">
+            <field name="name">Daily Collection Report</field>
+            <field name="model">daily.collection.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">daily_collection_report.report_daily_collection</field>
+            <field name="paperformat_id" ref="paperformat_daily_collection_report"/>
+        </record>
+
+    </data>
+</openerp>

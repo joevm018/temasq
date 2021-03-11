@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_edit_pos_edit,pos_edit.pos_edit,model_pos_edit_pos_edit,,1,0,0,0

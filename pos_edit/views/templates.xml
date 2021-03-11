@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+
+    <record id="view_pos_session_tree" model="ir.ui.view">
+            <field name="name">pos.session.tree.view</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree string="Point of Sale Session" attrs="{'create': [('groups', '=', 'point_of_sale.group_pos_manager')]}">
+                        <field name="config_id" />
+                        <field name="name" />
+                        <field name="user_id" />
+                        <field name="start_at" />
+                        <field name="stop_at" />
+                        <field name="state" />
+                    </tree>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="view_pos_session_form_inherited" model="ir.ui.view">
+            <field name="name">pos.session.form.view</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">1</attribute>
+                </xpath>
+                <field name="start_at" position="replace">
+                    <field name="start_at" />
+                </field>
+                <field name="stop_at" position="replace">
+                    <field name="stop_at" />
+                </field>
+            </field>
+    </record>
+
+
+
+  </data>
+</odoo>

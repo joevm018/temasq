@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_change_price_discount_wizard" model="ir.ui.view">
+            <field name="name">change.price.discount.wizard</field>
+            <field name="model">change.price.discount.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Enter details">
+                    <group>
+                        <group>
+                            <field name="pos_supervisor_card_pin" password="True"/>
+                        </group>
+                        <group/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_change_price_discount_wizard" model="ir.actions.act_window">
+            <field name="name">Change Price/Discount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">change.price.discount.wizard</field>
+            <field name="view_mode">form</field>
+             <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

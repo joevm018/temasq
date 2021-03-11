@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="scheduler_assets" name="scheduler assets"
+                  inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/scheduler_extended_tres_jolie/static/src/css/scheduler.css"></link>
+                <script type="text/javascript" src="/scheduler_extended_tres_jolie/static/src/js/quick_create.js"></script>
+                <script type="text/javascript" src="/scheduler_extended_tres_jolie/static/src/js/scheduler.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,180 @@
+<odoo>
+    <data>
+
+        <record id="partner_consent_form_view" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button class="oe_stat_button" name="show_consultation" type="object" icon="fa-edit">
+                    <field name="consultation" widget="statinfo" string="Consultation"/>
+                </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Facial" style="text-align: center;">
+                        <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                color: #FFF;background-color: #6EA522;">
+                    <label for="f1"/>
+                </h2>
+                <field name="f1" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;margin-bottom: 4px;
+                width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f2"/>
+                </h2>
+                <field name="f2" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f3"/>
+                </h2>
+                <field name="f3" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f4"/>
+                </h2>
+                <field name="f4" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f5"/>
+                </h2>
+                <field name="f5" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f51" attrs="{'invisible':[('f5', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f6"/>
+                </h2>
+                <field name="f6" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f61" attrs="{'invisible':[('f6', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f7"/>
+                </h2>
+                <field name="f7" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f71" attrs="{'invisible':[('f7', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f8"/>
+                </h2>
+                <field name="f8" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f81" attrs="{'invisible':[('f8', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f9"/>
+                </h2>
+                <field name="f9" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f9" string="CONDITION"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                        <tr>
+                            <td style="width:1%;"></td>
+                            <td style="width:24%;"></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:24%;"></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:24%;"></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:24%;"></td>
+                        </tr>
+                        <tr>
+                                <td><field name="f10"/></td>
+                                <td><label for="f10"/></td>
+                                <td><field name="f11"/></td>
+                                <td><label for="f11"/></td>
+                                <td><field name="f12"/></td>
+                                <td><label for="f12"/></td>
+                                <td><field name="f13"/></td>
+                                <td><label for="f13"/></td>
+                        </tr>
+                        <tr>
+                                <td><field name="f14"/></td>
+                                <td><label for="f14"/></td>
+                                <td><field name="f15"/></td>
+                                <td><label for="f15"/></td>
+                                <td><field name="f16"/></td>
+                                <td><label for="f16"/></td>
+                                <td><field name="f17"/></td>
+                                <td><label for="f17"/></td>
+                        </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f18"/>
+                </h2>
+                <field name="f18" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f19"/>
+                </h2>
+                <field name="f19" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f20"/>
+                </h2>
+                <field name="f20" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f21"/>
+                </h2>
+                <field name="f21" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f22"/>
+                </h2>
+                <field name="f22" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f23"/>
+                </h2>
+                <field name="f23" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f24"/>
+                </h2>
+                <field name="f24" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f34"/>
+                </h2>
+                <field name="f34" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+	

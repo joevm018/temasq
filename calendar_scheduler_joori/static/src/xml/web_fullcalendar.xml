@@ -1,0 +1,299 @@
+<template>
+    <t t-extend="CalendarView">
+        <t t-jquery="div.o_calendar_view" t-operation="before">
+            <button class="o_calendar_refresh btn btn-link" style="position: absolute;     margin-top: -11px;"><i class="fa fa-refresh"/></button>
+        </t>
+    </t>
+
+    <div t-name="CalendarView2.quick_create" class="o_calendar_quick_create">
+        <div class="form-group" id="progres_table">
+            <div class="first_service">
+            <div class="one" id="border_class_1">
+                <div class="border_class">
+                    <div class="service_start_t">
+                        <input class="sl_no" readonly="1" type="text" value="1" id="sl_no_1"/>
+                        <button class="delete_order" id="delete_order_1">
+                            <img style="pointer-events: none;" class="close_icon" src="/calendar_scheduler/static/src/img/close.png"/>
+                        </button>
+                    </div>
+                    <div class="service_start">
+                        <div class="start_icon_div">
+                            <div class="timer">
+                                <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/timeicon.png" width="32" height="32" />
+                            </div>
+                        </div>
+                        <div class="start_div">
+                            <select class="modal_scheduler_hour" id="modal_scheduler_hour_1">
+                                <t t-foreach="options.scheduler_hour" t-as="t">
+                                    <t t-if="options.start_minute == t">
+                                        <option t-att-value="t" selected="True">
+                                            <span t-esc="t" />
+                                        </option>
+                                    </t>
+                                    <t t-else="">
+                                        <option t-att-value="t">
+                                            <span t-esc="t" />
+                                        </option>
+                                    </t>
+                                </t>
+                            </select>
+                            <select class="modal_scheduler_minute" id="modal_scheduler_minute_1">
+                                <t t-foreach="options.scheduler_minute" t-as="t">
+                                    <t t-if="options.start_second == t">
+                                        <option t-att-value="t" selected="True">
+                                            <span t-esc="t" />
+                                        </option>
+                                    </t>
+                                    <t t-else="">
+                                        <option t-att-value="t">
+                                            <span t-esc="t" />
+                                        </option>
+                                    </t>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="duration_icon_div">
+                            <div class="duration_icon">
+                                <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/duration.jpg" width="32" height="32" />
+                            </div>
+                        </div>
+                        <div class="duration_div">
+                            <input class="duration" type="text" value="30" id="duration_1"/>
+                        </div>
+                    </div>
+                    <div class="staff_service">
+                        <div class="staff_icon_div">
+                            <div class="staff_icon">
+                                <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/staff.png" width="32" height="32" />
+                            </div>
+                        </div>
+                        <div class="staff_div">
+                            <select class="staff" id="staff_1">
+                                <t t-if="options.config_staff_type === 'service_based_staff'">
+                                    <t t-foreach="options.staff" t-as="st">
+                                        <t t-set="service_no_1" t-value=""/>
+                                        <t t-if="options.services">
+                                            <t t-set="service_no_1" t-value="options.services[0]"/>
+                                        </t>
+                                        <t t-foreach="service_no_1.staff_ids" t-as="staf">
+                                            <t t-if="staf === st.id">
+                                                <t t-if="options.staff_assigned === st.id">
+                                                    <option t-att-value="st.id" selected="True">
+                                                        <span t-esc="st.name" />
+                                                    </option>
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-if="st.is_beautician === true">
+                                                        <option placeholder="Staff" t-att-value="st.id">
+                                                            <span t-esc="st.name" />
+                                                        </option>
+                                                    </t>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="options.staff" t-as="st">
+                                        <t t-if="options.staff_assigned === st.id">
+                                            <option t-att-value="st.id" selected="True">
+                                                <span t-esc="st.name" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-if="st.is_beautician === true">
+                                                <option placeholder="Staff" t-att-value="st.id">
+                                                    <span t-esc="st.name" />
+                                                </option>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="existing_service_icon">
+                            <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/service_icon.png" width="32" height="32" />
+                        </div>
+                        <div class="service_div">
+                            <select class="services" name="states[]" placeholder="Services" id="services_1">
+                              <t t-foreach="options.services" t-as="se">
+                                  <!--<t t-foreach="options.staff" t-as="st">-->
+                                    <!--<t t-if="options.staff_assigned === st.id">-->
+                                        <!--<t t-foreach="st.service_ids" t-as="serv">-->
+                                          <!--<t t-if="serv === se.id">-->
+                                            <option t-att-value="se.id">
+                                                <span t-esc="se.name" />
+                                            </option>
+                                          <!--</t>-->
+                                        <!--</t>-->
+                                    <!--</t>-->
+                                  <!--</t>-->
+                              </t>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            <div class="two">
+                <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/customer_icon.png"
+                       class="center" width="90" height="90" />
+                  <div class="customr_duration">
+                        <div class="existing_cust_div">
+                                <input type="text" placeholder="Customer" class="customer_name" />
+                                <input class="customer_new_name" placeholder="Customer Name" type="text" />
+                                <input class="customer_new_phone" placeholder="Customer Phone" type="text" />
+                                <div >
+                                    <select class="customer_new_dob_month" id="customer_dob_month">
+                                        <option selected="1" value="">Select Birth Month</option>
+                                        <option t-att-value="January">
+                                            January
+                                        </option>
+                                        <option t-att-value="February">
+                                            February
+                                        </option>
+                                        <option t-att-value="March">
+                                            March
+                                        </option>
+                                        <option t-att-value="April">
+                                            April
+                                        </option>
+                                        <option t-att-value="May">
+                                            May
+                                        </option>
+                                        <option t-att-value="June">
+                                            June
+                                        </option>
+                                        <option t-att-value="July">
+                                            July
+                                        </option>
+                                        <option t-att-value="August">
+                                            August
+                                        </option>
+                                        <option t-att-value="September">
+                                            September
+                                        </option>
+                                        <option t-att-value="October">
+                                            October
+                                        </option>
+                                        <option t-att-value="November">
+                                            November
+                                        </option>
+                                        <option t-att-value="December">
+                                            December
+                                        </option>
+                                    </select>
+                                    <select class="customer_new_dob_day" id="customer_dob_day">
+                                        <option selected="1" value="">Day..</option>
+                                        <t t-set="day_dob" t-value="31"/>
+                                        <t t-foreach="day_dob" t-as="t">
+                                           <option t-att-value="t+1">
+                                                <span t-esc="t+1" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <input type="text" placeholder="Remarks...." class="notes_remarks" />
+                                <input class="customer_type" type="checkbox" checked="checked"/>
+                        </div>
+                        <div class="exist_cust_div">
+                                <button class="add_new_customer">
+                                    <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/add_client.png"
+                                        width="32" height="32" />
+                                </button>
+                                <!--<button class="create_new_customer_class">-->
+                                    <!--Create-->
+                                <!--</button>-->
+                                <button class="delete_new_customer_class">
+                                    <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/delete_client.png"
+                                        width="32" height="32" />
+                                </button>
+
+                        </div>
+                  </div>
+              </div>
+        </div>
+        <div class="add_icon_class">
+                    <button class="add_new_order">
+                        <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/add.jpeg"
+                            class="right" width="30" height="30" />
+                    </button>
+            </div>
+
+    </div>
+
+    <t t-extend="CalendarView.sidebar.contacts">
+        <t t-jquery="div.o_calendar_contact" t-operation="after">
+            <t t-if="works">
+                <label for="interval_start">Start</label>
+                <div class="interval_start">
+                    <select class="duration_start">
+                        <t t-foreach="time_schedule" t-as="s">
+                            <t t-if="s === start">
+                                <option t-att-value="s" selected="True">
+                                    <span t-esc="s" />
+                                </option>
+                            </t>
+                            <t t-else="">
+                                <option t-att-value="s">
+                                    <span t-esc="s" />
+                                </option>
+                            </t>
+                        </t>
+                    </select>
+                </div>
+                <br />
+                <label for="interval_start">End</label>
+                <div class="interval_end">
+                    <select class="duration_end">
+                        <t t-foreach="time_schedule" t-as="s">
+                            <t t-if="s === end">
+                                <option t-att-value="s" selected="True">
+                                    <span t-esc="s" />
+                                </option>
+                            </t>
+                            <t t-else="">
+                                <option t-att-value="s">
+                                    <span t-esc="s" />
+                                </option>
+                            </t>
+                        </t>
+                    </select>
+                </div>
+                <br />
+                <button class="update_time">Update</button>
+            </t>
+        </t>
+    </t>
+
+    	<div t-name="calendarModal2" id="calendarModal2" class="modal draggable fade">
+		<div class="modal-dialog">
+			<div class="modal-content" t-att-style="style_val">
+				<div class="modal-header">
+					<h4 id="modalTitle" class="modal-title">Cancel Appointment</h4>
+					<!--<h4 id="modalTitle" class="modal-title">State Controller</h4>-->
+				</div>
+				<div id="modalBody" class="modal-body">
+                    <p>Do you want to cancel </p>
+					<!--<select class="state_ctrl">-->
+						<!--<t t-foreach="states_list" t-as="st">-->
+							<!--<option t-att-value="st" selected="True">-->
+								<!--<span t-esc="st"/>-->
+							<!--</option>-->
+						<!--</t>-->
+					<!--</select>-->
+				</div>
+				<div class="modal-footer">
+					<button type="button"
+							class="btn btn-default" id="update_evt_status">
+						Confirm
+					</button>
+					<button type="button" class="btn btn-default close_btn"
+							data-dismiss="modal">Close
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</template>

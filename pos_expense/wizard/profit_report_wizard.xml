@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_profit_details_wizard" model="ir.ui.view">
+            <field name="name">profit.details.wizard.form</field>
+            <field name="model">profit.details.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Profit Report">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="action_report_profit_details" model="ir.actions.act_window">
+        <field name="name">Profit Report</field>
+        <field name="res_model">profit.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_report_profit_details" name="Profit Report" action="action_report_profit_details"
+                  parent="point_of_sale.menu_point_rep" sequence="10" groups="point_of_sale.group_pos_manager"/>
+
+</odoo>

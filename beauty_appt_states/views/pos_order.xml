@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_works_search_tres">
+            <field name="name">pos.order.line.search</field>
+            <field name="model">pos.order.line</field>
+            <field name="inherit_id" ref="beauty_pos.view_works_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='staff_assigned_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <filter string="Booked" name="Booked" domain="[('state_appt', '=', 'Booked')]"/>
+                    <filter string="Confirmed" name="Confirmed" domain="[('state_appt', '=', 'Confirmed')]"/>
+                    <filter string="No Response" name="NoResponse" domain="[('state_appt', '=', 'No Response')]"/>
+                    <filter string="Cancelled" name="Cancelled" domain="[('state_appt', '=', 'Cancelled')]"/>
+                    <filter string="Executed" name="Executed" domain="[('state_appt', '=', 'Executed')]"/>
+                    <filter string="Paid" name="paid" domain="[('state', '=', 'paid')]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_order_form_foc">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="state_appt" readonly="1" force_save="1"/>
+                    <field name="no_response" readonly="1" force_save="1"/>
+                    <field name="is_confirmed" readonly="1" force_save="1"/>
+                    <field name="is_executed" readonly="1" force_save="1"/>
+                </xpath>
+                <button name="action_check_in" position="replace">
+                    <button name="action_check_in" string="Check In" class="oe_highlight" type="object"
+                            attrs="{'invisible':['|',('checkin','=',True),('is_confirmed', '=', False)]}"/>
+                </button>
+                <button name="%(point_of_sale.action_pos_payment)d" position="before">
+                   <button name="apply_execute" string="Execute" type="object" class="oe_highlight"
+                           attrs="{'invisible':['&amp;','|','|',('is_executed', '=', True),('checkin', '=', False),('is_confirmed','=',False),'|',('is_executed', '=', True),('state', 'in', ('draft', 'cancel'))]}"/>
+                </button>
+                <button name="%(point_of_sale.action_pos_payment)d" position="replace">
+                    <button name="%(point_of_sale.action_pos_payment)d" string="Payment" class="oe_highlight"
+                        type="action" attrs="{'invisible':['|','|','|',('total_balance','=',0),('checkin', '=', False),('is_confirmed','=',False),('make_helpdesk_invisible','=',False)]}"
+                        context="{'pos_session_id' : session_id}"/>
+                </button>
+                <button name="action_check_in" position="before">
+                    <button name="apply_confirm" string="Confirm" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('state', '!=', 'draft'), ('is_confirmed', '=', True)]}"/>
+                    <button name="send_sms_noresponse" string="No Response" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|','|',('is_confirmed', '=', True), ('no_response', '=', True), ('state', '!=', 'draft')]}"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+	

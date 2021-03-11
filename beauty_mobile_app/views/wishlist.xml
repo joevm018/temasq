@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_website_wishlist_search" model="ir.ui.view">
+            <field name="name">website.wishlist.search.view</field>
+            <field name="model">website.wishlist</field>
+            <field name="arch" type="xml">
+                <search string="Wishlists">
+                    <field name="partner_id" />
+                </search>
+            </field>
+        </record>
+
+        <record id="website_wishlist_tree" model="ir.ui.view">
+            <field name="name">view.website.wishlist.tree</field>
+            <field name="model">website.wishlist</field>
+            <field name="arch" type="xml">
+                <tree string="Wishlists">
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_wishlist_form" model="ir.ui.view">
+            <field name="name">website.wishlist.form</field>
+            <field name="model">website.wishlist</field>
+            <field name="arch" type="xml">
+                <form string="Wishlists">
+                    <sheet>
+                        <!--<div class="oe_title">-->
+							<!--<h1>-->
+								<!--<field name="name"/>-->
+							<!--</h1>-->
+						<!--</div>-->
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="wishlists" string="Wishlist line"  >
+                                <field name="wishlist_line">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="price_unit"/>
+                                        <field name="date_order"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="name"/>
+                                                <field name="date_order"/>
+                                            </group>
+                                            <group>
+                                                <field name="product_uom_qty"/>
+                                                <field name="price_unit"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_website_wishlist" model="ir.actions.act_window">
+            <field name="name">Wishlists</field>
+            <field name="res_model">website.wishlist</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_website_wishlist_search"/>
+        </record>
+
+        <menuitem id="menu_website_wishlist" name="Wishlists" action="action_website_wishlist"
+                  parent="menu_website_cart_root" sequence="2"/>
+
+
+    </data>
+</odoo>

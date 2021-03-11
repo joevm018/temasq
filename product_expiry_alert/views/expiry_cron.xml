@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record id="ir_cron_min_product_notification" model="ir.cron">
+            <field name="name">Expiry Product Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2015-12-31 7:00:00</field>
+            <field eval="False" name="doall" />
+            <field name="model">stock.production.lot</field>
+            <field name="function">_expiry_product_alert</field>
+            <field name="args">()</field>
+      </record>
+    </data>
+</odoo>

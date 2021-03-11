@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_pos_receipt" inherit_id="beauty_pos.report_pos_receipt">
+            <xpath expr="//table[@class='receipt-total']" position="replace">
+                <table class='receipt-total' style="width: 100%;">
+                    <tr class="subtotal">
+                        <td><b>Subtotal:</b></td>
+                        <td class="text-right">
+                            <b><t t-esc="sub_total" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                        </td>
+                    </tr>
+                    <tr class="discount">
+                        <t t-set="line_discount" t-value="sub_total-o.amt_before_discount"/>
+                        <t t-set="total_discount" t-value="line_discount+o.amt_discount"/>
+                        <t t-if="total_discount">
+                            <td><b>Discount:</b></td>
+                            <td class="text-right">
+                                <b><t t-esc="total_discount" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr class="redeemed_gift">
+                        <t t-if="o.redeemed_amount">
+                            <td><b>Discount Card:</b></td>
+                            <td class="text-right">
+                                <b><t t-esc="o.redeemed_amount" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr class="emph">
+                        <td><b>Total:</b></td>
+                        <td class="text-right">
+                            <b><t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                        </td>
+                    </tr>
+                </table>
+            </xpath>
+            <xpath expr="//table[@class='receipt-total']" position="after">
+                <t t-if="o.redeemed_gift_id">
+                    <br />
+                    <b>Discount Card:</b>
+                    <table class='receipt-redeem-details' style="width: 100%;font-weight: bold;">
+                        <tr>
+                            <td>
+                                Gifted By:
+                            </td>
+                            <td class="text-right">
+                                <t t-esc="o.redeemed_gift_id.partner_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               Balance Amount:
+                            </td>
+                            <td class="text-right">
+                                <t t-esc="o.redeemed_gift_id.remaining_amount" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+                <t t-if="o.redeemed_package_id and o.get_package_remaining_session()">
+                    <br />
+                   <b> Package Card(Remaining):</b>
+                    <table class='receipt-package-card-details' style="width: 100%;font-weight: bold;">
+                        <tr t-foreach="o.get_package_remaining_session()" t-as="remain_package">
+                            <td>
+                                <t t-esc="remain_package.name"/>
+                            </td>
+                            <td class="text-right" colspan="2">
+                                <t t-esc="remain_package_value['count']"/>
+                                <t t-if="remain_package_value['count']==1">&#160;Session</t>
+                                <t t-else="">&#160;Sessions</t>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

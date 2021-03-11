@@ -1,0 +1,174 @@
+<odoo>
+  <data>
+
+
+
+    <record id="ir_cron_sale_details_notification" model="ir.cron">
+            <field name="name">Sales Details Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2015-12-31 20:45:00</field>
+            <field eval="False" name="doall" />
+            <field name="model">pos.order</field>
+            <field name="function">_sale_details_notification</field>
+            <field name="args">()</field>
+      </record>
+
+    <template id="point_of_sale.report_saledetails" >
+        <t t-call="report.html_container">
+        <t t-call="beauty_pos.internal_layout">
+            <div class="page">
+                <div class="text-center">
+                    <h2>Sale Details</h2>
+
+                    <strong><t t-esc="date_from"/> - <t t-esc="date_to"/></strong>
+                </div>
+
+                <!-- Orderlines -->
+              <h3>Products</h3>
+              <table  class="table table-condensed">
+                    <thead><tr>
+                        <th>Product</th>
+                        <th>Customer</th>
+                        <th>Staff Assigned</th>
+                        <th>Job No</th>
+                        <th>Quantity</th>
+                        <th>Price Unit</th>
+                        <th>Total</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr t-foreach='products' t-as='line'>
+                        <td><t t-esc="line['product_name']" /></td>
+                        <td><t t-esc="line['partner_name']" /></td>
+                        <td><t t-esc="line['staff']" /></td>
+                        <td><t t-esc="line['offer_string']" /></td>
+                        <td>
+                            <t t-esc="line['quantity']" />
+                            <t t-if='line["uom"] != "Unit(s)"'>
+                                <t t-esc='line["uom"]' />
+                            </t>
+                        </td>
+                        <td>
+                            <t t-esc='line["price_unit"]' />
+                        <t t-if='line["discount"] != 0'>
+                            Disc: <t t-esc='line["discount"]' />%
+                        </t>
+                        </td>
+                        <td>
+                            <t t-esc='line["price_subtotal_incl"]' />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <br/>
+
+                <h3>Staff Summary</h3>
+                <table  class="table table-condensed">
+                    <thead><tr>
+                        <th>Name</th>
+                        <th>Total</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr t-foreach='staff_summary' t-as='staff_line'>
+                        <td><t t-esc="staff_line['name']" /></td>
+                        <td><t t-esc="staff_line['amount']" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+              <br/>
+                <h3>Payment Mode Summary</h3>
+                <table  class="table table-condensed">
+                    <thead><tr>
+                        <th>Name</th>
+                        <th>Total</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr t-foreach='payments' t-as='payment'>
+                        <td><t t-esc="payment['name']" /></td>
+                        <td><t t-esc="payment['total']" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <br/>
+
+                <h3>Taxes</h3>
+                <table  class="table table-condensed">
+                    <thead><tr>
+                        <th>Name</th>
+                        <th>Total</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr t-foreach='taxes' t-as='tax'>
+                        <td><t t-esc="tax['name']" /></td>
+                        <td><t t-esc="tax['total']" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <br/>
+                <br/>
+
+                <strong>Total: <t t-esc='total_paid'/></strong>
+
+              </div>
+        </t>
+    </t>
+    </template>
+
+         <record id="view_pos_pos_form_inherited" model="ir.ui.view">
+            <field name="name">pos.order.view</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='product_id']" position="after">
+                    <field name="staff_assigned_id"/>
+                    <field name="offer_string" />
+                </xpath>
+                <xpath expr="//tree/field[@name='tax_ids_after_fiscal_position']" position="replace">
+                    <field name="tax_ids_after_fiscal_position" invisible="1"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='price_subtotal']" position="replace">
+                    <field name="price_subtotal" invisible="1"/>
+                </xpath>
+            </field>
+    </record>
+
+
+       <record id="view_pos_details_wizard_inherit" model="ir.ui.view">
+            <field name="name">pos.details.wizard.form</field>
+            <field name="model">pos.details.wizard</field>
+           <field name="inherit_id" ref="point_of_sale.view_pos_details_wizard"/>
+            <field name="arch" type="xml">
+                <field name="end_date" position="after">
+                    <field name="staff_assigned_id"/>
+                    <field name="partner_id"/>
+                </field>
+                    <footer position="inside">
+                        <button name="email_report" string="Email Report" type="object" class="btn-primary"/>
+                    </footer>
+            </field>
+        </record>
+
+
+       <record id="view_pos_conf_inherit" model="ir.ui.view">
+            <field name="name">pos.config.settings.form</field>
+            <field name="model">pos.config.settings</field>
+           <field name="inherit_id" ref="point_of_sale.view_sale_config_settings_form_pos"/>
+            <field name="arch" type="xml">
+                <field name="module_pos_reprint" position="after">
+                    <field name="email"/>
+                </field>
+            </field>
+        </record>
+
+
+  </data>
+</odoo>

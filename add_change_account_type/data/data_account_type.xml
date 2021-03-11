@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--<function name="write" model="ir.model.data">-->
+            <!--<function name="search" model="ir.model.data">-->
+                <!--<value eval="[('module', '=', 'account'), ('name', '=', 'data_account_type_other_income')]" />-->
+            <!--</function>-->
+            <!--<value eval="{'noupdate': False}" />-->
+        <!--</function>-->
+
+        <record model="account.account.type" id="account.data_account_type_other_income">
+          <field name="name">Indirect Income</field>
+          <field name="type">other</field>
+        </record>
+        <record model="account.account.type" id="account.data_account_type_revenue">
+          <field name="name">Direct Income</field>
+          <field name="type">other</field>
+        </record>
+        <record model="account.account.type" id="account.data_account_type_expenses">
+          <field name="name">Direct Expenses</field>
+          <field name="type">other</field>
+        </record>
+        <record model="account.account.type" id="data_account_type_other_expenses">
+          <field name="name">Indirect Expenses</field>
+          <field name="type">other</field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'account'), ('name', '=', 'account_financial_report_expense0')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="account.account_financial_report_expense0" model="account.financial.report">
+            <field name="name">Expense</field>
+            <field name="sign" eval="-1" />
+            <field name="parent_id" ref="account.account_financial_report_profitandloss0"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_expenses')), (4,ref('add_change_account_type.data_account_type_other_expenses')), (4,ref('account.data_account_type_direct_costs')), (4,ref('account.data_account_type_depreciation'))]"/>
+        </record>
+
+    </data>
+</odoo>
+

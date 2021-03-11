@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <record id="daily_report_wizard" model="ir.ui.view">
+            <field name="name">daily.report.wizard.form</field>
+            <field name="model">daily.report.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Send Daily report to owner">
+                    <group>
+                        <field name="report_date"/>
+                    </group>
+                    <footer>
+                        <button name="daily_report" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+    <record id="action_daily_report" model="ir.actions.act_window">
+            <field name="name">Send Daily report to owner</field>
+            <field name="res_model">daily.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="daily_report_wizard"/>
+            <field name="target">new</field>
+    </record>
+
+
+
+        <menuitem id="menu_daily_report" name="Daily Report Mail" action="action_daily_report"
+                  parent="point_of_sale.menu_point_rep" sequence="6" groups="point_of_sale.group_pos_manager"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="partner_property_form_view" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="before">
+               <field name="have_home_service" invisible="1"/>
+               <field name="is_home_service" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_todays_registration_view" model="ir.ui.view">
+        <field name="name">res.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="beauty_soft.view_todays_registration"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="before">
+               <field name="have_home_service" invisible="1"/>
+               <field name="is_home_service" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_customer_search_view" model="ir.ui.view">
+        <field name="name">res.partner.search.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="beauty_soft.view_today_registration_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='file_no']" position="after">
+               <filter string="Home Service Customers" name="home_service" domain="[('is_home_service', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

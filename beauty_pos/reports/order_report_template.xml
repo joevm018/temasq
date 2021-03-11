@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="external_layout">
+            <t t-raw="0" />
+        </template>
+        <template id="report_pos_receipt">
+                <t t-call="beauty_pos.external_layout">
+                    <t t-call="report.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="text-align: left;
+                                width: 300px;
+                                font-size: 14px;
+                                display: inline-block;
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                overflow: hidden;">
+                            <div>
+                                <div style="width: 55%; float: left; padding: 20px 0px;">
+                                    <t t-if="o.company_id.name">
+                                        <strong><t t-esc="o.company_id.name"/></strong><br />
+                                    </t>
+                                    <!--<t t-if="o.company_id">-->
+                                        <!--<div>-->
+                                            <!--<div style="width: 50%; float: left">Address</div>-->
+                                            <!--<div style="width: 50%; float: left">-->
+                                                <!--<span >-->
+                                                    <!--<t t-if="o.company_id.street" t-esc="o.company_id.street"/>-->
+                                                    <!--<t t-if="o.company_id.street2" t-esc="o.company_id.street2"/>-->
+                                                    <!--<t t-if="o.company_id.city" t-esc="o.company_id.city"/>-->
+                                                    <!--<t t-if="o.company_id.state_id" t-esc="o.company_id.state_id.name"/>-->
+                                                <!--</span>-->
+                                                 <!--<t t-if="o.company_id.country_id">-->
+                                                    <!--<t t-esc="o.company_id.country_id.name"/><br />-->
+                                                <!--</t>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+<!--<br />-->
+                                    <!--</t>-->
+                                    <t t-if="o.partner_id">
+                                        Customer: <t t-esc="o.partner_id.name"/><br />
+                                    </t>
+                                    <t t-if="o.user_id">
+                                        Cashier: <t t-esc="o.user_id.name"/><br />
+                                    </t>
+                                    <t t-if="o.company_id.phone">
+                                        Phone: <t t-esc="o.company_id.phone"/><br />
+                                    </t>
+                                    <t t-if="o.company_id.wifi_pswd">
+                                        Wifi Password: <t t-esc="o.company_id.wifi_pswd"/><br />
+                                    </t>
+                                    <t t-esc="o.pos_reference"/><br />
+                                    <t t-if="o.date_order">
+                                        <t t-esc="o.date_order" t-options="{'widget': 'datetime'}"/><br />
+                                        <!--<t t-esc="time.strftime('%d-%m-%Y %H:%M %p',time.strptime(o.date_order,'%Y-%m-%d %H:%M:%S'))" />-->
+                                    </t>
+                                </div>
+                                <div style="width: 45%;float: left;">
+                                    <img src='/web/binary/company_logo' style="width:100%;align:middle;vertical-align:middle;"/>
+                                    <!--<img src='/web/binary/company_logo' style="width:100%;align:middle;"/>-->
+                                </div>
+                            </div>
+                            <br />
+                            <t t-if="o.session_id.config_id.receipt_header">
+                                <div style='text-align:center'>
+                                    <t t-esc="o.session_id.config_id.receipt_header" />
+                                </div>
+                                <br/>
+                            </t>
+                            <table class='receipt-orderlines' style="width: 100%">
+                                <colgroup>
+                                    <col width='40%' />
+                                    <col width='14%' />
+                                    <col width='12%' />
+                                    <col width='17%' />
+                                    <col width='17%' />
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                                    <tr>
+                                        <th>
+                                            <strong>Description</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>Staff</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>Qty</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>Amt</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>After Disc.</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-set="sub_total" t-value="0" />
+                                <tr t-foreach="o.lines" t-as="orderline" style="border-top: 1px solid grey;border-bottom:1px solid grey;">
+                                    <td>
+
+                                        <t t-if="orderline.product_id.default_code">
+                                            <t t-esc="orderline.product_id.name+ '/' + orderline.product_id.default_code"/>
+                                        </t>
+                                        <t t-else="1">
+                                            <t t-esc="orderline.product_id.name"/>
+                                        </t>
+                                        <t t-if="orderline.discount > 0">
+                                            <div class="pos-disc-font">
+                                                With a <t t-esc="orderline.discount"/>% discount
+                                            </div>
+                                        </t>
+                                    </td>
+                                    <td style='text-align:center'>
+                                        <t t-esc="orderline.staff_assigned_id.name"/>
+                                    </td>
+                                    <td style='text-align:center'>
+                                        <t t-esc="orderline.qty"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-set="sub_total" t-value="sub_total+ (orderline.qty*orderline.price_unit)"/>
+                                        <t t-esc="orderline.qty*orderline.price_unit"/>
+                                        <!--<t t-esc="orderline.qty*orderline.price_unit" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>-->
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="orderline.price_subtotal_incl"/>
+                                        <!--<t t-esc="orderline.price_subtotal_incl" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>-->
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <br />
+                            <table class='receipt-total' style="width: 100%">
+                                <tr>
+                                    <td><b>Subtotal:</b></td>
+                                    <td class="text-right">
+                                        <b><t t-esc="sub_total" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <t t-if="sub_total-o.amount_total">
+                                        <td><b>Discount:</b></td>
+                                        <td class="text-right">
+                                            <b><t t-esc="sub_total-o.amount_total" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr class="emph">
+                                    <td><b>Total:</b></td>
+                                    <td class="text-right">
+                                        <b><t t-esc="o.amount_total" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                                    </td>
+                                </tr>
+                                <tr class="emph">
+                                    <td><b>Balance to be paid:</b></td>
+                                    <td class="text-right">
+                                        <b><t t-esc="o.total_balance" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <table class='receipt-paymentlines' style="width: 100%">
+                                <t t-foreach="o.statement_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <t t-if="line.journal_id">
+                                                <t t-esc="line.journal_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="line.amount" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <div  style='text-align:left'>
+                                <br />
+                                <br />
+                                Customer Signature : .......................................
+                            </div>
+
+                            <t t-if="o.session_id.config_id.receipt_footer">
+                                <br />
+                                <div style='text-align:center'>
+                                    <t t-esc="o.session_id.config_id.receipt_footer" />
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

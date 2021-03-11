@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_disc_restrict">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lines']/tree/field[@name='discount']" position="replace">
+                    <field name="show_discount" invisible="1"/>
+                    <field name="discount" widget="monetary"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                           attrs="{'readonly':['|', ('show_discount', '!=', True), ('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+	

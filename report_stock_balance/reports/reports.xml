@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+    <record id="stock_balance_report" model="ir.actions.report.xml">
+        <field name="name">Stock/Cost Report</field>
+        <field name="model">stock.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">report_stock_balance.report_stock_balance</field>
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+    </data>
+</openerp>

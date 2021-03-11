@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="employee_list_report">
+    <t t-call="report.html_container">
+        <t t-call="beauty_pos.internal_layout">
+             <div class="page">
+                 <div class="text-center">
+                    <br/>
+                    <br/>
+                    <br/>
+                     <center>
+                         <h2>Employee Summary Report</h2>
+                         <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Employee</strong></td>
+                                        <td>:
+                                            <t t-if="employee_id_name">
+                                                <span t-esc="employee_id_name"/>
+                                            </t>
+                                            <t t-else="">
+                                                All
+                                            </t>
+                                        </td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table class="table table-striped" width="100%">
+                                <!--<colgroup>-->
+                                    <!--<col width='10%'/>-->
+                                    <!--<col width='40%'/>-->
+                                    <!--<col width='20%'/>-->
+                                    <!--<col width='10%'/>-->
+                                    <!--<col width='20%'/>-->
+                                <!--</colgroup>-->
+                                <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <tr>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sr.no</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Emp.no</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Position</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Department</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Joining Date</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Phone</th>
+                                        <t t-foreach="heading_doc_list" t-as="doc_name">
+                                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="doc_name.name"/></th>
+                                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Exp.Date</th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody class="appointment_tbody" >
+                                    <t t-set="i" t-value="1" />
+                                    <t t-foreach="count_list" t-as="each_emp">
+                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:center"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].employee_no"/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].full_name"/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].job_id.name"/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].department_id.name"/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].joining_date" t-options='{"widget": "date"}'/></td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="each_emp['employee_id'].mobile_phone"/></td>
+                                            <t t-foreach="each_emp['doc_values']" t-as="emp_docs">
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="emp_docs_value[0]"/></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="emp_docs_value[1]" t-options='{"widget": "date"}'/></td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                     </center>
+                 </div>
+             </div>
+        </t>
+        </t>
+    </template>
+
+    <report id="report_employee_list_report"
+            model="hr.employee"
+            string="Employee Summary Report"
+            report_type="qweb-pdf"
+            name="beauty_hr.employee_list_report"
+            file="beauty_hr.employee_list_report"
+            menu="False"
+    />
+
+    <record id="report_employee_list_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    
+
+</odoo>

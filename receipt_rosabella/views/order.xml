@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model = "ir.ui.view" id = "view_order_form_foc">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='print_bill']" position="after">
+                    <button name="print_rosa_receipt" string="Print ReceiptBig)" type="object" class="oe_highlight"
+                            />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

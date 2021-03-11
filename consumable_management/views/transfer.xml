@@ -1,0 +1,30 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <data>
+
+        <record id="action_internal_transfer" model="ir.actions.act_window">
+            <field name="name">Item Transfers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{
+                'contact_display': 'partner_address',
+                'default_move_type': 'one',
+                'default_picking_type_id': 4,
+                }
+            </field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a new transfer.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_item_transfers" name="Item Transfers" action="action_internal_transfer"
+                  parent="product_expiry_alert.menu_beautysoft_inventory" sequence="10"/>
+
+    </data>
+</odoo>

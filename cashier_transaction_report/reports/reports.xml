@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+    <record id="pos_cashier_transaction_details_report" model="ir.actions.report.xml">
+        <field name="name">Cashier Transaction Report</field>
+        <field name="model">report.partner.details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cashier_transaction_report.report_cashier_transaction</field>
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    </data>
+</openerp>

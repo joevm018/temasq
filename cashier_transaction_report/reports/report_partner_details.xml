@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <template id="report_partner_details " inherit_id="pos_daily_report.report_partner_details ">
+            <xpath expr="//table[1]/thead/tr/th[7]" position="replace">
+                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Disc</th>
+            </xpath>
+            <xpath expr="//table[1]//tr[@t-as='order_l']/t[1]/td[4]" position="replace">
+                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                    <t t-if="order_l.discount">
+                        <t t-set="sub_total" t-value="order_l.qty*order_l.price_unit"/>
+                        <t t-set="line_discount" t-value="sub_total-order_l.price_subtotal_incl"/>
+                        <t t-esc="'%.2f'% line_discount" />
+                    </t>
+                    <t t-else=""></t>
+                </td>
+            </xpath>
+            <xpath expr="//table[1]//tr[@t-as='order_l']/t[2]/td[4]" position="replace">
+                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                    <t t-if="order_l.discount">
+                        <t t-set="sub_total" t-value="order_l.qty*order_l.price_unit"/>
+                        <t t-set="line_discount" t-value="sub_total-order_l.price_subtotal_incl"/>
+                        <t t-esc="'%.2f'% line_discount" />
+                    </t>
+                    <t t-else=""></t>
+                </td>
+            </xpath>
+            <xpath expr="//table[1]//t[@t-as='order']/tr[1]/td[4]/div[2]" position="replace">
+                <div style="float:right;width:30%;">
+                    <t t-if="order['order_line'].amt_discount">Global Disc : <t t-esc="order['order_line'].amt_discount"/></t>
+                </div>
+            </xpath>
+    </template>
+</data>
+</openerp>

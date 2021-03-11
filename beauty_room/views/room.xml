@@ -1,0 +1,47 @@
+<odoo>
+
+    <record id="seq_room" model="ir.sequence">
+         <field name="name">Room</field>
+         <field name="code">salon.room</field>
+         <field name="prefix">R</field>
+         <field name="padding">3</field>
+         <field name="company_id" eval="False"/>
+    </record>
+	<!-- Form view of Salon Rooms -->
+    <record id="view_salon_room_form" model="ir.ui.view">
+        <field name="name">view.salon.room.form</field>
+        <field name="model">salon.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="facilities"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view of Salon Rooms -->
+    <record id="view_salon_room_tree" model="ir.ui.view">
+        <field name="name">view.salon.room.tree</field>
+        <field name="model">salon.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="facilities"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action of Salon Rooms -->
+    <record id="action_salon_rooms" model="ir.actions.act_window">
+        <field name="name">Salon Rooms</field>
+        <field name="res_model">salon.room</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- Menu for Salon Rooms -->
+    <menuitem id="menu_rooms" parent="beauty_soft.sub_menu_master" action="action_salon_rooms" sequence="15"/>
+
+</odoo>

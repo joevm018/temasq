@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="asset_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/theme-color.less" rel="stylesheet" type="text/less"/>
+            <link href="/beaudesk_theme/static/src/less/custom.less" rel="stylesheet" type="text/less"/>
+            <link href="/beaudesk_theme/static/src/less/admin.less" rel="stylesheet" type="text/less"/>
+
+            <script src="/beaudesk_theme/static/src/js/custom.js" type="text/javascript"/>
+            <script src="/beaudesk_theme/static/src/js/menu.js" type="text/javascript"/>
+        </xpath>
+    </template>
+    <template id="asset_editor" inherit_id="beaudesk_theme.asset_backend">
+        <xpath expr="." position="inside">
+            <script groups="base.group_system" src="/beaudesk_theme/static/src/js/base.js" type="text/javascript"/>
+        </xpath>
+    </template>
+    <template id="beaudesk_theme.theme_customize_backend" name="Theme Modal for Customization">
+        <div class="modal fade beaudesk_theme" id="theme_customize_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title">Theme Customize</h4>
+                    </div>
+                    <p class="pf-title">Backend Color Palates</p>
+                    <div class="pf-separator"/>
+                    <div class="panel-primary-color">
+                        <label class="chd-color-combi">
+                            <span class="pf-color1"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_grey" name="colorvar-primary" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color2"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_light_green" name="colorvar-primary" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color3"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_blue" name="colorvar-primary" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color4"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_peach" name="colorvar-primary" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color5"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_sea_green" name="colorvar-primary" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color6"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_pink" name="colorvar-primary" type="radio"/>
+                        </label>
+                    </div>
+                    <p class="pf-title">POS Color Palates</p>
+                    <div class="pf-seprator"/>
+                    <div class="panel-primary-color">
+                        <label class="chd-color-combi">
+                            <span class="pf-color1"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_grey_pos" name="pos_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color2"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_light_green_pos" name="pos_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color3"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_blue_pos" name="pos_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color4"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_peach_pos" name="pos_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color5"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_sea_green_pos" name="pos_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color6"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_pink_pos" name="pos_theme" type="radio"/>
+                        </label>
+                    </div>
+                    <p class="pf-title">Login Color Palates</p>
+                    <div class="pf-seprator"/>
+                    <div class="panel-primary-color">
+                        <label class="chd-color-combi">
+                            <span class="pf-color1"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_grey_login" name="login_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color2"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_light_green_login" name="login_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color3"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_blue_login" name="login_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color4"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_peach_login" name="login_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color5"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_sea_green_login" name="login_theme" type="radio"/>
+                        </label>
+                        <label class="chd-color-combi">
+                            <span class="pf-color6"/>
+                            <input data-enable="less" data-xmlid="beaudesk_theme.option_primary_color_pink_login" name="login_theme" type="radio"/>
+                        </label>
+                    </div>
+                    <div class="pf-separator"/>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Option Primary Fonts -->
+    <template active="False" customize_show="True" id="option_primary_color_grey" inherit_id="web.assets_backend" name="option_primary_color_grey">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/backend-grey.less"/>
+        </xpath>
+    </template>
+    <template active="False" customize_show="True" id="option_primary_color_light_green" inherit_id="web.assets_backend" name="option_primary_color_light_green">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/backend-light-green.less"/>
+        </xpath>
+    </template>
+    <template active="False" customize_show="True" id="option_primary_color_blue" inherit_id="web.assets_backend" name="option_primary_color_blue">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/backend-dark-blue.less"/>
+        </xpath>
+    </template>
+    <template active="False" customize_show="True" id="option_primary_color_peach" inherit_id="web.assets_backend" name="option_primary_color_peach">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/backend-peach.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+    <template active="False" customize_show="True" id="option_primary_color_sea_green" inherit_id="web.assets_backend" name="option_primary_color_sea_green">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/backend-sea-green.less"/>
+        </xpath>
+    </template>
+    <template active="False" customize_show="True" id="option_primary_color_pink" inherit_id="web.assets_backend" name="option_primary_color_pink">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/backend-pink.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_grey_pos" inherit_id="point_of_sale.assets" name="option_primary_color_grey_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_grey.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_light_green_pos" inherit_id="point_of_sale.assets" name="option_primary_color_light_green_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_light_green.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_blue_pos" inherit_id="point_of_sale.assets" name="option_primary_color_blue_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_blue.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_peach_pos" inherit_id="point_of_sale.assets" name="option_primary_color_peach_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_peach.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_sea_green_pos" inherit_id="point_of_sale.assets" name="option_primary_color_sea_green_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_sea_green.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_pink_pos" inherit_id="point_of_sale.assets" name="option_primary_color_pink_pos">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/pos_pink.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_grey_login" inherit_id="web.assets_frontend" name="option_primary_color_grey_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_grey.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_light_green_login" inherit_id="web.assets_frontend" name="option_primary_color_light_green_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_light_green.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_blue_login" inherit_id="web.assets_frontend" name="option_primary_color_blue_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_blue.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_peach_login" inherit_id="web.assets_frontend" name="option_primary_color_peach_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_peach.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_sea_green_login" inherit_id="web.assets_frontend" name="option_primary_color_sea_green_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_sea_green.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template active="False" customize_show="True" id="option_primary_color_pink_login" inherit_id="web.assets_frontend" name="option_primary_color_pink_login">
+        <xpath expr="." position="inside">
+            <link href="/beaudesk_theme/static/src/less/login_pink.less" rel="stylesheet" type="text/less"/>
+        </xpath>
+    </template>
+
+    <template id="beaudesk_calendar_scheduler" name="beaudesk_calendar" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href='/beaudesk_theme/static/src/less/beaudesk_backend.less'/>
+        </xpath>
+    </template>
+
+    <template id="beaudesk_point_of_sale" name="beaudesk_pos" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/beaudesk_pos.less"/>
+        </xpath>
+    </template>
+
+    <template id="beaudesk_login" name="beaudesk_login" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/beaudesk_theme/static/src/less/beaudesk_login.less"/>
+        </xpath>
+    </template>
+
+    <template id="secondary_menu" inherit_id="web.menu_secondary_submenu">
+        <xpath expr="//ul[@class='oe_secondary_submenu nav nav-pills nav-stacked']" position="attributes">
+            <attribute name="class">oe_secondary_submenu nav nav-pills nav-stacked hide_secondary</attribute>
+        </xpath>
+    </template>
+    <template id="secondary" inherit_id="web.menu_secondary">
+        <xpath expr="//div[@class='o_sub_menu_content']//div[@class='oe_secondary_menu_section']" position="inside">
+            <t t-if="menu['menu_icon_class']">
+                <i t-att-class="menu['menu_icon_class']"/>
+            </t>
+            <t t-if="not(menu['menu_icon_class'])">
+                <i class="fa fa-circle-o"/>
+            </t>
+            <t t-if="menu.get('children') and menu['children']">
+                <span class="sb-m"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="menu_link" inherit_id="web.menu_link">
+        <xpath expr="//a" position="inside">
+            <t t-if="menu.get('children') and menu['children']">
+                <span class="sb-m"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_hair_color_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Hair Color
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c1" string="Skin / Body"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c1"/>
+                        </td>
+                        <td>
+                            <label for="c1"/>
+                        </td>
+                        <td>
+                            <field name="c2"/>
+                        </td>
+                        <td>
+                            <label for="c2"/>
+                        </td>
+                        <td>
+                            <field name="c3"/>
+                        </td>
+                        <td>
+                            <label for="c3"/>
+                        </td>
+                        <td>
+                            <field name="c4"/>
+                        </td>
+                        <td>
+                            <label for="c4"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c5"/>
+                        </td>
+                        <td>
+                            <label for="c5"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c6" string="Scalp"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c6"/>
+                        </td>
+                        <td>
+                            <label for="c6"/>
+                        </td>
+                        <td>
+                            <field name="c7"/>
+                        </td>
+                        <td>
+                            <label for="c7"/>
+                        </td>
+                        <td>
+                            <field name="c8"/>
+                        </td>
+                        <td>
+                            <label for="c8"/>
+                        </td>
+                        <td>
+                            <field name="c9"/>
+                        </td>
+                        <td>
+                            <label for="c9"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c10" string="Hair"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c10"/>
+                        </td>
+                        <td>
+                            <label for="c10"/>
+                        </td>
+                        <td>
+                            <field name="c11"/>
+                        </td>
+                        <td>
+                            <label for="c11"/>
+                        </td>
+                        <td>
+                            <field name="c12"/>
+                        </td>
+                        <td>
+                            <label for="c12"/>
+                        </td>
+                        <td>
+                            <field name="c13"/>
+                        </td>
+                        <td>
+                            <label for="c13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c14"/>
+                        </td>
+                        <td>
+                            <label for="c14"/>
+                        </td>
+                        <td>
+                            <field name="c15"/>
+                        </td>
+                        <td>
+                            <label for="c15"/>
+                        </td>
+                        <td>
+                            <field name="c16"/>
+                        </td>
+                        <td>
+                            <label for="c16"/>
+                        </td>
+                        <td>
+                            <field name="c17"/>
+                        </td>
+                        <td>
+                            <label for="c17"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c18"/>
+                        </td>
+                        <td>
+                            <label for="c18"/>
+                        </td>
+                        <td>
+                            <field name="c19"/>
+                        </td>
+                        <td>
+                            <label for="c19"/>
+                        </td>
+                        <td>
+                            <field name="c20"/>
+                        </td>
+                        <td>
+                            <label for="c20"/>
+                        </td>
+                        <td>
+                            <field name="c21"/>
+                        </td>
+                        <td>
+                            <label for="c21"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c22"/>
+                        </td>
+                        <td>
+                            <label for="c22"/>
+                        </td>
+                        <td>
+                            <field name="c23"/>
+                        </td>
+                        <td>
+                            <label for="c23"/>
+                        </td>
+                        <td>
+                            <field name="c24"/>
+                        </td>
+                        <td>
+                            <label for="c24"/>
+                        </td>
+                        <td>
+                            <field name="c25"/>
+                        </td>
+                        <td>
+                            <label for="c25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c26"/>
+                        </td>
+                        <td>
+                            <label for="c26"/>
+                        </td>
+                        <td>
+                            <field name="c27"/>
+                        </td>
+                        <td>
+                            <label for="c27"/>
+                        </td>
+                        <td>
+                            <field name="c28"/>
+                        </td>
+                        <td>
+                            <label for="c28"/>
+                        </td>
+                        <td>
+                            <field name="c29"/>
+                        </td>
+                        <td>
+                            <label for="c29"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c30"/>
+                        </td>
+                        <td>
+                            <label for="c30"/>
+                        </td>
+                        <td>
+                            <field name="c31"/>
+                        </td>
+                        <td>
+                            <label for="c31"/>
+                        </td>
+                        <td>
+                            <field name="c32"/>
+                        </td>
+                        <td>
+                            <label for="c32"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c33" string="Hair Color"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c33"/>
+                        </td>
+                        <td>
+                            <label for="c33"/>
+                        </td>
+                        <td>
+                            <field name="c34"/>
+                        </td>
+                        <td>
+                            <label for="c34"/>
+                        </td>
+                        <td>
+                            <field name="c35"/>
+                        </td>
+                        <td>
+                            <label for="c35"/>
+                        </td>
+                        <td>
+                            <field name="c36"/>
+                        </td>
+                        <td>
+                            <label for="c36"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c37"/>
+                        </td>
+                        <td>
+                            <label for="c37"/>
+                        </td>
+                        <td>
+                            <field name="c371"/>
+                        </td>
+                        <td>
+                            <label for="c371"/>
+                        </td>
+                        <td>
+                            <field name="c372"/>
+                        </td>
+                        <td>
+                            <label for="c372"/>
+                        </td>
+                        <td>
+                            <field name="c373"/>
+                        </td>
+                        <td>
+                            <label for="c373"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="c374"/>
+                        </td>
+                        <td>
+                            <label for="c374"/>
+                        </td>
+                        <td>
+                            <field name="c375"/>
+                        </td>
+                        <td>
+                            <label for="c375"/>
+                        </td>
+                        <td>
+                            <field name="c376"/>
+                        </td>
+                        <td>
+                            <label for="c376"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c38"/>
+                </h2>
+                <field name="c38" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c39" attrs="{'invisible':[('c38', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c40"/>
+                </h2>
+                <field name="c40" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c41" attrs="{'invisible':[('c40', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c42"/>
+                </h2>
+                <field name="c42" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c43" attrs="{'invisible':[('c42', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c44"/>
+                </h2>
+                <field name="c44" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c45" attrs="{'invisible':[('c44', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c46"/>
+                </h2>
+                <field name="c46" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c47" attrs="{'invisible':[('c46', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c48"/>
+                </h2>
+                <field name="c48" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c49" attrs="{'invisible':[('c48', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c50"/>
+                </h2>
+                <field name="c50" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="c51" attrs="{'invisible':[('c50', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c52"/>
+                </h2>
+                <field name="c52" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c53"/>
+                </h2>
+                <field name="c53" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c54"/>
+                </h2>
+                <field name="c54" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c55"/>
+                </h2>
+                <field name="c55" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c56"/>
+                </h2>
+                <field name="c56" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c57"/>
+                </h2>
+                <field name="c57" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c58"/>
+                </h2>
+                <field name="c58" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="c59"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="c59" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="c60"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="c60" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="c61"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="c61" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="c62"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="c62" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c63"/>
+                </h2>
+                <field name="c63" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c64"/>
+                </h2>
+                <field name="c64" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c65"/>
+                </h2>
+                <field name="c65" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c66"/>
+                </h2>
+                <field name="c66" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c67"/>
+                </h2>
+                <field name="c67" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c68"/>
+                </h2>
+                <field name="c68" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c681"/>
+                </h2>
+                <field name="c681" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="c682"/>
+                </h2>
+                <field name="c682" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    General Notes:
+                    <br/>
+                    Dye is a temporary solution to hair coloring, not a permanent solution.
+                    <br/>
+                    Light dyes do not completely cover white hair, but rather their coverage ranges between 100%
+                    <br/>
+                    The dye used is a 100% natural base dye, so it is normal for white hair to reappear after several
+                    washes, depending on the nature of the hair and the speed of its growth.
+                    <br/>
+                </h4>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    ملاحظات عامة:
+                    <br/>
+                    ـ ان الصبغة هي حل مؤقت لتلوين الشعر وليست حل دائم.
+                    <br/>
+                    ـ ان الصبغات الفاتحه لاتغطي الشعر الابيض كاملا بل تتراوح نسبة تغطيتها مابين بالمئه
+                    <br/>
+                    ـ ان الصبغة المستخدمه هي صبغة من اساس طبيعي بنسبه 100 بالمئه فمن الطبيعي ظهور الشعر الابيض مجددا بعد
+                    <br/>
+                    عدة غسلات على حسب طبيعة الشعر وسرعة نموه.
+                    <br/>
+                </h4>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="c70"/>
+                        </td>
+                        <td>
+                            <field name="c70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="c71"/>
+                        </td>
+                        <td>
+                            <field name="c71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_hair_color" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_hair_color_wizard"/>
+        <field name="context">{'default_type':'hair_color'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_hair_color" name="HAIR COLOR" action="action_consent_hair_color"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

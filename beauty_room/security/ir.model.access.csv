@@ -1,0 +1,2 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_salon_room,access_salon_room,model_salon_room,,1,1,1,1

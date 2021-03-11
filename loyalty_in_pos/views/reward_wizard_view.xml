@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_reward_wizard_form">
+        <field name="name">reward.wizard.extend</field>
+        <field name="model">reward.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Rewards">
+                    <group>
+                        <field name="reward_id" options="{'no_create': True}"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+        </field>
+    </record>
+</odoo>

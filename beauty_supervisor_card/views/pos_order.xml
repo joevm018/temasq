@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_pos_new_form_extended">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="discounts_in_pos.view_pos_new_form_extended"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='discount_total']" position="replace">
+                    <field name="discount_total" attrs="{'readonly':[('active_for_supervisor', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='discount_percent']" position="before">
+                    <field name="discount_percent_test" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='discount_percent']" position="replace">
+                    <field name="discount_percent" attrs="{'readonly':[('active_for_supervisor', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_order_form_beauty_pos">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lines']/tree/field[@name='discount']" position="before">
+                    <field name="active_for_supervisor" invisible="1"/>
+                    <field name="wizard_pin_update" invisible="1"/>
+                    <field name="discount_test" invisible="1"/>
+                    <field name="price_unit_test" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='lines']/tree/field[@name='price_subtotal_incl']" position="replace">
+                    <field name="price_subtotal_incl" widget="monetary"
+                           attrs="{'readonly':[('make_helpdesk_invisible','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='lines']/tree/field[@name='price_unit']" position="replace">
+                    <field name="price_unit" widget="monetary"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" force_save="1"
+                           attrs="{'readonly':['|','|',('state', '!=', 'draft'),('active_for_supervisor', '=', False),('make_helpdesk_invisible','=',False)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='lines']/tree/field[@name='discount']" position="replace">
+                    <field name="discount" widget="monetary"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                           attrs="{'readonly':['|','|',('state', '!=', 'draft'),('active_for_supervisor', '=', False)],'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='write_uid']" position="after">
+                    <field name="active_for_supervisor" invisible="1"/>
+                    <field name="wizard_pin_update" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='action_check_in']" position="before">
+                    <button name="action_swipe_card_discount_order" string="Change Price/Discount" class="oe_highlight"
+                            type="object" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                            attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

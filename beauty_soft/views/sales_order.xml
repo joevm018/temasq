@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+             
+     <!--<record id="form_billing" model="ir.ui.view">-->
+            <!--<field name="name">sale.order.form</field>-->
+            <!--<field name="model">sale.order</field>-->
+            <!--<field name="inherit_id" ref="sale.view_order_form"/>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<xpath expr="/form/header/button[@name='action_quotation_send']" position="replace" >-->
+                    <!--<button name="action_quotation_send" string="Send by Email" type="object" states="draft" class="oe_highlight" groups="base.group_user"  invisible="1"/>-->
+
+                <!--</xpath>-->
+                 <!--<xpath expr="/form/header/button[@name='print_quotation']" position="replace" >-->
+                    <!--<button name="print_quotation" string="Send by Email" type="object" states="draft" class="oe_highlight" groups="base.group_user"  invisible="1"/>-->
+                <!--</xpath>-->
+                 <!--<xpath expr="//field[@name='validity_date']" position="replace" >-->
+                     <!--<field name="validity_date" invisible = '1'/>-->
+                     <!--<field name="file_no" string='File No' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                <!--<xpath expr="//field[@name='partner_invoice_id']" position="replace" >-->
+                     <!--<field name="partner_invoice_id" invisible = '1' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                 <!--<xpath expr="//field[@name='partner_shipping_id']" position="replace" >-->
+                     <!--<field name="partner_shipping_id" invisible = '1' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                <!--<xpath expr="//field[@name='payment_term_id']" position="replace" >-->
+                     <!--<field name="payment_term_id" invisible = '1' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                <!--<xpath expr="//tree/field[@name='name']" position="replace" >-->
+                     <!--<field name="name" invisible = '1' options="{'no_create': True}"/>-->
+                     <!--<field name="staff_id" invisible = '0' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                <!--<xpath expr="//tree/field[@name='tax_id']" position="replace" >-->
+                     <!--<field name="tax_id" invisible = '1' options="{'no_create': True}"/>-->
+                <!--</xpath>-->
+                <!--<xpath expr="//page/field[@name='note']" position="replace" >-->
+                     <!--<field name="note" invisible='1' class="oe_inline" placeholder="Setup default terms and conditions in your company settings."/>-->
+
+                <!--</xpath>-->
+            <!--</field>-->
+     <!--</record>-->
+     <!--<record id="action_orders_billing" model="ir.actions.act_window">-->
+            <!--<field name="name">Sales Orders</field>-->
+            <!--<field name="type">ir.actions.act_window</field>-->
+            <!--<field name="res_model">sale.order</field>-->
+            <!--<field name="view_type">form</field>-->
+            <!--<field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>-->
+            <!--<field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>-->
+            <!--<field name="context">{'hide_sale':True}</field>-->
+            <!--<field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>-->
+            <!--<field name="help" type="html">-->
+                <!--<p class="oe_view_nocontent_create">-->
+                    <!--Create a Quotation, the first step of a new sale.-->
+                <!--</p><p>-->
+                    <!--Once the quotation is confirmed, it becomes a sales order.-->
+                    <!--You'll be able to invoice it and collect payments.-->
+                    <!--From the <i>Sales Orders</i> menu, you can track delivery-->
+                    <!--orders or services.-->
+                <!--</p>-->
+            <!--</field>-->
+        <!--</record>-->
+        
+
+    </data>
+</odoo>

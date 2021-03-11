@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="category_sale_report">
+    <t t-call="report.html_container">
+        <t t-call="beauty_pos.internal_layout">
+             <div class="page">
+                 <div class="text-center">
+                    <br/>
+                    <br/>
+                    <br/>
+                     <center>
+                         <h2>Category Sale Report</h2>
+                         <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Period From</strong></td>
+                                        <td>: <span t-esc="date_start" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Period To</strong></td>
+                                        <td>: <span t-esc="date_stop" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Type</strong></td>
+                                        <td>:
+                                            <t t-if="product_type_name">
+                                                <span t-esc="product_type_name"/>
+                                            </t>
+                                            <t t-else="">
+                                                All
+                                            </t>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table class="table table-striped" name="category">
+                                <colgroup>
+                                    <col width='10%'/>
+                                    <col width='50%'/>
+                                    <col width='10%'/>
+                                    <col width='30%'/>
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <tr>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Product Category</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sales</th>
+                                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Sale Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="appointment_tbody" >
+                                    <t t-set="i" t-value="1" />
+                                    <t t-set="tot_category_sale_amount" t-value="0" />
+                                    <t t-set="tot_sales" t-value="0" />
+                                    <t t-foreach="count_list" t-as="categ">
+                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <t t-set="tot_category_sale_amount" t-value="tot_category_sale_amount+categ['total_sale_amount']" />
+                                            <t t-set="tot_sales" t-value="tot_sales+categ['total_sales']" />
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b><span t-esc="i"/></b><t t-set="i" t-value="i+1"/></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b><span t-esc="categ['category']"/></b></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><span t-esc="categ['total_sales']"/></b></td>
+                                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><span t-esc="categ['total_sale_amount']"/></b></td>
+                                        </tr>
+                                        <t t-if="is_detailed">
+                                            <tr t-foreach="categ['list_order_lines']" t-as="order_lines" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"/>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:center"><span t-esc="order_lines.product_id.name"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:right"/>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:right"><span t-esc="order_lines.qty*order_lines.price_unit"/></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b>Total:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="tot_sales"/></b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right"><b><span t-esc="tot_category_sale_amount"/></b></td>
+                                    </tr>
+                                    <tr t-if="product_type=='service' or not product_type" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b>Previous Advance:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b><span t-esc="remove_total_old_advance"/></b></td>
+                                    </tr>
+                                    <tr t-if="product_type=='service' or not product_type" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b>Today's Advance:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b><span t-esc="add_total_today_advance_amt"/></b></td>
+                                    </tr>
+                                    <tr t-if="product_type=='service' or not product_type" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b>Total Collected:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b><span t-esc="tot_category_sale_amount-remove_total_old_advance+add_total_today_advance_amt"/></b></td>
+                                    </tr>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b>No of Clients:</b></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;text-align:right" colspan="2"><b><span t-esc="clients_count"/></b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          <div class="pull-right">
+                            <strong>Authorized Signature</strong>
+                        </div>
+                     </center>
+                 </div>
+             </div>
+        </t>
+        </t>
+    </template>
+
+    <report id="report_category_sale_report"
+            model="stock.move"
+            string="Category Sale Report"
+            report_type="qweb-pdf"
+            name="ak_category_sale_report.category_sale_report"
+            file="ak_category_sale_report.category_sale_report"
+            menu="False"
+    />
+
+    <record id="report_category_sale_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    
+
+</odoo>

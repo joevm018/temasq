@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_card_status">
+    <t t-call="report.html_container">
+    <t t-call="beauty_pos.internal_layout">
+            <div class="page">
+                <div class="text-center">
+                    <h2>Card Report</h2>
+                </div>
+                <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Card Type</strong></td>
+                                        <td>:
+                                            <t t-if="card_type">
+                                                <t t-esc="{'type_student_card': 'Student Card','type_discount_gift_card': 'Discount Gift Card','type_package_card': 'Package Card'}[card_type]" />
+                                            </t>
+                                            <t t-else="">All</t>
+                                        </td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status</strong></td>
+                                        <td>:
+                                            <t t-if="status"><span t-esc="status" /></t>
+                                            <t t-else="">All</t>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                            </tbody>
+                        </table>
+
+                <br/>
+                <table width="100%" class="table table-striped">
+                    <thead >
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card name</th>
+                            <th t-if="not card_type" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Type</th>
+                            <th t-if="not status" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="sl_no" t-value="0"/>
+                        <t t-foreach="info_card['content']" t-as='cards'>
+                            <t t-set="sl_no" t-value="sl_no+1"/>
+                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-foreach="cards" t-as='card_item'>
+                                <t t-if="cards.state=='new'">
+                                    <td style="color: grey;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="sl_no" /></td>
+                                    <td style="color: grey;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="card_item.name" /></td>
+                                    <td t-if="not card_type" style="color: grey;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">
+                                        <t t-esc="{'type_student_card': 'Student Card','type_discount_gift_card': 'Discount Gift Card','type_package_card': 'Package Card'}[card_item.type]" />
+                                    </td>
+                                    <td t-if="not status" style="color: grey;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">New</td>
+                                </t>
+                                 <t t-if="cards.state=='cancel'">
+                                    <td style="color: orange;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="sl_no" /></td>
+                                    <td style="color: orange;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="card_item.name" /></td>
+                                    <td t-if="not card_type" style="color: orange;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">
+                                        <t t-esc="{'type_student_card': 'Student Card','type_discount_gift_card': 'Discount Gift Card','type_package_card': 'Package Card'}[card_item.type]" />
+                                    </td>
+                                    <td t-if="not status" style="color: orange;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Cancelled</td>
+                                </t>
+                                <t t-if="cards.state=='active' and cards.is_zeroo_card">
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="sl_no" /></td>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="card_item.name" /></td>
+                                    <td t-if="not card_type" style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">
+                                        <t t-esc="{'type_student_card': 'Student Card','type_discount_gift_card': 'Discount Gift Card','type_package_card': 'Package Card'}[card_item.type]" />
+                                    </td>
+                                    <td t-if="not status" style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Finished</td>
+                                </t>
+                                <t t-if="cards.state=='active' and not cards.is_zeroo_card">
+                                    <td style="color: green;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="sl_no" /></td>
+                                    <td style="color: green;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="card_item.name" /></td>
+                                    <td t-if="not card_type" style="color: green;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">
+                                        <t t-esc="{'type_student_card': 'Student Card','type_discount_gift_card': 'Discount Gift Card','type_package_card': 'Package Card'}[card_item.type]" />
+                                    </td>
+                                    <td t-if="not status" style="color: green;border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Active</td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+    </t>
+    </t>
+</template>
+</data>
+</openerp>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="external_pos_inv_layout">
+            <!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <div class="header">
+                <div class="row" style="text-align: center;">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                         style="max-height: 150px;"/>
+                </div>
+            </div>
+
+            <t t-raw="0"/>
+            <div class="footer">
+
+                <div class="text-center" style="border-top: 1px solid black;color: #FBCBCA;">
+                    <t t-set="company" t-value="company.sudo()"/>
+                    <!--<span t-field="company.name"/><br/>-->
+                    <br/>
+                    <t>THANKS FOR VISITING</t>
+                </div>
+            </div>
+        </template>
+
+        <record id="beauty_pos.report_pos_receipt_record" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="report.paperformat_euro"/>
+        </record>
+
+        <template id="beauty_pos.report_pos_receipt">
+            <t t-call="receipt_eljoori.external_pos_inv_layout">
+                <t t-call="report.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="text-align: center;font-family:Georgia, 'Times New Roman', Times, serif !important; font-size: 18px;">
+                            <br/>
+                            <table name="table master" width="100%">
+                                <colgroup>
+                                    <col width='30%'/>
+                                    <col width='70%'/>
+                                </colgroup>
+                                <tbody>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #FBCBCA;">
+                                            <strong>DATE</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.date_order" t-options='{"widget": "datetime"}'/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #FBCBCA;">
+                                            <strong>CUSTOMER NAME</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #FBCBCA;">
+                                            <strong>CUSTOMER PHONE</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.partner_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="line-height: 25px;">
+                                        <td style="color: #FBCBCA;">
+                                            <strong>BILL NUMBER</strong>
+                                        </td>
+                                        <td>:
+                                            <span t-esc="o.name"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 style="color: #FBCBCA;">
+                                <b>INVOICE</b>
+                            </h3>
+                            <br/>
+                            <table class='table receipt-orderlines' width="100%">
+                                <colgroup>
+                                    <col width='12%'/>
+                                    <col width='35%'/>
+                                    <col width='15%'/>
+                                    <col width='16%'/>
+                                    <col width='16%'/>
+                                </colgroup>
+                                <thead style="border-top: 1px solid #FBCBCA;border-bottom: 1px solid #FBCBCA;">
+                                    <tr style="border-top: 1px solid #FBCBCA;border-bottom:1px solid #FBCBCA;">
+                                        <th style="border-top: 1px solid #FBCBCA;color: white; background-color: #FBCBCA;border-bottom:1px solid #FBCBCA;vertical-align:middle;text-align:center">
+                                            <strong>Sl No.</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #FBCBCA;color: white; background-color: #FBCBCA;border-bottom:1px solid #FBCBCA;vertical-align:middle;text-align:center">
+                                            <strong>Item Name</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #FBCBCA;color: white; background-color: #FBCBCA;border-bottom:1px solid #FBCBCA;vertical-align:middle;text-align:center">
+                                            <strong>Units</strong>
+                                        </th>
+                                        <th style="border-top: 1px solid #FBCBCA;color: white; background-color: #FBCBCA;border-bottom:1px solid #FBCBCA;vertical-align:middle;text-align:center">
+                                            <strong>Net Total</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-set="sl_no" t-value="0"/>
+                                <t t-set="sub_total" t-value="0"/>
+                                <tr t-foreach="o.lines" t-as="orderline">
+                                    <t t-set="sl_no" t-value="sl_no+1"/>
+                                    <td style="text-align:center">
+                                        <t t-esc="sl_no"/>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="orderline.product_id.name"/>
+                                    </td>
+                                    <t t-set="sub_total" t-value="sub_total+ (orderline.qty*orderline.price_unit)"/>
+                                    <td style="text-align:center;">
+                                        <t t-esc="int(orderline.qty)"/>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="'%.2f'% orderline.price_subtotal_incl"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="o.amt_service_charge > 0">
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center;">VIP Treatment</td>
+                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">
+                                        <t t-esc="'%.2f'% o.amt_service_charge"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid #FBCBCA;border-bottom:1px solid #FBCBCA;">
+                                    <td/>
+                                    <td/>
+                                    <td style="text-align:center;color: #FBCBCA;">
+                                        <b>: QAR</b>
+                                    </td>
+                                    <td style="text-align:center;color: #FBCBCA;">
+                                        <b>
+                                            <t t-esc="'%.2f'% o.amount_total"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <table name="master" class='receipt-paymentlines' width="100%">
+                                <colgroup>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                    <col width='25%'/>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th/>
+                                        <th/>
+                                        <th/>
+                                        <th/>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color: #FBCBCA;">Received</td>
+                                        <td colspan="3">:
+                                            <span t-esc="'%.2f'% o.total_paid"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #FBCBCA;">Balance</td>
+                                        <td colspan="3">:
+                                            <span t-esc="'%.2f'% o.total_balance"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #FBCBCA;">
+                                            <br/>
+                                            <b>Mode of Payment :</b>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                                    <tr t-foreach="o.statement_ids" t-as="line">
+                                        <td style="color: #FBCBCA;">
+                                            <t t-if="line.journal_id">
+                                                <t t-esc="line.journal_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td colspan="3">:
+                                            <t t-esc="'%.2f'% line.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <table class='receipt-total' width="100%">
+                                <tr>
+                                    <td style="text-align:center; color: #FBCBCA;"><b>Client's Signature</b></td>
+                                    <td style="text-align:center;color: #FBCBCA;"><b>Authorized Signatory</b></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

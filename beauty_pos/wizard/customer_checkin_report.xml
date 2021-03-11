@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="checkin_report_wizard" model="ir.ui.view">
+            <field name="name">checkin.report.wizard</field>
+            <field name="model">checkin.report.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Checkin  Report">
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="checkin_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_checkin_report" model="ir.actions.act_window">
+                <field name="name">Checkin  Report</field>
+                <field name="res_model">checkin.report.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="checkin_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem 
+            id="menu_checkin_report"
+            name="Checkin Report" 
+            action="action_checkin_report"
+            parent="point_of_sale.menu_point_rep" sequence="1"/>
+
+    </data>
+</odoo>

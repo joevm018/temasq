@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_consumption_template_inherit"
+                  inherit_id="consumable_management.report_consumption_template">
+            <xpath expr="//table[@name='appointments']//tbody/tr/td[5]" position="replace">
+                <td align="center"
+                    style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <t t-foreach="doc['staff_ids']" t-as='n'>
+                        <t t-esc="n.name"/>,
+                    </t>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

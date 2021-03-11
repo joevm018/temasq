@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record model = "ir.ui.view" id = "view_pos_make_payment_enhanced">
+        <field name="name">pos.make.payment.inherit</field>
+        <field name="model">pos.make.payment</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_payment"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer" position="replace">
+                    <div>
+                        Select Payment Mode
+                        <br/>
+                    </div>
+                    <button name="type_cash" string="&#160;&#160;&#160;&#160;&#160;&#160;CASH&#160;&#160;&#160;&#160;&#160;&#160;"  type="object" class="btn-primary" />
+                    or
+                    <button name="type_card" string="&#160;&#160;&#160;&#160;&#160;&#160;CARD&#160;&#160;&#160;&#160;&#160;&#160;" type="object" class="btn-primary"/>
+                    <footer>
+                        <button name="check" string="Make Payment" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancel" class="btn-default"/>
+                    </footer>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="replace">
+                <field name="journal_id" domain="[('journal_user', '=', True)]" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

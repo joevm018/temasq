@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <report
+            id="report_appointment"
+            model="pos.order.line"
+            string="Appointment Report"
+            report_type="qweb-pdf"
+            name="beauty_pos.report_appointment_template"
+            file="beauty_pos.report_appointment_template"
+            attachment_use="False"
+            menu="False"
+          />
+
+        <record id="paperformat_a4_Appointment_Report_report" model="report.paperformat">
+            <field name="name">Appointment Report Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">55</field>
+            <field name="margin_bottom">14</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">54</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="report_appointment" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_a4_Appointment_Report_report"/>
+        </record>
+    </data>
+</openerp>
+

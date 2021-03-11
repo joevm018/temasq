@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_pos_new_form_extended">
+        <field name="name">pos.order.extend</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_loyalty" string="Rewards" class="fa fa-star"
+                        style="background-color: #30ba75;border-color: #7c7bad;color: white;" type="object"
+                        attrs="{'invisible':['|',('have_reward','=',False),('state', 'not in', ['draft'])]}"/>
+            </xpath>
+            <xpath expr="//page[@name='extra']" position="before">
+                <page name="loyalty" string="Loyalty">
+                    <group>
+                        <group>
+                            <field name="customer_loyalty" />
+                            <field name="loyalty_points" />
+                        </group>
+                        <group>
+                            <field name="loyalty_won" />
+                            <field name="points_spent" />
+                            <field name="have_reward" invisible="1"/>
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

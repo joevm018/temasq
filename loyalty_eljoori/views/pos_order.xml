@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_loyalty_card" model="product.product">
+            <field name="name">Loyalty Card</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">20</field>
+            <field name="type">product</field>
+            <field name="tracking">none</field>
+            <field name="default_code">CARD</field>
+            <field name="image" type="base64" file="point_of_sale/static/img/product_product_49-image.jpg"/>
+        </record>
+    </data>
+
+    <record model="ir.ui.view" id="view_pos_new_form_extended_joori">
+        <field name="name">pos.order.extend</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="swipe_card" string="Swipe Card" type="object"
+                        attrs="{'invisible':['|', '|', ('card_no','!=',False), ('partner_id','=',False), ('have_loyalty_card','=',False)]}"/>
+                <button name="loyalty_purchase" string="Purchase Loyalty Card" type="object"
+                        attrs="{'invisible':['|', ('partner_id','=',False), ('have_loyalty_card','=',True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='customer_loyalty']" position="before">
+                <field name="have_loyalty_card" invisible="1"/>
+                <field name="card_no" password="True" readonly="1"/>
+            </xpath>
+            <xpath expr="//page[@name='loyalty']" position="attributes">
+                <attribute name="attrs">{'invisible':[('have_loyalty_card','=',False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_pos_receipt" inherit_id="beauty_pos.report_pos_receipt">
+            <xpath expr="//table[@class='receipt-paymentliness']" position="replace">
+                <br/>
+                <table class='receipt-paymentliness' t-if="o.partner_id">
+                  <b><center>*******LOYALTY REWARDS*******</center></b>
+                  <tr>
+                      <td>Earned Points</td>
+                      <td class="text-align:right">
+                          : <t t-esc='o.loyalty_won' />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Spent Points</td>
+                      <td class="text-align:right">
+                          : <t t-esc='o.points_spent' />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Remaining Points</td>
+                      <td class="text-align:right">
+                          : <b><t t-esc='o.customer_loyalty' /></b>
+                      </td>
+                  </tr>
+            </table>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

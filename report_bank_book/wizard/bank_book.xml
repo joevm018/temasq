@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bank_book_wizard" model="ir.ui.view">
+            <field name="name">bank.book.report</field>
+            <field name="model">bank.book.report</field>
+            <field name="arch" type="xml">
+                <form string="Bank Book Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="account_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_bank_book_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bank_book" model="ir.actions.act_window">
+                <field name="name">Bank Book</field>
+                <field name="res_model">bank.book.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="bank_book_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_bank_book_report" name="Bank Book" action="action_bank_book"
+                  parent="account.menu_finance_legal_statement" sequence="1"/>
+
+    </data>
+</odoo>

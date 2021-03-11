@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="partner_property_form_view_joori" model="ir.ui.view">
+        <field name="name">partner.property.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="replace">
+                <field name="barcode" readonly="1"/>
+                <field name="loyalty_purchase_date" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

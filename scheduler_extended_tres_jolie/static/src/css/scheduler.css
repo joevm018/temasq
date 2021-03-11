@@ -1,0 +1,37 @@
+.show_session_indicator {
+    display: flex;
+}
+.session_indicator {
+    width: 50px;
+    height: 100%;
+    border-right: 1px solid grey;
+    background-image: linear-gradient(
+        135deg,
+        #d00404 10%, transparent 10%,
+        transparent 20%, #d00404 20%,
+        #d00404 30%, transparent 30%,
+        transparent 40%, #d00404 40%,
+        #d00404 50%, transparent 50%,
+        transparent 60%, #d00404 60%,
+        #d00404 70%, transparent 70%,
+        transparent 80%, #d00404 80%,
+        #d00404 90%, transparent 90%,
+        transparent 100%, #d00404 100%
+    )
+}
+.last_session {
+    opacity: .6 !important;
+    background-image: linear-gradient(
+        135deg,
+        #d00404 10%, transparent 10%,
+        transparent 20%, #d00404 20%,
+        #d00404 30%, transparent 30%,
+        transparent 40%, #d00404 40%,
+        #d00404 50%, transparent 50%,
+        transparent 60%, #d00404 60%,
+        #d00404 70%, transparent 70%,
+        transparent 80%, #d00404 80%,
+        #d00404 90%, transparent 90%,
+        transparent 100%, #d00404 100%
+    ) !important;
+}

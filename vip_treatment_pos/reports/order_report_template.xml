@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_pos_receipt" inherit_id="beauty_pos.report_pos_receipt">
+            <xpath expr="//table[@class='receipt-total']" position="replace">
+                <table class='receipt-total' style="width: 100%">
+                    <tr>
+                        <td><b>Subtotal:</b></td>
+                        <td class="text-right">
+                            <b><t t-esc="sub_total" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <t t-if="sub_total-o.amount_total+o.amt_service_charge">
+                            <td><b>Discount:</b></td>
+                            <td class="text-right">
+                                <b>
+                                   <t t-esc="sub_total-o.amount_total+o.amt_service_charge"
+                                      t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
+                                </b>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr>
+                        <t t-if="o.amt_service_charge">
+                            <td><b>VIP Treatment:</b></td>
+                            <td class="text-right">
+                                <b><t t-esc="o.amt_service_charge" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr class="emph">
+                        <td><b>Total:</b></td>
+                        <td class="text-right">
+                            <b><t t-esc="o.amount_total" t-esc-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/></b>
+                        </td>
+                    </tr>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</odoo>

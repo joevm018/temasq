@@ -1,0 +1,23 @@
+{
+    "name": "A4 Receipt Florans",
+    "version": "1.0",
+    "author": "Al Kidhma Group",
+    "website": "",
+    "category": "Point of Sale",
+    "license": "LGPL-3",
+    "summary": "A4 Receipt print",
+    "description": """ """,
+    "depends": ['beauty_pos'],
+    "data": [
+        "views/report_pos_invoice_a4.xml",
+    ],
+    "demo": [],
+    "test": [],
+    "images": [],
+    'qweb': ['static/src/xml/*.xml'],
+    "css": [],
+    "sequence": 1,
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <report
+            id="consumption_record_report"
+            model="consumption.record"
+            string="Consumption Record"
+            report_type="qweb-pdf"
+            name="consumable_management.report_consumption_template"
+            file="consumable_management.report_consumption_template"
+            attachment_use="False"
+          />
+
+         <record id="consumption_record_report" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+        </record>
+    </data>
+</openerp>

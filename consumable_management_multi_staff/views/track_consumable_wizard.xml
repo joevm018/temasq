@@ -1,0 +1,16 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <data>
+        <record id="view_track_consumable_inherit" model="ir.ui.view">
+            <field name="name">track.consumable.wizard.inherit</field>
+            <field name="model">track.consumable.wizard</field>
+            <field name="inherit_id" ref="consumable_management.view_track_consumable"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='staff_id']" position="replace">
+                    <field name="staff_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

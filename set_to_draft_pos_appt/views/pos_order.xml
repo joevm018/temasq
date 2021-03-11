@@ -1,0 +1,19 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <data>
+        <record model = "ir.ui.view" id = "view_order_form_foc">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_check_in']" position="before">
+                    <button name="action_set_to_draft" string="Reset to Draft" class="oe_highlight" type="object"
+                            groups="beauty_pos.group_user_saloon_admin"
+                            confirm="Do you really want to set this order to Draft?"
+                            attrs="{'invisible':['|', ('is_reversed', '=', True),('state', 'not in', ['draft', 'paid', 'invoiced'])]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherited_google_view_general_configuration" model="ir.ui.view">
+        <field name="name">General Settings</field>
+        <field name="model">base.config.settings</field>
+        <field name="inherit_id" ref="base_setup.view_general_configuration" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='google']" position="before">
+                <group string="HR Email" name="HR Email">
+                    <div class="row mt16 o_settings_container" id="mail_to_hr">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="mail_to_hr"
+                             title="HR Email">
+                                <div class="row">
+                                    <label class="col-md-3 o_light_label" string="HR Email" for="mail_to_hr"/>
+                                    <field name="mail_to_hr" class="oe_inline"/>
+                                </div>
+                        </div>
+                    </div>
+                </group>
+                <group string="Organization Normal working hours per day" name="Organization Normal working hours per day">
+                    <div class="row mt16 o_settings_container" id="normal_working_hr">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="normal_working_hr"
+                             title="">
+                                <div class="row">
+                                    <label class="col-md-3 o_light_label" string="Working hours" for="normal_working_hr"/>
+                                    <field name="normal_working_hr" class="oe_inline"/>
+                                </div>
+                        </div>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

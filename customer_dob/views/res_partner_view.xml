@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model = "ir.ui.view" id = "view_partner_form_enhanced">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dob']" position="replace">
+                <label for="dob_month" string="Birth Month &amp; Date"/>
+                <div class="o_row">
+                    <field name="dob_month" nolabel="1"/>
+                    <field name="dob_day"/>
+                </div>
+                <field name="dob" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

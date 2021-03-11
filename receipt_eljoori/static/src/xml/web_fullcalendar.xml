@@ -1,0 +1,16 @@
+<template>
+
+    <t t-extend="CalendarView.sidebar.filters">
+        <t t-jquery="div.o_calendar_contacts" t-operation="before">
+            <b>Status</b>
+            <br/>
+            Checkedin<div class="status_calendar state_draft_checkin"></div><br/>
+            Booked<div class="status_calendar state_draft_not_checkin"></div><br/>
+            Cancelled<div class="status_calendar state_cancel"></div><br/>
+            Paid<div class="status_calendar state_paid"></div><br/>
+            Posted<div class="status_calendar state_done"></div><br/>
+            <!--Invoiced<div class="status_calendar state_invoiced"></div><br/>-->
+        </t>
+    </t>
+
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model = "ir.ui.view" id = "product_public_category_form_view">
+            <field name="name">product.public.category.form.inherit</field>
+            <field name="model">product.public.category</field>
+            <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sequence']" position="after">
+                        <field name="badge_expiry_date"/>
+                        <field name="is_hair_consultation"/>
+                        <field name="image_website" widget='image' class="oe_avatar"/>
+                    </xpath>
+            </field>
+        </record>
+
+
+</odoo>

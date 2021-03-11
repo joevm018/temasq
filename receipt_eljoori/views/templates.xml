@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <template id="state_color_assets" name="dc assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/receipt_eljoori/static/src/css/state_color.css"></link>
+      </xpath>
+    </template>
+  </data>
+</odoo>

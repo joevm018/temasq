@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_cron_appointment_customer_notification" model="ir.cron">
+        <field name="name">Appointment Reminder</field>
+        <field eval="True" name="active"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field eval="False" name="doall"/>
+        <field name="model">pos.order</field>
+        <field name="function">_appointment_reminder</field>
+        <field name="args">()</field>
+    </record>
+
+    <record id="pos_order_tree_inherited" model="ir.ui.view">
+        <field name="name">pos.order.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="POS Orders" decoration-info="state == 'draft'" decoration-danger="negative_entry == True"
+                      decoration-muted="state in ('done','cancel')" create="1">
+                    <field name="name"/>
+                    <field name="pos_reference"/>
+                    <field name="is_reversed" invisible="1"/>
+                    <field name="negative_entry" invisible="1"/>
+                    <field name="make_helpdesk_invisible" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="date_order"/>
+                    <field name="staff_ids" widget="many2many_tags"/>
+                    <field name="amount_total" sum="Amount total" widget="monetary"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                    <field name="session_id" invisible="1"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">pos.order.form</field>
+        <field name="model">pos.order</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <form string="Point of Sale Orders" create="0">
+                <header>
+                    <button name="%(point_of_sale.action_pos_payment)d" string="Payment" class="oe_highlight"
+                            type="action"
+                            attrs="{'invisible':['|','|',('total_balance','=',0),('state', '!=', 'draft'),('make_helpdesk_invisible','=',False)]}"
+                            context="{'pos_session_id' : session_id}"/>
+                    <button name="action_set_to_paid" string="Set to Paid" class="oe_highlight"
+                            type="object" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                            attrs="{'invisible':['|','|',('total_balance','!=',0),('state', '!=', 'draft'),('make_helpdesk_invisible','=',False)]}"/>
+                    <button name="%(action_change_orderdate_wizard)d" string="Change Order date"
+                            type="action" states="draft"/>
+                    <button name="action_cancel_appt" string="Cancel" type="object"
+                            attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                    <button name="action_check_in" string="Check In" class="oe_highlight" type="object"
+                            attrs="{'invisible':['|','|','|',('is_reversed', '=', True),('checkin','=',True),('state', 'not in', ['draft','paid','done','invoiced']),('make_helpdesk_invisible','=',False)]}"/>
+                    <!--<button name="action_pos_order_invoice" string="Invoice" type="object" states="paid"-->
+                    <!--attrs="{'readonly': [('partner_id','=',False)]}"/>-->
+                    <button name="reverse" string="Reverse Order" type="object"
+                            groups="beauty_pos.group_user_pos_reverse"
+                            confirm="Do you really want to reverse the order ?"
+                            attrs="{'invisible':['|',('is_reversed', '=', True), ('state','=','draft')]}"/>
+                    <button name="refund" string="Return Products" type="object"
+                            groups="beauty_pos.group_user_pos_reverse"
+                            attrs="{'invisible':['|',('is_reversed', '=', True), ('state','=','draft')]}"/>
+                    <button name="print_bill" string="Print Bill" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,paid,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="show_due" type="object"
+                                attrs="{'invisible': ['|',('partner_id', '=', False),('amount_due', '&lt;', '1')]}">
+                            <i class="fa fa-money" style="font-size:25px;color:red"></i>
+                            <span style="color:red;" widget="statinfo">
+                                <field name="amount_due"/>
+                            </span>
+                            <br/>
+                            <span style="color:red; margin-left:6px;"> Amount Due </span>
+                        </button>
+                        <!--                    <button name="action_view_invoice"-->
+                        <!--                        string="Invoice"-->
+                        <!--                        type="object"-->
+                        <!--                        class="oe_stat_button"-->
+                        <!--                        icon="fa-pencil-square-o"-->
+                        <!--                        attrs="{'invisible':[('state','!=','invoiced')]}">-->
+                        <!--                    </button>-->
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group name="order_fields">
+                        <group>
+                            <field name="partner_id" domain="[('customer', '=', True)]"
+                                   context="{'search_default_customer':1}"
+                                   attrs="{'readonly': ['|',('helpdesk_flag', '=', True),('state','=','invoiced')]}"/>
+                            <!--attrs="{'readonly': ['|',('helpdesk_flag', '=', True),('state','=','invoiced')], 'required': [('appointment', '=', True)]}"/>-->
+                            <field name="phone" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                            <field name="display_name" invisible="1"
+                                   attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                            <field name="session_id" options="{'no_create': True}"
+                                   attrs="{'readonly':[('helpdesk_flag', '=', True)],'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                            <field name="appointment" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                            <field name="checkin"/>
+                            <field name="helpdesk_flag" invisible="1"/>
+                            <field name="make_helpdesk_invisible" invisible="1"/>
+                            <field name="staff_ids" widget="many2many_tags" readonly="1"
+                                   attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                            <field name="fiscal_position_id" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"
+                                   options="{'no_create': True}" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date_order" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                            <field name="date_start"
+                                   attrs="{'readonly':['|',('helpdesk_flag', '=', True),('state', '!=', 'draft')]}"
+                                   invisible="1"/>
+                            <field name="ref_date_start" invisible="1"/>
+                            <field name="date_stop"
+                                   attrs="{'readonly':['|',('helpdesk_flag', '=', True),('state', '!=', 'draft')]}"
+                                   invisible="1"/>
+                            <field name="is_reversed"/>
+                            <field name="negative_entry" invisible="1"/>
+                        </group>
+                    </group>
+                    <group name="create_details">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" string="Modified by" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" string="Modified on" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Procedures &amp; Products">
+                            <field name="lines" colspan="4" nolabel="1"
+                                   context="{'default_procedure_start': ref_date_start,'lines':lines}"
+                                   attrs="{'readonly':[('helpdesk_flag', '=', True)]}">
+                                <tree string="Order lines" editable="bottom">
+                                    <field name="product_id" string="Procedure/Product" style="width: 4%%"
+                                           options="{'no_create': True, 'no_open':True}"
+                                           attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    <field name="staff_assigned_id"/>
+                                    <!--<field name="staff_assigned_id"  widget="many2many_tags"/>-->
+                                    <field name="make_helpdesk_invisible" invisible="1"/>
+                                    <field name="offer_string"/>
+                                    <field name="procedure_start"/>
+                                    <field name="procedure_stop"/>
+                                    <field name="procedure_start_val" invisible="1"/>
+                                    <field name="procedure_stop_val" invisible="1"/>
+                                    <field name="qty" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="price_unit" widget="monetary"
+                                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                                           attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    <field name="discount" widget="monetary"
+                                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
+                                           attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                                    <field name="price_subtotal_incl" widget="monetary"
+                                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                </tree>
+                                <form string="Order lines">
+                                    <group col="4">
+                                        <field name="product_id"/>
+                                        <field name="staff_assigned_id" string="Staff"/>
+                                        <field name="offer_string"/>
+                                        <field name="procedure_start"/>
+                                        <field name="procedure_stop"/>
+                                        <field name="qty"/>
+                                        <field name="make_helpdesk_invisible" invisible="1"/>
+                                        <field name="discount" widget="monetary"
+                                               attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                                        <field name="price_unit" widget="monetary"
+                                               attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                                        <field name="price_subtotal" invisible="1" widget="monetary"/>
+                                        <field name="price_subtotal_incl" invisible="1" widget="monetary"/>
+                                        <field name="tax_ids_after_fiscal_position" widget="many2many_tags"
+                                               attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                                        <field name="tax_ids" widget="many2many_tags" invisible="1"/>
+                                        <field name="notice"
+                                               attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                                    </group>
+                                </form>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="order_total"
+                                   attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}">
+                                <field name="amount_tax" widget="monetary"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="amount_total"/>
+                                    <button name="button_dummy"
+                                            states="draft" string="(update)" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                       widget="monetary"/>
+                                <field name="total_paid" widget="monetary"/>
+                                <field name="total_balance" class="oe_subtotal_footer_separator" widget="monetary"/>
+                            </group>
+                            <div class="oe_clear"/>
+                        </page>
+                        <page string="Payments" attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}">
+                            <field name="statement_ids" colspan="4" nolabel="1"
+                                   attrs="{'readonly':[('helpdesk_flag', '=', True)]}">
+                                <tree editable="bottom" string="Statement lines">
+                                    <field name="name" readonly="1"/>
+                                    <field name="is_advance"/>
+                                    <field name="date"/>
+                                    <field name="journal_id" readonly="1"/>
+                                    <field name="statement_id" readonly="1"/>
+                                    <field name="amount" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="extra" string="Extra Info">
+                            <group string="General Information">
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="location_id" widget="selection"
+                                       groups="stock.group_stock_multi_locations"/>
+                                <field name="user_id" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                                <field name="cashier_name" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                                <field name="pricelist_id" groups="product.group_sale_pricelist"/>
+                                <field name="picking_id" readonly="1"/>
+                                <field name="pos_reference"/>
+                            </group>
+                            <group string="Accounting Information"
+                                   attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}">
+                                <group>
+                                    <field name="sale_journal" domain="[('type','=','sale')]"/>
+                                    <field name="account_move" readonly="1"
+                                           attrs="{'invisible':[('state','&lt;&gt;','done')]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="note" attrs="{'readonly':[('helpdesk_flag', '=', True)]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_orders_calender" model="ir.ui.view">
+        <field name="name">pos.order</field>
+        <field name="model">pos.order</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Orders" color="checkin" attendee="staff_ids" avatar_model="hr.employee"
+                      date_start="date_start" date_stop="date_stop" mode="day" quick_add="False">
+                <field name="show_name"/>
+                <field name="staff_ids"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_orders_search" model="ir.ui.view">
+        <field name="name">pos.order.search.view</field>
+        <field name="model">pos.order</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <search string="Orders">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="phone"/>
+                <field name="staff_ids"/>
+                <field name="state"/>
+                <filter string="Appointments" domain="[('appointment','=',True)]" help="Customers came after booking"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_orders_tree" model="ir.ui.view">
+        <field name="name">pos.order.tree</field>
+        <field name="model">pos.order</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <tree string="POS Orders" decoration-info="state == 'draft'" decoration-danger="negative_entry == True"
+                  decoration-muted="state in ('done','cancel')" create="1">
+                <field name="name"/>
+                <field name="pos_reference" invisible="1"/>
+                <field name="is_reversed" invisible="1"/>
+                <field name="negative_entry" invisible="1"/>
+                <field name="partner_id"/>
+                <field name="date_order"/>
+                <field name="staff_ids" widget="many2many_tags"/>
+                <field name="amount_total" sum="Amount total" widget="monetary"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state"/>
+                <field name="session_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pos_pos_form" model="ir.actions.act_window">
+        <field name="name">Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_orders_search"/>
+        <field name="context">{'default_appointment':1,'default_checkin':0}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new order.
+            </p>
+            <p>
+                Use this menu to browse previous orders.
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_orders_calendar">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_orders_calender"/>
+        <field name="act_window_id" ref="action_pos_pos_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_orders_tree">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_orders_tree"/>
+        <field name="act_window_id" ref="action_pos_pos_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_orders_form">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_order_form"/>
+        <field name="act_window_id" ref="action_pos_pos_form"/>
+    </record>
+
+    <!--<menuitem id="menu_orders" parent="beauty_soft.sub_menu_master" action="action_pos_pos_form" sequence="1"/>-->
+
+
+    <record id="view_works_form" model="ir.ui.view">
+        <field name="name">pos.order.line.form</field>
+        <field name="model">pos.order.line</field>
+        <field name="priority">5</field>
+        <field name="arch" type="xml">
+            <form string="Work" create="0" edit="0" delete="0" duplicate="false">
+                <header>
+                    <button name="show_order_form" string="Show Order"
+                            groups="beauty_pos.group_scheduler_manager,beauty_pos.group_help_desk,base.group_system"
+                            class="oe_highlight" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_id" readonly="1"/>
+                            <field name="procedure_start" readonly="1"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="qty" invisible="1" readonly="1"/>
+                            <field name="checkin" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                            <field name="discount" invisible="1" widget="monetary" readonly="1"/>
+                            <field name="create_date" invisible="1"/>
+                            <field name="make_helpdesk_invisible" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="staff_assigned_id" readonly="1" string="Staff"/>
+                            <field name="procedure_stop" readonly="1"/>
+                            <field name="price_unit" widget="monetary" readonly="1"
+                                   attrs="{'invisible':[('make_helpdesk_invisible','=',False)]}"/>
+                            <field name="offer_string" invisible="1" readonly="1"/>
+                            <field name="order_id" required="1" invisible="1"
+                                   readonly="1" domain="[('state', '=', 'draft')]"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_works_tree" model="ir.ui.view">
+        <field name="name">pos.order.line.all.sales.tree</field>
+        <field name="model">pos.order.line</field>
+        <field name="priority">5</field>
+        <field name="arch" type="xml">
+            <tree string="Works" create="0" edit="0" delete="0" duplicate="false">
+                <field name="order_id"/>
+                <field name="create_date" invisible="1"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="qty"/>
+                <field name="staff_assigned_id"/>
+                <field name="price_unit" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_works_calender" model="ir.ui.view">
+        <field name="name">pos.order.line</field>
+        <field name="model">pos.order.line</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Orders" date_start="procedure_start" date_stop="procedure_stop" color="staff_assigned_id"
+                      avatar_model="hr.employee" mode="week" quick_add="False">
+                <!--<field name="name" invisible="1"/>-->
+                <field name="order_id"/>
+                <field name="partner_id"/>
+                <field name="staff_assigned_id"/>
+                <field name="product_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_works_timeline" model="ir.ui.view">
+        <field name="model">pos.order.line</field>
+        <field name="type">timeline</field>
+        <field name="arch" type="xml">
+            <timeline date_start="procedure_start"
+                      date_stop="procedure_stop"
+                      default_group_by="staff_assigned_id"
+                      event_open_popup="true"
+
+                      colors="#ec7063: checkin == false; #2ecb71: checkin == true;"/>
+
+            <!-- colors="#ec7063: user_id == false; #2ecb71: kanban_state == 'done';"-->
+
+
+        </field>
+    </record>
+
+    <record id="view_works_search" model="ir.ui.view">
+        <field name="name">pos.order.line.search.view</field>
+        <field name="model">pos.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Works">
+                <field name="staff_assigned_id"/>
+                <field name="order_id"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_works" model="ir.actions.act_window">
+        <field name="name">Works</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="view_mode">calendar,tree,form,timeline</field>-->
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_works_search"/>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new work.
+            </p>
+            <p>
+                Use this menu to browse previous works. To record new
+                works.
+            </p>
+        </field>
+    </record>
+
+    <!--<record model="ir.actions.act_window.view" id="action_works_timeline">-->
+    <!--<field name="sequence" eval="1"/>-->
+    <!--<field name="view_mode">timeline</field>-->
+    <!--<field name="view_id" ref="view_works_timeline"/>-->
+    <!--<field name="act_window_id" ref="action_works"/>-->
+    <!--</record>-->
+    <!--<record model="ir.actions.act_window.view" id="action_works_calendar">-->
+    <!--<field name="sequence" eval="1"/>-->
+    <!--<field name="view_mode">calendar</field>-->
+    <!--<field name="view_id" ref="view_works_calender"/>-->
+    <!--<field name="act_window_id" ref="action_works"/>-->
+    <!--</record>-->
+
+    <record model="ir.actions.act_window.view" id="action_works_tree">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_works_tree"/>
+        <field name="act_window_id" ref="action_works"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="action_works_form">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_works_form"/>
+        <field name="act_window_id" ref="action_works"/>
+    </record>
+
+    <menuitem id="beauty_soft.menu_beauty_soft" name="Appointment Scheduler" parent="" sequence="50"
+              action="action_works"
+              groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user,beauty_pos.group_help_desk"/>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_point_root">
+        <field name="groups_id"
+               eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('point_of_sale.group_pos_user'),ref('beauty_pos.group_help_desk')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_point_ofsale">
+        <field name="groups_id"
+               eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('point_of_sale.group_pos_user'),ref('beauty_pos.group_help_desk')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="beauty_soft.menu_items">
+        <field name="groups_id"
+               eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('point_of_sale.group_pos_user')])]"/>
+    </record>
+
+    <record model="ir.ui.view" id="point_of_sale.view_partner_property_form">
+        <field name="groups_id" eval="[(6,0,[ref('beauty_pos.group_help_desk'),ref('point_of_sale.group_pos_user')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_pos_dashboard">
+        <field name="groups_id"
+               eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('point_of_sale.group_pos_user')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_point_rep">
+        <field name="groups_id"
+               eval="[(6,0,[ref('point_of_sale.group_pos_manager'),ref('beauty_pos.group_help_desk')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_report_pos_order_all">
+        <field name="groups_id" eval="[(6,0,[ref('point_of_sale.group_pos_manager')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="point_of_sale.menu_report_order_details">
+        <field name="groups_id" eval="[(6,0,[ref('point_of_sale.group_pos_manager')])]"/>
+    </record>
+
+    <record model="ir.ui.view" id="product_template_form_view_hide">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//group[@name='group_standard_price']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('make_helpdesk_invisible','=',False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="make_helpdesk_invisible" invisible="1"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="view_move_picking_tree_inherit_gm" model="ir.ui.view">
+        <field name="name">stock.move.tree.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="is_return" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

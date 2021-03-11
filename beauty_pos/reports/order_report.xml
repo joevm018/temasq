@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="paperformat_pos_receipt" model="report.paperformat">
+            <field name="name">Paperformat Pest Control POS Receipt</field>
+            <field name="format">custom</field>
+            <field name="page_height">1000</field>
+            <field name="page_width">70</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">6</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">24</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <report
+            id="report_pos_receipt_record"
+            model="pos.order"
+            string="POS Receipt"
+            report_type="qweb-pdf"
+            name="beauty_pos.report_pos_receipt"
+            file="beauty_pos.report_pos_receipt"
+            attachment_use="False"
+            menu="False"
+            paperformat="paperformat_pos_receipt"
+          />
+    </data>
+
+            <template id="internal_layout">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                    </div>
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <!--<span t-esc="company.name"/>-->
+                        <img src='/web/binary/company_logo' style="height:170px"/>
+
+                    </div>
+                    <div class="col-xs-2 col-xs-offset-3 text-right">
+                        <ul class="list-inline">
+                            <li><span class="page"/></li>
+                            <li>/</li>
+                            <li><span class="topage"/></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-center">
+                        <i class="fa fa-map-marker"></i><span t-if="company.street" t-esc="company.street"/>,
+                        <span t-if="company.street2" t-esc="company.street2"/>, <span t-if="company.city" t-esc="company.city"/>
+                    </div>
+                    <div class="text-center">
+                        <i class="fa fa-phone"></i><span t-if="company.phone" t-esc="company.phone"/>
+                        <t t-if="company.email"><i class="fa fa-envelope"></i><span t-if="company.email" t-esc="company.email"/></t>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+            <t t-raw="0" />
+        </template>
+
+</openerp>

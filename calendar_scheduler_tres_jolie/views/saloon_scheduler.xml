@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="saloon_scheduler_view" model="ir.ui.view">
+            <field name="name">pos.order.line.search.view</field>
+            <field name="model">pos.order.line</field>
+            <field name="arch" type="xml">
+<!--
+                <scheduler
+                        string="Orders"
+                        date_start="procedure_start"
+                        date_stop="procedure_stop"
+                        color="staff_assigned_id"
+                        avatar_model="hr.employee"
+                        mode="week"
+                        quick_add="False">
+                    &lt;!&ndash;<field name="name" invisible="1"/>&ndash;&gt;
+                    <field name="order_id"/>
+                    &lt;!&ndash;<field name="partner_id" />&ndash;&gt;
+                    <field name="staff_assigned_id"/>
+                    <field name="product_id"/>
+                </scheduler>
+-->
+                <scheduler date_start="procedure_start"
+                           date_stop="procedure_stop"
+                           colors="#2eafdb: state == 'draft'; #51c16f: state == 'paid'; #08591d: state == 'done';"
+                           avatar_model="hr.employee"
+                           string="Services"
+                           mode="agendaDay">
+                    <field name="product_id"/>
+                    <field name="procedure_start"/>
+                    <field name="procedure_stop"/>
+                    <field name="staff_assigned_id"/>
+                    <field name="partner_id"/>
+                    <field name="statement_ids"/>
+                    <field name="order_id"/>
+                    <field name="state"/>
+                    <field name="checkin"/>
+                    <field name="state_appt"/>
+                </scheduler>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_works_scheduler">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">scheduler</field>
+        <field name="view_id" ref="saloon_scheduler_view"/>
+        <field name="act_window_id" ref="beauty_pos.action_works"/>
+    </record>
+
+        <record model="ir.actions.act_window" id="beauty_pos.action_works">
+            <field name="view_mode">scheduler,form,tree</field>
+            <!--<field name="view_mode">calendar,tree,form,timeline,scheduler</field>-->
+        </record>
+    </data>
+</odoo>

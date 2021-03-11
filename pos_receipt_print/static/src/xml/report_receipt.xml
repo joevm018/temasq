@@ -1,0 +1,103 @@
+<templates id="template" xml:space="preserve">
+    <t t-extend="PosTicket">
+        <t t-jquery=".receipt-change" t-operation="after">
+            <div style="text-align: center;font-weight: bold;color:black;" class="order-ref-date">
+                <br/>
+                Receipt no:<t t-esc="order.name"/>
+                <br/>
+                Date:<t t-esc="moment().format('DD-MM-YYYY LT')"/><br/>
+                <br/>
+                We loved having you at Organique<br/>
+                Refunds must be made within 7 days<br/>
+                More Details:www.organique.qa<br/>
+            </div>
+        </t>
+        <t t-jquery=".receipt-orderlines" t-operation="replace">
+            <table class='receipt-orderlines' style="font-weight: bold;color:black;">
+                <colgroup>
+                    <col width='30%' />
+                    <col width='16%' />
+                    <col width='10%' />
+                    <col width='22%' />
+                    <col width='22%' />
+                </colgroup>
+                <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <strong>Description</strong>
+                        </th>
+                        <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <strong>Staff</strong>
+                        </th>
+                        <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <strong>Qty</strong>
+                        </th>
+                        <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <strong>Amt</strong>
+                        </th>
+                        <th style="vertical-align: middle;text-align:center;background-color: black;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <strong>After Disc.</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <t t-set="sub_total" t-value="0" />
+                <t t-foreach="orderlines" t-as="orderline">
+                    <tr>
+                        <td style="text-align:left;" colspan="5">
+                            <t t-if="orderline.get_product().default_code">
+                                <t t-esc="orderline.get_product().display_name + '/' + orderline.get_product().default_code"/>
+                            </t>
+                            <t t-else="1">
+                                <t t-esc="orderline.get_product().display_name"/>
+                            </t>
+                            <t t-if="orderline.get_discount() > 0">
+                                <div class="pos-disc-font" style="font-weight: bold;color:black;">
+                                    With a <t t-esc="orderline.get_discount()"/>% discount
+                                </div>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-align:left;" colspan="2">
+                           <t t-esc="orderline.get_staff_string()"/>
+                        </td>
+                        <td class="pos-right-align">
+                            <t t-esc="orderline.get_quantity()"/>
+                        </td>
+                        <td class="pos-right-align">
+                            <t t-set="sub_total" t-value="sub_total+ (orderline.get_new_get_unit_price_qty())"/>
+                            <t t-esc="orderline.get_new_get_unit_price_qty_decimal_2()"/>
+                        </td>
+                        <td class="pos-right-align">
+                            <t t-esc="orderline.get_display_price_decimal_2()"/>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+        </t>
+        <t t-jquery=".header-main-company" t-operation="replace">
+            <div class="header-main-company">
+                <div style="text-align: center;font-weight: bold;color:black;" class="header-main-company">
+                    <div style="width: 100%;text-align: center;">
+                        <img src='/web/binary/company_logo' style="width:35%;align:center;vertical-align:center;"/>
+                    </div>
+                    <div style="width: 100%; text-align: center;">
+                        <t t-if="widget.pos.company.name">
+                            <strong><t t-esc="widget.pos.company.name"/></strong><br />
+                        </t>
+                        <t t-if="widget.pos.company.phone">
+                            Phone: <t t-esc="widget.pos.company.phone || ''"/><br />
+                        </t>
+                        <t t-if="order.get_client()">
+                            Customer: <t t-esc="order.get_client().name"/><br />
+                        </t>
+                        Cashier: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
+                        <t t-if="widget.pos.company.wifi_pswd">
+                            Wifi Password: <t t-esc="widget.pos.company.wifi_pswd || ''"/><br />
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

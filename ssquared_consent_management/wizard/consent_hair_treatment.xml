@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_hair_treatment_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Hair Treatment
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t1" string="Skin / Body"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t1"/>
+                        </td>
+                        <td>
+                            <label for="t1"/>
+                        </td>
+                        <td>
+                            <field name="t2"/>
+                        </td>
+                        <td>
+                            <label for="t2"/>
+                        </td>
+                        <td>
+                            <field name="t3"/>
+                        </td>
+                        <td>
+                            <label for="t3"/>
+                        </td>
+                        <td>
+                            <field name="t4"/>
+                        </td>
+                        <td>
+                            <label for="t4"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t5"/>
+                        </td>
+                        <td>
+                            <label for="t5"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t6" string="Scalp"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t6"/>
+                        </td>
+                        <td>
+                            <label for="t6"/>
+                        </td>
+                        <td>
+                            <field name="t7"/>
+                        </td>
+                        <td>
+                            <label for="t7"/>
+                        </td>
+                        <td>
+                            <field name="t8"/>
+                        </td>
+                        <td>
+                            <label for="t8"/>
+                        </td>
+                        <td>
+                            <field name="t9"/>
+                        </td>
+                        <td>
+                            <label for="t9"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t10" string="Hair"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t10"/>
+                        </td>
+                        <td>
+                            <label for="t10"/>
+                        </td>
+                        <td>
+                            <field name="t11"/>
+                        </td>
+                        <td>
+                            <label for="t11"/>
+                        </td>
+                        <td>
+                            <field name="t12"/>
+                        </td>
+                        <td>
+                            <label for="t12"/>
+                        </td>
+                        <td>
+                            <field name="t13"/>
+                        </td>
+                        <td>
+                            <label for="t13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t14"/>
+                        </td>
+                        <td>
+                            <label for="t14"/>
+                        </td>
+                        <td>
+                            <field name="t15"/>
+                        </td>
+                        <td>
+                            <label for="t15"/>
+                        </td>
+                        <td>
+                            <field name="t16"/>
+                        </td>
+                        <td>
+                            <label for="t16"/>
+                        </td>
+                        <td>
+                            <field name="t17"/>
+                        </td>
+                        <td>
+                            <label for="t17"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t18"/>
+                        </td>
+                        <td>
+                            <label for="t18"/>
+                        </td>
+                        <td>
+                            <field name="t19"/>
+                        </td>
+                        <td>
+                            <label for="t19"/>
+                        </td>
+                        <td>
+                            <field name="t20"/>
+                        </td>
+                        <td>
+                            <label for="t20"/>
+                        </td>
+                        <td>
+                            <field name="t21"/>
+                        </td>
+                        <td>
+                            <label for="t21"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t22"/>
+                        </td>
+                        <td>
+                            <label for="t22"/>
+                        </td>
+                        <td>
+                            <field name="t23"/>
+                        </td>
+                        <td>
+                            <label for="t23"/>
+                        </td>
+                        <td>
+                            <field name="t24"/>
+                        </td>
+                        <td>
+                            <label for="t24"/>
+                        </td>
+                        <td>
+                            <field name="t25"/>
+                        </td>
+                        <td>
+                            <label for="t25"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t26"/>
+                        </td>
+                        <td>
+                            <label for="t26"/>
+                        </td>
+                        <td>
+                            <field name="t27"/>
+                        </td>
+                        <td>
+                            <label for="t27"/>
+                        </td>
+                        <td>
+                            <field name="t28"/>
+                        </td>
+                        <td>
+                            <label for="t28"/>
+                        </td>
+                        <td>
+                            <field name="t29"/>
+                        </td>
+                        <td>
+                            <label for="t29"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="t30"/>
+                        </td>
+                        <td>
+                            <label for="t30"/>
+                        </td>
+                        <td>
+                            <field name="t31"/>
+                        </td>
+                        <td>
+                            <label for="t31"/>
+                        </td>
+                        <td>
+                            <field name="t32"/>
+                        </td>
+                        <td>
+                            <label for="t32"/>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t38"/>
+                </h2>
+                <field name="t38" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="t39" attrs="{'invisible':[('t38', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t44"/>
+                </h2>
+                <field name="t44" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="t45" attrs="{'invisible':[('t44', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t46"/>
+                </h2>
+                <field name="t46" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="t47" attrs="{'invisible':[('t46', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t48"/>
+                </h2>
+                <field name="t48" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="t49" attrs="{'invisible':[('t48', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t50"/>
+                </h2>
+                <field name="t50" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="t51" attrs="{'invisible':[('t50', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t52"/>
+                </h2>
+                <field name="t52" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t53"/>
+                </h2>
+                <field name="t53" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t54"/>
+                </h2>
+                <field name="t54" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t55"/>
+                </h2>
+                <field name="t55" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t56"/>
+                </h2>
+                <field name="t56" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t57"/>
+                </h2>
+                <field name="t57" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t58"/>
+                </h2>
+                <field name="t58" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="t59"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="t59" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="t60"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="t60" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="t61"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="t61" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                        <td>
+                            <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="t62"/>
+                            </h2>
+                        </td>
+                        <td style="padding-top: 15px;">
+                            <field name="t62" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <h4>
+                    استنادا الى المعلومات السابقة ووفقا للحالة الصحية يرجى تحديد العلاج المناسب :
+                    <br/>
+                    Based on the above information and according to the current hair condition please select the
+                    appropriate treatment
+                </h4>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="t63"/>
+                </h2>
+                <field name="t63" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+
+                    Contraindications after temporary treatment:
+                    <br/>
+                    Natural oils or mixes should not be applied.
+                    <br/>
+                    Not swimming in chlorinated water.
+                    <br/>
+                    Henna should not be applied
+                    <br/>
+                    Be sure to use a shampoo and conditioner that is free of parabens and sulfates.
+                    <br/>
+                    <br/>
+
+                    Special box for customers:
+                    <br/>
+                    I confirm that all the information I have obtained is correct.
+                    <br/>
+                    I confirm that the therapist gave me all the required information regarding the treatment.
+                    <br/>
+                    I confirm my commitment to all the advice given to me to get a better result.
+                    <br/>
+                    I confirm that I agree to all of the above.
+                    <br/>
+                    I confirm that I have given correct information regarding the history and condition of my hair.
+                    <br/>
+
+                </h4>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    موانع ما بعد العلاج المؤقت:
+                    <br/>
+                    لا يجب وضع الزيوت أو الخلطات الطبيعية.
+                    <br/>
+                    عدم السباحة في المياه المملوءة بالكلور.
+                    لا يجب وضع الحنة
+                    <br/>
+                    يجب الحرص على استخدام شامبو وبلسم خالي من البرابين والسولفات .
+                    <br/>
+                    <br/>
+
+                    خانة خاصة بالزبائن :
+                    <br/>
+                    أؤكد أن جميع المعلومات التي حصلت عليها صحيحة.
+                    <br/>
+                    أؤكد أن المعالج قد أعطاني كل المعلومات المطلوبة فيما يتعلق بالعلاج.
+                    <br/>
+                    أؤكد التزامي بجميع النصائح التي أعطيت لي للحصول على نتيجة أفضل.
+                    <br/>
+                    أؤكد على موافقتي على كل ما سبق.
+                    <br/>
+                    أؤكد بأني قد أعطيت المعلومات الصحيحة المتعلقة بتاريخ ووضع شعري.
+                    <br/>
+
+                </h4>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="t70"/>
+                        </td>
+                        <td>
+                            <field name="t70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="t71"/>
+                        </td>
+                        <td>
+                            <field name="t71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_hair_treatment" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_hair_treatment_wizard"/>
+        <field name="context">{'default_type':'hair_treatment'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_hair_treatment" name="HAIR TREATMENT" action="action_consent_hair_treatment"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

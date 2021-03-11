@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_pos_invoice_new_extended">
+            <field name="name">pos.order.invoice.extend</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//field[@name='discount']" position="after">-->
+                    <!--<field name="discount_fixed" groups="sale.group_discount_per_so_line"/>-->
+                <!--</xpath>-->
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                    <field name="discount_total" attrs="{'invisible':[('discount_total','=',0.00)]}" readonly="1"/>
+                    <field name="discount_percent" attrs="{'invisible':[('discount_percent','=',0.00)]}" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="consignment_action" model="ir.actions.act_window">
+        <field name="name">Consignment Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_consignment': True}</field>
+        <field name="domain">[('consignment', '=', True)]</field>
+        <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a quotation that will be converted into a purchase order.
+            </p>
+            <p>
+                Use this menu to search within your purchase orders by
+                references, vendor, products, etc. For each purchase order,
+                you can track the related discussion with the vendor, control
+                the products received and control the vendor bills.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="consignment_action" id="menu_consignment_action" parent="purchase.menu_procurement_management" sequence="7"/>
+</odoo>

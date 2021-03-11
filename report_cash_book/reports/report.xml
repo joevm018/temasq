@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="id_cash_book_report"
+            string="Cash Book Report"
+            model="cash.book.report"
+            report_type="qweb-pdf"
+            file="report_cash_book.cash_book_report_pdf"
+            name="report_cash_book.cash_book_report_pdf"
+            menu="False"
+            />
+    </data>
+</odoo>

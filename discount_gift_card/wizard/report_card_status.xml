@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_card_details_wizard" model="ir.ui.view">
+            <field name="name">card.status.wizard.form</field>
+            <field name="model">card.status.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Card Details Report">
+                    <group>
+                        <group>
+                            <field name="card_type"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="action_report_card_details" model="ir.actions.act_window">
+        <field name="name">Card Details Report</field>
+        <field name="res_model">card.status.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_report_card_details" name="Card Details Report" action="action_report_card_details"
+                  parent="point_of_sale.menu_point_rep" sequence="9" groups="point_of_sale.group_pos_manager"/>
+
+</odoo>

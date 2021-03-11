@@ -1,0 +1,70 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="view_res_company_enhanced_view">
+          <field name="name">res.company.inherit</field>
+          <field name="model">res.company</field>
+          <field name="inherit_id" ref="base.view_company_form" />
+          <field name="arch" type="xml">
+               <xpath expr="//field[@name = 'phone']" position="after">
+                  <field name="wifi_pswd"/>
+               </xpath>
+          </field>
+      </record>
+
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="beauty_soft.list">
+      <field name="name">beauty_soft list</field>
+      <field name="model">beauty_soft.beauty_soft</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="beauty_soft.action_window">
+      <field name="name">beauty_soft window</field>
+      <field name="res_model">beauty_soft.beauty_soft</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="beauty_soft.action_server">
+      <field name="name">beauty_soft server</field>
+      <field name="model_id" ref="model_beauty_soft_beauty_soft"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="beauty_soft" id="beauty_soft.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="beauty_soft.menu_1" parent="beauty_soft.menu_root"/>
+    <menuitem name="Menu 2" id="beauty_soft.menu_2" parent="beauty_soft.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="beauty_soft.menu_1_list" parent="beauty_soft.menu_1"
+              action="beauty_soft.action_window"/>
+    <menuitem name="Server to list" id="beauty_soft" parent="beauty_soft.menu_2"
+              action="beauty_soft.action_server"/>
+    -->
+  </data>
+</odoo>

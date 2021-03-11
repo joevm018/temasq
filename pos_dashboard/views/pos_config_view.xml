@@ -1,0 +1,148 @@
+<odoo>
+  <data>
+    <record id="view_pos_config_kanban_inherit" model="ir.ui.view">
+        <field name="name">pos.config.kanban.view.inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="before">
+                <field name="pos_session_user_image"/>
+                <field name="user_id"/>
+                <field name="today_amount"/>
+                <field name="cash_amount"/>
+                <field name="bank_amount"/>
+                <field name="emp_of_month"/>
+                <field name="emp_name_of_month"/>
+            </field>
+            <xpath expr="//t[@t-name='kanban-box']/div" position="replace"/>
+            <xpath expr="//t[@t-name='kanban-box']" position="inside">
+                <!-- User Details -->
+                <div style="background: #131433; border: #131433; max-width: 28% !important; max-height: 385px;">
+                    <center style="margin-top: 60px;">
+                        <img t-if="!record.current_session_id.raw_value" class="oe_kanban_avatar" src="/pos_dashboard/static/src/img/user_icon.png" width="120" height="120" style="border-radius: 50%;"/>
+                        <img t-if="record.current_session_id.raw_value" class="oe_kanban_avatar" t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" width="120" height="120" style="border-radius: 50%;"/>
+                        <span t-if="record.current_session_id.raw_value"><h2><t t-esc="record.pos_session_username.raw_value"/></h2></span>
+                    </center>
+                    <div class="container o_kanban_card_content o_visible" style="margin-top: 30px;">
+                        <div class="row text-center">
+                            <button t-if="record.current_session_state.raw_value === 'opened'" class="btn btn-primary" name="open_ui" type="object">Resume</button>
+
+                            <button t-if="record.current_session_state.raw_value === 'opening_control'" class="btn btn-primary" name="open_existing_session_cb" type="object">Open Session</button>
+
+                            <button t-if="record.current_session_state.raw_value === 'opened'" class="btn btn-default" name="open_existing_session_cb_close" type="object">Close</button>
+
+                            <button t-if="record.current_session_state.raw_value === 'closing_control'" class="btn btn-default" name="open_existing_session_cb" type="object">Close</button>
+
+                            <button t-if="!record.current_session_id.raw_value" class="btn btn-primary" name="open_session_cb" type="object">New Session</button>
+                        </div>
+                        <div class="row text-center">
+                            <div t-if="record.last_session_closing_date.value" class="row">
+                                <div class="col-xs-3">
+                                    <span>Last Closing Date</span>
+                                </div>
+                                <div class="col-xs-3 text-left">
+                                    <span><b><t t-esc="record.last_session_closing_date.value"/></b></span>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <span>Cash Balance</span>
+                                </div>
+                                <div class="col-xs-3">
+                                    <span><b><field name="last_session_closing_cash" widget="monetary"/></b></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Total Sales and Client Details  -->
+                <span class="grid-container">
+                    <div class="item5 ">
+                        <a name="%(action_pos_order_today_filter)d" type="action">
+                            <i class="fa fa-usd fa_icn2" aria-hidden="true"></i>
+                            <h1>
+                                <span class="main-span">Today's Total</span>
+                                <div class="main-price-span">
+                                    <field name="today_amount" widget="monetary"/>
+                                </div>
+                            </h1>
+                        </a>
+                    </div>
+                    <div class="">
+                        <a name="%(action_pos_order_cash_filter)d" type="action">
+                            <i class="fa fa-money fa_icn" aria-hidden="true"></i>
+                            <h4>
+                                <span class="products-span">Cash</span>
+                                <br />
+                                <div class="price-span1">
+                                    <field name="cash_amount" widget="monetary"/>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="">
+                        <a name="%(action_pos_order_bank_filter)d" type="action">
+                            <i class="fa fa-credit-card fa_icn" aria-hidden="true"></i>
+                            <h4>
+                                <span class="products-span">Card</span>
+                                <br />
+                                <span class="price-span1">
+                                    <field name="bank_amount" widget="monetary"/>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="">
+                        <a name="%(base.action_partner_customer_form)d" type="action">
+                            <i class="fa fa-users fa_icn" aria-hidden="true"></i>
+                            <h4>
+                                <span class="products-span">Clients</span>
+                                <br />
+                                <span class="client-span">
+                                    <field name="clients"/>
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="retail-service">
+                        <a>
+                            <i class="fa fa-shopping-bag fa_icn" aria-hidden="true"></i>
+                            <span class="products-span" style="margin-top: 23px;">Service Income</span>
+                            <br />
+                            <span class="price-span2">
+                                <field name="service_amount" widget="monetary"/>
+                            </span>
+                        </a>
+                    </div>  
+                    <div class="retail-service">
+                        <a>
+                            <i class="fa fa-scissors fa_icn" aria-hidden="true"></i>
+                            <span class="products-span" style="margin-top: 23px;">Retail Income</span>
+                            <span class="price-span2">
+                                <field name="retail_amount" widget="monetary"/>
+                            </span>
+                        </a>
+                    </div>
+                </span>
+                <!-- Employee of the month -->
+                <div style="background: #131433; border: #131433; max-width: 28% !important; max-height: 385px;">
+                    <div style="background: aquamarine; height: 35px; width: 200px; color: white; border-bottom-right-radius: 15px; border-top-left-radius: 6px; text-align:center; line-height: 35px; font-weight: 700;"><span>EMPLOYEE OF THE MONTH</span></div>
+                    <center style="margin-top: 20px; margin-bottom: 20px;">
+                        <img t-if="!record.emp_of_month.raw_value" class="oe_kanban_avatar" src="/pos_dashboard/static/src/img/user_icon.png" width="150" height="150" style="border-radius: 50%;"/>
+                        <img t-if="record.emp_of_month.raw_value" class="oe_kanban_avatar" t-att-src="kanban_image('hr.employee', 'image_small', record.emp_of_month.raw_value)" width="150" height="150" style="border-radius: 50%;"/>
+                        <span t-if="record.emp_of_month.raw_value"><h2><t t-esc="record.emp_name_of_month.raw_value"/></h2></span>
+                    </center>
+                </div>
+
+                <!-- POS Pie Graph -->
+                <div class="text-center" style="background: #131433; border: #131433; min-width: 455px !important; max-height: 55px; margin-left: 17px;">
+                    <a name="%(action_pos_order_pie)d" type="action"><h3>Service Sales Summary</h3></a>
+                </div>
+                <!-- POS Line Graph -->
+                <div class="text-center" style="background: #131433; border: #131433; max-height: 55px; margin-left: 18px; margin-right: 55px;">
+                    <a name="%(action_pos_order_line)d" type="action"><h3>Monthly Sales Report</h3></a>
+                </div>
+                <!-- <div class="o_website_dashboard_content"/> -->
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend='ClientDetails'>
+        <t t-jquery='.client-details-left' t-operation='prepend'>
+            <div class='client-detail'>
+                <span class='label'>DOB Day</span>
+                <t t-if='partner.dob_day'>
+                    <span class='detail client-id'><t t-esc='partner.dob_day'/></span>
+                </t>
+                <t t-if='!partner.dob_day'>
+                    <span class='detail client-id empty'>N/A</span>
+                </t>
+            </div>
+        </t>
+        <t t-jquery='.client-details-right' t-operation='prepend'>
+            <div class='client-detail'>
+                <span class='label'>Month</span>
+                <t t-if='partner.dob_month'>
+                    <span class='detail client-id'><t t-esc='partner.dob_month'/></span>
+                </t>
+                <t t-if='!partner.dob_month'>
+                    <span class='detail client-id empty'>N/A</span>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend='ClientDetailsEdit'>
+        <t t-jquery='.client-details-left' t-operation='prepend'>
+            <div class='client-detail'>
+                <span class='label'>DOB Day</span>
+                <select class="customer_new_dob_day" id="customer_dob_day" name='dob_day'>
+                    <option selected="1" value="">Select day</option>
+                    <t t-set="day_dob" t-value="31"/>
+                    <t t-foreach="day_dob" t-as="t">
+                       <option t-att-value="t+1" t-att-selected="partner.dob_day ? ((JSON.stringify(t+1) === partner.dob_day) ? true : undefined) : undefined">
+                            <span t-esc="t+1" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+        </t>
+        <t t-jquery='.client-details-right' t-operation='prepend'>
+            <div class='client-detail'>
+                <span class='label'>Month</span>
+                <select class="customer_new_dob_month" id="customer_dob_month" name="dob_month">
+                    <option selected="1" value="">Select birth month..</option>
+                    <option t-att-value="January" t-att-selected="partner.dob_month ? (('January' === partner.dob_month) ? true : undefined) : undefined">
+                        January
+                    </option>
+                    <option t-att-value="February" t-att-selected="partner.dob_month ? (('February' === partner.dob_month) ? true : undefined) : undefined">
+                        February
+                        <!--<t t-if="partner.dob_month == 'February'">-->
+                           <!--eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-->
+                        <!--</t>-->
+                    </option>
+                    <option t-att-value="March" t-att-selected="partner.dob_month ? (('March' === partner.dob_month) ? true : undefined) : undefined">
+                        March
+                    </option>
+                    <option t-att-value="April" t-att-selected="partner.dob_month ? (('April' === partner.dob_month) ? true : undefined) : undefined">
+                        April
+                    </option>
+                    <option t-att-value="May" t-att-selected="partner.dob_month ? (('May' === partner.dob_month) ? true : undefined) : undefined">
+                        May
+                    </option>
+                    <option t-att-value="June" t-att-selected="partner.dob_month ? (('June' === partner.dob_month) ? true : undefined) : undefined">
+                        June
+                    </option>
+                    <option t-att-value="July" t-att-selected="partner.dob_month ? (('July' === partner.dob_month) ? true : undefined) : undefined">
+                        July
+                    </option>
+                    <option t-att-value="August" t-att-selected="partner.dob_month ? (('August' === partner.dob_month) ? true : undefined) : undefined">
+                        August
+                    </option>
+                    <option t-att-value="September" t-att-selected="partner.dob_month ? (('September' === partner.dob_month) ? true : undefined) : undefined">
+                        September
+                    </option>
+                    <option t-att-value="October" t-att-selected="partner.dob_month ? (('October' === partner.dob_month) ? true : undefined) : undefined">
+                        October
+                    </option>
+                    <option t-att-value="November" t-att-selected="partner.dob_month ? (('November' === partner.dob_month) ? true : undefined) : undefined">
+                        November
+                    </option>
+                    <option t-att-value="December" t-att-selected="partner.dob_month ? (('December' === partner.dob_month) ? true : undefined) : undefined">
+                        December
+                    </option>
+                </select>
+            </div>
+        </t>
+    </t>
+
+</templates>

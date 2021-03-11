@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <template id="report_saledetails2" inherit_id="pos_staff.report_saledetails2">
+        <xpath expr="//table[2]//th[4]" position="after">
+            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">VIP Treatment Sale</th>
+        </xpath>
+        <xpath expr="//table[2]//td[4]" position="after">
+            <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['vip_value']" /></td>
+        </xpath>
+        <xpath expr="//table[1]//tbody/tr[1]" position="before">
+            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                <td style="border-top: 1px solid black;border-bottom: 1px solid black;"><strong><i>VIP Treatment Total</i></strong></td>
+                <td style="border-top: 1px solid black;border-bottom: 1px solid black;"></td>
+                <td style="border-top: 1px solid black;border-bottom: 1px solid black;" class="text-right"><strong><t t-esc='vip_total'/></strong></td>
+            </tr>
+        </xpath>
+    </template>
+</data>
+</openerp>

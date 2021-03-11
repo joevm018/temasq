@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="hr_report_attendance.report_attendance">
+    <t t-call="report.html_container">
+        <t t-call="report.external_layout">
+                <div class="page">
+                    <center><h3>Attendance Report</h3></center>
+                      <table width="90%">
+                          <colgroup>
+                              <col width='15%' />
+                              <col width='45%' />
+                              <col width='15%' />
+                              <col width='35%' />
+                          </colgroup>
+                          <tbody >
+                              <tr>
+                                  <td t-if="date_start" style="text-align: left;">
+                                      <strong>Start Date</strong>
+                                  </td>
+                                  <td t-if="date_start" style="text-align: left;">
+                                     : <span t-esc="date_start" t-options="{'widget': 'datetime'}"/>
+                                  </td>
+                                  <td style="text-align: left;">
+                                      <t >
+                                          <strong>Employee</strong>
+                                      </t>
+                                  </td>
+                                  <td t-if="employee_id" style="text-align: left;">
+                                       : <span t-esc="employee_id"/>
+                                  </td>
+                                  <td t-if="not employee_id" style="text-align: left;">
+                                       : All
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td t-if="date_stop" style="text-align: left;">
+                                      <strong>End Date</strong>
+                                  </td>
+                                  <td t-if="date_stop" style="text-align: left;">
+                                     : <span t-esc="date_stop" t-options="{'widget': 'datetime'}"/>
+                                  </td>
+                                  <td style="text-align: left;">
+                                      <strong>Report time</strong>
+                                  </td>
+                                  <td style="text-align: left;">
+                                      : <span t-esc="datetime.datetime.now()" t-options="{'widget': 'datetime'}"/>
+                                  </td>
+                              </tr>
+
+                          </tbody>
+                      </table>
+                    <br/>
+                    <table class="table table-striped">
+                        <colgroup>
+                            <col width='6%'/>
+                            <col width='42%'/>
+                            <col width='42%'/>
+                            <col width='10%'/>
+                        </colgroup>
+                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <tr>
+                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Check In</th>
+                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Check Out</th>
+                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Working Hours</th>
+                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Overtime Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody" >
+                            <t t-foreach="employee_list" t-as="employ">
+                                <t t-set="sum_duration" t-value="0"/>
+                                <t t-set="sum_ot" t-value="0"/>
+                                <t t-set="i" t-value="0"/>
+                                <t t-foreach="attendances['content']" t-as="attend">
+                                    <t t-if="attend['emp_id']==employ.id">
+                                        <t t-set="sum_duration" t-value="sum_duration+attend['work_hour']"/>
+                                        <t t-set="sum_ot" t-value="sum_ot+attend['ot_hour']"/>
+                                    </t>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="3"><span t-esc="employ.name"/></td>
+                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="sum_duration"/></td>
+                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="sum_ot"/></td>
+                                </tr>
+                                <t t-foreach="attendances['content']" t-as="attend">
+                                    <tr t-if="attend['emp_id']==employ.id" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc ="i+1"/>.</td>
+                                        <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="attend['check_in']" t-options="{'widget': 'datetime'}"/></td>
+                                        <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="attend['check_out']" t-options="{'widget': 'datetime'}"/></td>
+                                        <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="attend['work_hour']"/></td>
+                                        <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="attend['ot_hour']"/></td>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+
+    </t>
+</template>
+</data>
+</openerp>

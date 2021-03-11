@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_loyalty_pdf">
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <div class="text-center">
+                            <h2 style="color:#915e4c;">
+                                <b>LOYALTY REPORT</b>
+                            </h2>
+                            <center>
+                                <table name="master" width="90%">
+                                    <colgroup>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                    </colgroup>
+                                    <tbody class="invoice_tbody">
+                                        <tr>
+                                            <td style="color:#915e4c;">
+                                                <t t-if="start_date">
+                                                    <strong>Period From</strong>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="start_date">
+                                                    :
+                                                    <span t-esc="start_date" t-options='{"widget": "date"}'/>
+                                                </t>
+                                            </td>
+                                            <td style="color:#915e4c;">
+                                                <t t-if="end_date">
+                                                    <strong>Period To</strong>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="end_date">:
+                                                    <span t-esc="end_date" t-options='{"widget": "date"}'/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:#915e4c;">
+                                                <strong>Customer</strong>
+                                            </td>
+                                            <td>:
+                                                <t t-if="partner_id">
+                                                    <span t-esc="partner_id[1]"/>
+                                                </t>
+                                                <t t-else="">
+                                                    All
+                                                </t>
+                                            </td>
+                                            <td style="color:#915e4c;">
+                                                <strong>Report Date</strong>
+                                            </td>
+                                            <td>:
+                                                <span t-esc="datetime.datetime.now()"
+                                                      t-options='{"widget": "datetime"}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <table class="table table-striped" name="orders">
+                                    <thead style="border-top: 1px solid #915e4c;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <tr>
+                                            <th style="width:7%;color:white;background-color: #915e4c;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                                class="text-center">Sl No.
+                                            </th>
+                                            <th style="color:white;background-color: #915e4c;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                                class="text-center">Bill No.
+                                            </th>
+                                            <th style="color:white;background-color: #915e4c;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                                class="text-center">Date
+                                            </th>
+                                            <th style="color:white;background-color: #915e4c;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                                class="text-center">
+                                                Earned Points
+                                            </th>
+                                            <th style="color:white;background-color: #915e4c;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                                class="text-center">
+                                                Spent Points
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="treat_tbody"
+                                           style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+
+                                        <tr t-foreach="records" t-as="o"
+                                            style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <td colspan="3" class="text-left"
+                                                style="background-color: #edcfc5;border-top:1px solid #000000;">
+                                                <b>
+                                                    <span t-esc="o.name"/>
+                                                </b>
+                                                <b>/
+                                                    <span t-esc="o.phone"/>
+                                                </b>
+                                                <t t-set="i" t-value="1"/>
+                                            </td>
+                                            <td colspan="2" class="text-center"
+                                                style="background-color: #edcfc5;border-top:1px solid #000000;">
+                                                <b>Remaining Points :
+                                                    <span t-esc="o.loyalty_points"/>
+                                                </b>
+                                            </td>
+                                            <tr t-foreach="records[o]" t-as="order">
+                                                <td class="text-center" style="border-top:1px solid #000000;">
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td class="text-center" style="border-top:1px solid #000000;">
+                                                    <span t-esc="order.name"/>
+                                                </td>
+                                                <td class="text-center" style="border-top:1px solid #000000;">
+                                                    <span t-esc="order.date_order" t-options='{"widget": "date"}'/>
+                                                </td>
+                                                <td class="text-center" style="border-top:1px solid #000000;">
+                                                    <span t-esc="order.loyalty_won"/>
+                                                </td>
+                                                <td class="text-center" style="border-top:1px solid #000000;">
+                                                    <span t-esc="order.points_spent"/>
+                                                </td>
+
+                                            </tr>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+
+                            </center>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="report_loyalty"
+                string="Loyalty Report"
+                model="pos.order"
+                menu="False"
+                report_type="qweb-pdf"
+                file="loyalty_in_pos.report_loyalty_pdf"
+                name="loyalty_in_pos.report_loyalty_pdf"
+        />
+
+    </data>
+</openerp>

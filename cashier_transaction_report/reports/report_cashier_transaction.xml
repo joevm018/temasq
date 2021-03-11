@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_cashier_transaction">
+    <t t-call="report.html_container">
+    <t t-call="beauty_pos.internal_layout">
+            <div class="page">
+                <div class="text-center">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div >
+                        <h2><b>Cashier Transaction Report</b></h2>
+                    </div>
+                    <center>
+                         <table name="master" width="100%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                    <tr>
+                                        <td><strong>Period From</strong></td>
+                                        <td>: <span t-esc="date_from" t-options='{"widget": "date"}'/></td>
+                                        <td><strong>Report Date</strong></td>
+                                        <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Period To</strong></td>
+                                        <td>: <span t-esc="date_to" t-options='{"widget": "date"}'/></td>
+                                        <!--<td><strong>Customer</strong></td>-->
+                                        <!--<td>:-->
+                                            <!--<t t-if="partner_name"><span t-esc="partner_name" /></t>-->
+                                            <!--<t t-else="">All</t>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td><strong>Cashier</strong></td>-->
+                                        <!--<td>:-->
+                                            <!--<t t-if="user_name"><span t-esc="user_name" /></t>-->
+                                            <!--<t t-else="">All</t>-->
+                                        <!--</td>-->
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table width="100%" class="table table-striped">
+                            <thead >
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Sales Amount</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Disc</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">FOC</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Gift Card</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Credit Sales</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Cash Sales</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">ATM Sales</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Advance Cash</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Advance ATM</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Return</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Reverse</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Net Sales</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Product Cost</th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Service Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sales_amt_total" t-value="0"/>
+                                <t t-set="pay_later_amt_total" t-value="0"/>
+                                <t t-set="cash_amt_total" t-value="0"/>
+                                <t t-set="credit_amt_total" t-value="0"/>
+                                <t t-set="discount_amt_total" t-value="0"/>
+                                <t t-set="foc_amt_total" t-value="0"/>
+                                <t t-set="gift_card_amt_total" t-value="0"/>
+                                <t t-set="adv_cash_amt_total" t-value="0"/>
+                                <t t-set="adv_credit_amt_total" t-value="0"/>
+                                <t t-set="returned_amt_total" t-value="0"/>
+                                <t t-set="reversed_amt_total" t-value="0"/>
+                                <t t-set="net_sales_amt_total" t-value="0"/>
+                                <t t-set="product_cost_amt_total" t-value="0"/>
+                                <t t-set="service_cost_amt_total" t-value="0"/>
+                                <t t-foreach="day_wise_counts" t-as='day_wise'>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <t t-set="sales_amt_total" t-value="sales_amt_total+day_wise_value['sales_amt']"/>
+                                        <t t-set="pay_later_amt_total" t-value="pay_later_amt_total+day_wise_value['pay_later_amt']"/>
+                                        <t t-set="cash_amt_total" t-value="cash_amt_total+day_wise_value['cash_amt']"/>
+                                        <t t-set="credit_amt_total" t-value="credit_amt_total+day_wise_value['credit_amt']"/>
+                                        <t t-set="discount_amt_total" t-value="discount_amt_total+day_wise_value['discount_amt']"/>
+                                        <t t-set="foc_amt_total" t-value="foc_amt_total+day_wise_value['foc_amt']"/>
+                                        <t t-set="gift_card_amt_total" t-value="gift_card_amt_total+day_wise_value['gift_card_amt']"/>
+                                        <t t-set="adv_cash_amt_total" t-value="adv_cash_amt_total+day_wise_value['adv_cash_amt']"/>
+                                        <t t-set="adv_credit_amt_total" t-value="adv_credit_amt_total+day_wise_value['adv_credit_amt']"/>
+                                        <t t-set="returned_amt_total" t-value="returned_amt_total+day_wise_value['returned_amt']"/>
+                                        <t t-set="reversed_amt_total" t-value="reversed_amt_total+day_wise_value['reversed_amt']"/>
+                                        <t t-set="net_sales_amt_total" t-value="net_sales_amt_total+day_wise_value['net_sales_amt']"/>
+                                        <t t-set="product_cost_amt_total" t-value="product_cost_amt_total+day_wise_value['product_cost_amt']"/>
+                                        <t t-set="service_cost_amt_total" t-value="service_cost_amt_total+day_wise_value['service_cost_amt']"/>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="day_wise" t-options='{"widget": "date"}'/></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="day_wise_value['sales_amt']"/></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['discount_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['foc_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['gift_card_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['pay_later_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="day_wise_value['cash_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['credit_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['adv_cash_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['adv_credit_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['returned_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['reversed_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['net_sales_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['product_cost_amt']" /></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% day_wise_value['service_cost_amt']" /></td>
+                                    </tr>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b>Total </b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% sales_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% discount_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% foc_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% gift_card_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% pay_later_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% cash_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% credit_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% adv_cash_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% adv_credit_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% returned_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% reversed_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% net_sales_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% product_cost_amt_total" /></b></td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% service_cost_amt_total" /></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+            </div>
+    </t>
+    </t>
+</template>
+</data>
+</openerp>

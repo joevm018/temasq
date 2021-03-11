@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_details_wizard" model="ir.ui.view">
+        <field name="name">stock.balance.wizard.form</field>
+        <field name="model">stock.balance.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Stock Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="product_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="report_type" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_stock_balance" model="ir.actions.act_window">
+        <field name="name">Stock Report</field>
+        <field name="res_model">stock.balance.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'type_stock'}</field>
+    </record>
+
+    <menuitem id="menu_report_stock_balance" name="Stock Report." action="action_report_stock_balance"
+                  parent="stock.menu_warehouse_report" groups="stock.group_stock_manager" sequence="7"/>
+
+    <record id="view_cost_details_wizard" model="ir.ui.view">
+        <field name="name">stock.balance.wizard.form</field>
+        <field name="model">stock.balance.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Cost Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="product_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="report_type" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_cost_balance" model="ir.actions.act_window">
+        <field name="name">Cost Report</field>
+        <field name="res_model">stock.balance.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'type_cost'}</field>
+    </record>
+
+    <menuitem id="menu_report_cost_balance" name="Cost Report" action="action_report_cost_balance"
+                  parent="stock.menu_warehouse_report" groups="stock.group_stock_manager" sequence="7"/>
+
+
+</odoo>

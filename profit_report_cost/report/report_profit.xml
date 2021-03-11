@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="pos_expense.report_profit_pos ">
+            <t t-call="report.html_container">
+                <t t-call="beauty_pos.internal_layout">
+                    <div class="page">
+                        <div class="text-center">
+                            <h2>Profit Report</h2>
+                            <strong>
+                                <t t-esc="date_from"/>
+                                -
+                                <t t-esc="date_to"/>
+                                <br/>
+                            </strong>
+                        </div>
+
+                        <h3>Income</h3>
+                        <table width="100%" class="table table-striped">
+                            <thead>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Order Ref
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Order Date
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Cashier
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Customer
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Services
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Staff
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">Disc(%)
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">Subtotal
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">By Cash
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        width="7%" class="text-right">By Credit
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">Total Sales
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">Total Cost
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="credit_total" t-value="0"/>
+                                <t t-set="cash_total" t-value="0"/>
+                                <t t-set="credit_cash_total" t-value="0"/>
+                                <t t-foreach="info_income['content']" t-as='order'>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <t t-set="credit_total" t-value="credit_total+order['order_line'].cash_amt"/>
+                                        <t t-set="cash_total" t-value="cash_total+order['order_line'].credit_amt"/>
+                                        <t t-set="credit_cash_total"
+                                           t-value="credit_cash_total+order['order_line'].amount_total"/>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-center">
+                                            <t t-esc="order['order_line'].name"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-center">
+                                            <span t-esc="time.strftime('%d-%m-%Y %H:%M:%S', time.strptime(order['order_line'].date_order,'%Y-%m-%d %H:%M:%S'))"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-left">
+                                            <t t-esc="order['order_line'].user_id.name"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-left" colspan="5">
+                                            <t t-esc="order['order_line'].partner_id.name"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-right">
+                                            <t t-esc="'%.2f'% order['order_line'].cash_amt"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-right">
+                                            <t t-esc="'%.2f'% order['order_line'].credit_amt"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-right">
+                                            <t t-esc="'%.2f'% order['order_line'].amount_total"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-right">
+                                            <t t-esc="'%.2f'% order['cost']"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        t-foreach="order['order_line'].lines" t-as='order_l'>
+                                        <t t-if="not order['order_line'].negative_entry">
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                colspan="4"/>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                <t t-esc="order_l.product_id.name"/>
+                                            </td>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                <t t-esc="order_l.staff_assigned_id.name"/>
+                                            </td>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% order_l.discount"/>
+                                            </td>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% order_l.price_subtotal_incl"/>
+                                            </td>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                colspan="3"/>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% (order_l.product_id.standard_price * order_l.qty)"/>
+                                            </td>
+                                        </t>
+                                        <t t-if="order['order_line'].negative_entry">
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"
+                                                colspan="4"/>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;">
+                                                <t t-esc="order_l.product_id.name"/>
+                                            </td>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;">
+                                                <t t-esc="order_l.staff_assigned_id.name"/>
+                                            </td>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% order_l.discount"/>
+                                            </td>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% order_l.price_subtotal_incl"/>
+                                            </td>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"
+                                                colspan="3"/>
+                                            <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% (order_l.product_id.standard_price * order_l.qty)"/>
+                                            </td>
+                                        </t>
+
+                                    </tr>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center" colspan="8">
+                                        <b>Total</b>
+                                    </td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">
+                                        <b>
+                                            <t t-esc="'%.2f'% credit_total"/>
+                                        </b>
+                                    </td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">
+                                        <b>
+                                            <t t-esc="'%.2f'% cash_total"/>
+                                        </b>
+                                    </td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">
+                                        <b>
+                                            <t t-esc="'%.2f'% credit_cash_total"/>
+                                        </b>
+                                    </td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">
+                                        <b>
+                                            <t t-esc="'%.2f'% total_cost"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <br/>
+                        <h3>Expense</h3>
+                        <table width="100%" class="table table-striped">
+                            <thead>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Number
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Date
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Journal
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Vendor
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Description
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">Amount
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="expense_total" t-value="0"/>
+                                <t t-foreach="info_expense['content']" t-as='expense'>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <t t-set="expense_total"
+                                           t-value="expense_total+expense['expense_line'].amount"/>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-center">
+                                            <t t-esc="expense['expense_line'].number"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-center">
+                                            <span t-esc="time.strftime('%d-%m-%Y %H:%M:%S', time.strptime(expense['expense_line'].date,'%Y-%m-%d %H:%M:%S'))"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-center">
+                                            <t t-esc="expense['expense_line'].journal_id.name"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-left" colspan="2">
+                                            <t t-esc="expense['expense_line'].partner_name"/>
+                                        </td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                            class="text-right">
+                                            <t t-esc="'%.2f'% expense['expense_line'].amount"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        t-foreach="expense['expense_line'].line_ids" t-as='expense_l'>
+                                        <t>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                colspan="4"/>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                <t t-esc="expense_l.name"/>
+                                            </td>
+                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                                class="text-right">
+                                                <t t-esc="'%.2f'% expense_l.price_subtotal"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center" colspan="5">
+                                        <b>Total</b>
+                                    </td>
+                                    <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-right">
+                                        <b>
+                                            <t t-esc="'%.2f'% expense_total"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <br/>
+                        <h3>Profit</h3>
+                        <table width="100%" class="table table-striped">
+                            <thead>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Sales Income
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Sales Cost
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Expense
+                                    </th>
+                                    <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"
+                                        class="text-center">Profit
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                        class="text-center">
+                                        <strong>
+                                            <t t-esc="'%.2f'% total_income_total"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                        class="text-center">
+                                        <strong>
+                                            <t t-esc="'%.2f'% total_cost"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                        class="text-center">
+                                        <strong>
+                                            <t t-esc="'%.2f'% total_expense_total"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"
+                                        class="text-center">
+                                        <strong>
+                                            <t t-esc="'%.2f'% total_profit_total"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

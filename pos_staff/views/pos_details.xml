@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_saledetails2_pdf"
+        string="Detailed Sale DEtails"
+        model="pos.details.wizard"
+        report_type="qweb-pdf"
+        file="pos_staff.report_saledetails2"
+        name="pos_staff.report_saledetails2"
+    />
+    <report
+        id="report_saledetails3_pdf"
+        string="Detailed Monthly Sales"
+        model="pos.details.wizard"
+        report_type="qweb-pdf"
+        file="pos_staff.report_saledetails3"
+        name="pos_staff.report_saledetails3"
+    />
+
+    <record id="paperformat_new_a4_Appointment_Report_report" model="report.paperformat">
+            <field name="name">Appointment New Report Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">55</field>
+            <field name="margin_bottom">14</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">54</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+    <record id="report_saledetails2_pdf" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="paperformat_new_a4_Appointment_Report_report"/>
+    </record>
+
+
+
+    <record id="paperformat_Monthly_a4_sales_details" model="report.paperformat">
+        <field name="name">POS Monthly Sales Deatils Portrait</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">45</field>
+        <field name="margin_bottom">14</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">42</field>
+        <field name="dpi">90</field>
+    </record>
+
+     <record id="report_saledetails3_pdf" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="paperformat_Monthly_a4_sales_details"/>
+    </record>
+
+    <record id="view_pos_details_wizard2" model="ir.ui.view">
+            <field name="name">pos.details.wizard.form</field>
+            <field name="model">pos.details.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Detailed Sale Details">
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="staff_assigned_id"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                    </group>
+                    <!--<group>-->
+                        <!--&lt;!&ndash;<field name="pos_config_ids" colspan="4" nolabel="1" />&ndash;&gt;-->
+                        <!--<field name="pos_config_ids" colspan="4" nolabel="1">-->
+                            <!--<tree string="Session" delete="1">-->
+                                <!--<field name="name"/>-->
+                            <!--</tree>-->
+                        <!--</field>-->
+                    <!--</group>-->
+                    <footer>
+                        <button name="generate_report2" string="Print" type="object" class="btn-primary"/>
+                        <button name="email_report2" string="Email Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+    <record id="action_report_pos_details2" model="ir.actions.act_window">
+            <field name="name">Detailed Sale Details</field>
+            <field name="res_model">pos.details.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pos_details_wizard2"/>
+            <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_report_order_details2" name="Detailed Sale Details" action="action_report_pos_details2"
+              parent="point_of_sale.menu_point_rep" sequence="5" groups="point_of_sale.group_pos_manager"/>
+
+
+</odoo>

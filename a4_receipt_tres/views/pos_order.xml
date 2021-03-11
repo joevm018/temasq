@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_foc">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lines']/tree/field[@name='offer_string']" position="before">
+                    <field name="executed_staff_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

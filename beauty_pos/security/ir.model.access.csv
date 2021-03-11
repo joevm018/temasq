@@ -1,0 +1,29 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"base.access_ir_sequence_group_system","ir_sequence group_system","base.model_ir_sequence",,1,1,1,1
+mail.access_mail_tracking_value_system,mail.tracking.value.system,mail.model_mail_tracking_value,,1,1,1,1
+"module_scheduler_help_desk_group","scheduler.help.desk.group","model_pos_order_line",beauty_pos.group_help_desk,1,1,1,1
+"module_scheduler_manager_group",scheduler.manager.group","model_pos_order_line",beauty_pos.group_scheduler_manager,1,1,1,1
+access_pos_order,pos.order,point_of_sale.model_pos_order,beauty_pos.group_help_desk,1,1,1,1
+access_pos_order_line,pos.order.line,point_of_sale.model_pos_order_line,beauty_pos.group_help_desk,1,1,1,1
+access_pos_pack_operation_lot,pos.pack.operation.lot,point_of_sale.model_pos_pack_operation_lot,beauty_pos.group_help_desk,1,1,1,1
+access_stock_picking_pos_help_desk,stock.picking pos_help_desk,stock.model_stock_picking,,1,1,1,1
+access_stock_warehouse_pos_help_desk,stock.warehouse pos_help_desk,stock.model_stock_warehouse,beauty_pos.group_help_desk,1,0,0,0
+access_stock_move_pos_help_desk,stock.move pos_help_desk,stock.model_stock_move,beauty_pos.group_help_desk,1,1,1,1
+access_report_pos_order,report.pos.order,point_of_sale.model_report_pos_order,beauty_pos.group_help_desk,1,1,1,1
+access_account_journal_pos_help_desk,account.journal pos_help_desk,account.model_account_journal,beauty_pos.group_help_desk,1,0,0,0
+access_account_bank_statement,account.bank.statement,account.model_account_bank_statement,beauty_pos.group_help_desk,1,1,1,0
+access_account_bank_statement_line,account.bank.statement.line,account.model_account_bank_statement_line,beauty_pos.group_help_desk,1,1,1,0
+access_product_product,product.product,product.model_product_product,beauty_pos.group_help_desk,1,0,0,0
+access_product_template_pos_help_desk,product.template pos help_desk,product.model_product_template,beauty_pos.group_help_desk,1,0,0,0
+access_product_product_supplierinfo_help_desk,product.supplierinfo help_desk,product.model_product_supplierinfo,beauty_pos.group_help_desk,1,0,0,0
+access_product_product_packaging_help_desk,product.packaging help_desk,product.model_product_packaging,beauty_pos.group_help_desk,1,0,0,0
+access_pos_session_help_desk,pos.session help_desk,point_of_sale.model_pos_session,beauty_pos.group_help_desk,1,1,1,0
+access_product_category_pos_help_desk,pos.category help_desk,point_of_sale.model_pos_category,beauty_pos.group_help_desk,1,0,0,0
+access_barcode_nomenclature_pos_help_desk,barcode.nomenclature.pos.help_desk,barcodes.model_barcode_nomenclature,beauty_pos.group_help_desk,1,0,0,0
+access_barcode_rule_pos_help_desk,barcode.rule.pos.help_desk,barcodes.model_barcode_rule,beauty_pos.group_help_desk,1,0,0,0
+access_bank_statement_cashbox_help_desk,account.bank.statement.cashbox help_desk,account.model_account_bank_statement_cashbox,beauty_pos.group_help_desk,1,1,1,0
+access_account_cashbox_line_help_desk,account.cashbox.line help_desk,account.model_account_cashbox_line,beauty_pos.group_help_desk,1,1,1,0
+access_pos_config_help_desk,pos.config help_desk,point_of_sale.model_pos_config,beauty_pos.group_help_desk,1,1,0,0
+access_hr_employee_resource_help_desk,hr_employee_resource help_desk,resource.model_resource_resource,beauty_pos.group_help_desk,1,1,1,1
+access_account_invoice_help_desk,account_invoice help_desk,account.model_account_invoice,beauty_pos.group_help_desk,1,1,1,1
+access_account_invoice_all,account_invoice cashier,account.model_account_invoice,,1,1,1,1

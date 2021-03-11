@@ -1,0 +1,36 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+        <record id="view_combo_report_wizard" model="ir.ui.view">
+            <field name="name">combo.report.wizard.form</field>
+            <field name="model">combo.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Combo Packs Report ">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="product_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                        <button name="email_report" string="Email Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="action_combo_report" model="ir.actions.act_window">
+        <field name="name">Combo Packs Report</field>
+        <field name="res_model">combo.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="combo_report_menu" name="Combo Packs Report" action="action_combo_report"
+                  groups="point_of_sale.group_pos_manager" parent="point_of_sale.menu_point_rep" sequence="6"/>
+
+</odoo>

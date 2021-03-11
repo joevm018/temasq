@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_scrap_form_view_inherit">
+        <field name="name">stock.scrap.form.inherit</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="with_expiry" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                <attribute name="attrs">{'required': [('with_expiry', '=', True)], 'invisible': [('with_expiry', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_expected']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', '=', 'draft')],'readonly': [('state', '=', 'done')]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <menuitem
+            id="stock.menu_stock_scrap"
+            name="Scrap"
+            action="stock.action_stock_scrap"
+            parent="product_expiry_alert.menu_beautysoft_inventory"
+            sequence="75"/>
+
+</odoo>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="report_saledetails3">
+    <t t-call="report.html_container">
+    <t t-call="beauty_pos.internal_layout">
+    <div class="page">
+        <div class="text-center">
+            <h2>Monthly Sales Report</h2>
+
+            <strong><t t-esc="date_from"/> - <t t-esc="date_to"/></strong>
+        </div>
+        <center>
+            <table width="100%" class="table table-striped">
+                <thead>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" >Date</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Income</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="total" t-value="0"/>
+                    <tr t-foreach='income_list' t-as='income' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="income['date']" /></td>
+                        <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="income['amount']" /></td>
+                        <t t-set="total" t-value="total + income['amount']"/>
+                    </tr>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><strong>Total Income : </strong></td>
+                        <td  style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><strong><t t-esc='total'/></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <h3>Product Category Summary</h3>
+            <table  width="100%" class="table table-striped">
+                <thead>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Type</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total Income</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Consumable Product</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% Consumable_price_subtotal_incl" /> </td>
+                    </tr>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Retail Product</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% Retail_price_subtotal_incl" /></td>
+                    </tr>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center">Service Product</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% Service_price_subtotal_incl" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <h3>Staff Summary</h3>
+            <table  width="100%" class="table table-striped">
+                <thead>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Consumables Sale</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Retail Sale</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Service Sale</th>
+                        <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr t-foreach='staff_summary' t-as='staff_line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="staff_line['name']" /></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['consu_value']" /></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['product_value']" /></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['service_value']" /></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% staff_line['amount']" /></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+                <br/>
+                <h3>Payment Mode Summary</h3>
+                <table width="100%" class="table table-striped">
+                    <t t-set="payment_total" t-value="0"/>
+                    <thead>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr t-foreach='payments' t-as='payment' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <t t-set="payment_total" t-value="payment_total+payment['total']"/>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="payment['name']" /></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% payment['total']" /></td>
+                    </tr>
+                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><strong>Total</strong></td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><strong><t t-esc="'%.2f'% payment_total" /></strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--<br/>-->
+
+                <!--<h3>Taxes</h3>-->
+                <!--<table class="table table-bordered"  style="width: 70%">-->
+                    <!--<thead><tr>-->
+                        <!--<th style='text-align:left'>Name</th>-->
+                        <!--<th style='text-align:left'>Total</th>-->
+                    <!--</tr></thead>-->
+                    <!--<tbody>-->
+                    <!--<tr t-foreach='taxes' t-as='tax'>-->
+                        <!--<td><t t-esc="tax['name']" /></td>-->
+                        <!--<td><t t-esc="tax['total']" /></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+
+                <!--<br/>-->
+                <!--<br/>-->
+
+                <!--<strong>Total Income  : <t t-esc='total'/></strong>-->
+
+        </center>
+    </div>
+    </t>
+    </t>
+</template>
+</data>
+</openerp>

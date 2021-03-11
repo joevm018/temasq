@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_frontend" inherit_id="web.assets_common">
+          <xpath expr="." position="inside">
+              <!--<link rel="stylesheet" href="/discount_gift_card/static/src/css/discount_card.css" />-->
+              <script type="text/javascript" src="/discount_gift_card/static/src/js/discount_card.js"/>
+          </xpath>
+        </template>
+
+    </data>
+</openerp>

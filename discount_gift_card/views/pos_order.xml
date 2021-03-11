@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model = "ir.ui.view" id = "view_order_form_discount_gift_card">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="beauty_pos.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                         <page string="Purchased Cards" >
+                             <label for="purchased_gift_card_ids" string="Gift Cards"/>
+                             <field name="purchased_gift_card_ids" readonly="1">
+                                 <tree>
+                                     <field name="name"/>
+                                     <field name="discount_gift_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                     <field name="state"/>
+                                 </tree>
+                                 <form>
+                                     <group>
+                                         <group>
+                                             <field name="name"/>
+                                             <field name="discount_gift_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                         </group>
+                                         <group>
+                                             <field name="state"/>
+                                             <field name="remaining_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                         </group>
+
+                                     </group>
+                                 </form>
+                             </field>
+                             <label for="purchased_package_card_ids" string="Package Cards"/>
+                             <field name="purchased_package_card_ids" readonly="1">
+                                 <tree>
+                                     <field name="name"/>
+                                     <field name="package_combo_item" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                     <field name="package_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                     <field name="state"/>
+                                 </tree>
+                                 <form>
+                                     <group>
+                                         <group>
+                                             <field name="name"/>
+                                             <field name="package_combo_item" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                         </group>
+                                         <group>
+                                             <field name="state"/>
+                                             <field name="package_card_amount" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                                         </group>
+
+                                     </group>
+                                 </form>
+                             </field>
+                             <label for="purchased_student_card_ids" string="Student Cards"/>
+                             <field name="purchased_student_card_ids" readonly="1">
+                                 <tree>
+                                     <field name="name"/>
+                                     <field name="state"/>
+                                 </tree>
+                                 <form>
+                                     <group>
+                                         <group>
+                                             <field name="name"/>
+                                         </group>
+                                         <group>
+                                             <field name="state"/>
+                                         </group>
+
+                                     </group>
+                                 </form>
+                             </field>
+
+                         </page>
+                </xpath>
+                <xpath expr="//field[@name='lines']/tree/field[@name='product_id']" position="after">
+                    <field name="is_redeemed"/>
+                    <field name="is_student_card_redeemed" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='negative_entry']" position="after">
+                    <field name="redeemed_gift_id" attrs="{'invisible':[('redeemed_gift_id','=',False)]}"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" readonly="1"
+                           context="{'show_discount_gift_card':True}"/>
+                    <field name="redeemed_package_id" attrs="{'invisible':[('redeemed_package_id','=',False)]}"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" readonly="1"/>
+                    <field name="redeemed_student_id" attrs="{'invisible':[('redeemed_student_id','=',False)]}"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" readonly="1"/>
+                </xpath>
+                <xpath expr="//button[@name='action_check_in']" position="after">
+                    <button name="buy_discount_gift_card" string="Buy Cards" type="object"
+                            attrs="{'invisible':[('state','!=','draft')]}"
+                            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                    <button name="redeem_discount_gift_card" string="Redeem Cards" type="object"
+                            attrs="{'invisible':[('state','!=','draft')]}"
+                            groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model = "ir.ui.view" id = "view_pos_new_form_extended_form_discount_gift_card">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="discounts_in_pos.view_pos_new_form_extended"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amt_discount']" position="after">
+                    <field name="amt_before_redeem" attrs="{'invisible':[('redeemed_gift_id','=',False)]}"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" />
+                    <field name="redeemed_amount" attrs="{'invisible':[('redeemed_gift_id','=',False)]}"
+                           groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="id_expense_report"
+            string="Expense Report"
+            model="expense.account.report"
+            report_type="qweb-pdf"
+            file="report_account_expense.expense_report_pdf"
+            name="report_account_expense.expense_report_pdf"
+            menu="False"
+            />
+    </data>
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_deliveryslip_itemmove_inherit" inherit_id="stock.report_delivery_document">
+           <xpath expr="//div[@class='page']" position="replace">
+                        <!-- <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" /> -->
+                        <div class="page" >
+                             <div class="text-center">
+                                 <div >
+                                     <h1><b>ITEM MOVES</b></h1>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                                
+                                                <tr>
+                                                    <td><strong>Document Name</strong></td>
+                                                    <td>: <span t-esc="o.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Scheduled Date</strong></td>
+                                                    <td>:
+                                                        <span t-esc="o.min_date" t-options='{"widget": "date"}'/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Report Date</strong></td>
+                                                    <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/> </td>
+                                                </tr>
+                                        </tbody>
+
+
+                                    </table>
+                                    <table class="table table-striped" name="itemmoves">
+                                        <colgroup>
+                                            <col width='6%'/>
+                                            <col width='10%'/>
+                                            <col width='13%'/>
+                                            <col width='25%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='22%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Product</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">LOT</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Quantity</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                                <tr t-foreach="o.pack_operation_ids" t-as="pack_operation" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="pack_operation.product_id.name"/></td>
+                                                    <t>
+                                                        <td t-if="pack_operation.pack_lot_ids"  align="right" style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                            <table class="table table-condensed" t-if="pack_operation.pack_lot_ids">
+                                                                <tr t-foreach="pack_operation.pack_lot_ids" t-as="packlot">
+                                                                    <td>
+                                                                        <span t-field="packlot.lot_id"/>
+                                                                        <t t-if="not packlot.lot_id">
+                                                                            <span t-field="packlot.lot_name"/>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td t-if="not pack_operation.pack_lot_ids"/>
+                                                    </t>
+                                                    <td align="right" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="pack_operation.qty_done_uom_ordered"/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="o.staff_id.name"/></td>
+                                               </tr>
+                                            </tbody>
+                                    </table>
+                                 </center>
+                                 <br/>
+                                  <br/>
+                                 <!-- <div class="pull-right">
+                                    <strong>Storekeeper</strong>
+                                </div>
+                                 <div class="pull-left">
+                                    <strong>Staff Signature</strong>
+                                </div> -->
+                             </div>
+                         </div>
+                   
+            </xpath>
+        </template>
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_pos_config_form_extended">
+            <field name="name">pos.config.extend</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="discounts_in_pos.view_pos_config_form_extended"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='discount_account']" position="after">
+                    <field name="service_charge_account"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_pos_new_form_extended">
+                <field name="name">pos.order.extend</field>
+                <field name="model">pos.order</field>
+                <field name="inherit_id" ref="discounts_in_pos.view_pos_new_form_extended"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='amt_discount']" position="after">
+                        <field name="service_charge_percent" />
+                        <field name="amt_service_charge" />
+                    </xpath>
+                </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_swipe_card_wizard" model="ir.ui.view">
+            <field name="name">swipe.card</field>
+            <field name="model">swipe.card</field>
+            <field name="arch" type="xml">
+                <form string="Swipe Card">
+                    <group>
+                        <group>
+                            <field name="card_no" password="True"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

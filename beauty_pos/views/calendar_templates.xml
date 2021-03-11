@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="assets_backend_salon" name="web_calendar assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/beauty_pos/static/src/js/calendar.js"></script>
+            </xpath>
+        </template>
+</odoo>

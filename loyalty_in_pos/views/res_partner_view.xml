@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="barcode_view_partner_property_form" model="ir.ui.view">
+        <field name="name">partner.property.barcode.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="point_of_sale.view_partner_property_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//group[@name='point_of_sale']" position="replace">
+<!--                <label for="barcode" string="Barcode"/>-->
+<!--                <div class="oe_inline">-->
+<!--                    <b><field name="barcode" readonly="1"/></b>-->
+<!--                    <button name="generate_barcode"  type="object" icon="fa-cogs" string="Generate Barcode"/>-->
+<!--                </div>-->
+             </xpath>
+
+        </field>
+    </record>
+
+    <record id="partner_property_form_view" model="ir.ui.view">
+        <field name="name">partner.property.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="before">
+               <field name="barcode"/>
+               <field name="loyalty_points"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

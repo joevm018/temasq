@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <record id="pos_order_tree_inherited" model="ir.ui.view">
+        <field name="name">pos.order.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="beauty_pos.pos_order_tree_inherited"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="credit_amt" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+                <field name="cash_amt" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

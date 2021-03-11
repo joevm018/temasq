@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_consumption_template">
+            <t t-call="report.html_container">
+                <t t-call="beauty_pos.internal_layout">
+
+                         <div class="page" >
+                             <div class="text-center">
+                                 <div >
+                                     <h1><b>CONSUMPTION RECORD</b></h1>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="table table-striped" name="appointments">
+                                        <colgroup>
+                                            <col width='6%'/>
+                                            <col width='10%'/>
+                                            <col width='13%'/>
+                                            <col width='25%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='22%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Document Name</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Product</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Quantity</th>
+                                                <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                                <tr t-foreach="docs" t-as="doc" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="doc['name']"/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="doc['date']" t-options='{"widget": "date"}'/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="doc['product_id'].name"/></td>
+                                                    <td align="right" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="doc['new_quantity']"/></td>
+                                                    <td align="center" style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="doc['staff_id'].name"/></td>
+                                               </tr>
+                                            </tbody>
+                                    </table>
+                                 </center>
+                                 <br/>
+                                  <br/>
+                                 <div class="pull-right">
+                                    <strong>Storekeeper</strong>
+                                </div>
+                                 <div class="pull-left">
+                                    <strong>Staff Signature</strong>
+                                </div>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

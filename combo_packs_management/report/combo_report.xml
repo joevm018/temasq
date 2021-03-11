@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <template id="report_combo_packs">
+        <t t-call="report.html_container">
+            <t t-call="beauty_pos.internal_layout">
+                <div class="page">
+                    <center>
+                        <h2>Combo Packs Report</h2>
+                        <table name="master" width="90%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <tbody class="patient_invoice_tbody">
+                                <tr>
+                                    <td><strong>Period From</strong></td>
+                                    <td>: <span t-esc="date_start" t-options='{"widget": "datetime"}'/></td>
+                                    <td><strong>Period To</strong></td>
+                                    <td>: <span t-esc="date_stop" t-options='{"widget": "datetime"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Customer</strong></td>
+                                    <td>:
+                                        <t t-if="customer">
+                                            <span t-esc="customer[1]"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td><strong>Report Date</strong></td>
+                                    <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Combo Pack</strong></td>
+                                    <td>:
+                                        <t t-if="product_id">
+                                            <span t-esc="product_id[1]"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table width="100%" class="table">
+                            <colgroup>
+                                <col width='7%'/>
+                                <col width='13%'/>
+                                <col width='15%'/>
+                                <col width='20%'/>
+                                <col width='10%'/>
+                                <col width='15%'/>
+                                <col width='10%'/>
+                                <col width='10%'/>
+                            </colgroup>
+                            <thead >
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No.</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Ref</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Date</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Services</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Count</th>
+                                    <th style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="amount_sum" t-value="0"/>
+                                <t t-set="i" t-value="0"/>
+                                <t t-set="count" t-value="0"/>
+                                <t t-foreach="orders" t-as='order'>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="i+1"/><t t-set="i" t-value="i+1"/></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order['number']"/></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="order['date']" t-options="{'widget': 'datetime'}"/></td>
+                                        <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left" colspan="5"><t t-esc="order['customer']"/></td>
+                                        <t t-foreach="order['lines']" t-as='line'>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="background-color: #b7e7ff;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="5"><t t-esc="line['line'].product_id.name"/></td>
+                                                <td style="background-color: #b7e7ff;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-if="line['line'].staff_assigned_id" t-esc="line['line'].staff_assigned_id.name"/></td>
+                                                <td style="background-color: #b7e7ff;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="line['line'].qty"/><t t-set="count" t-value="count+line['line'].qty"/></td>
+                                                <td style="background-color: #b7e7ff;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="'%.2f'% line['line'].price_subtotal_incl"/><t t-set="amount_sum" t-value="amount_sum+line['line'].price_subtotal_incl"/></td>
+                                                <t t-foreach="line['sessions']" t-as='session'>
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <t t-if="session.state == 'draft'">
+                                                            <td style="color:blue;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right" colspan="3"><t t-esc="session.date" t-options='{"widget": "date"}'/></td>
+                                                            <td style="color:blue;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="2"><t t-esc="session.product_id.name"/></td>
+                                                            <td style="color:blue;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                                <t t-set="staffs" t-value="''"/>
+                                                                <t t-if="session.staff_ids" t-foreach="session.staff_ids" t-as='each'>
+                                                                    <t t-set="staffs" t-value="staffs + each.name + ', '"/>
+                                                                </t>
+                                                                <t t-esc="staffs"/></td>
+                                                            <td style="color:blue;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left" colspan="2">
+                                                                Draft
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="session.state == 'done'">
+                                                            <td style="color:green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right" colspan="3"><t t-esc="session.date" t-options='{"widget": "date"}'/></td>
+                                                            <td style="color:green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="2"><t t-esc="session.product_id.name"/></td>
+                                                            <td style="color:green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                                <t t-set="staffs" t-value="''"/>
+                                                                <t t-if="session.staff_ids" t-foreach="session.staff_ids" t-as='each'>
+                                                                    <t t-set="staffs" t-value="staffs + each.name + ', '"/>
+                                                                </t>
+                                                                <t t-esc="staffs"/></td>
+                                                            <td style="color:green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left" colspan="2">
+                                                                Done
+                                                            </td>
+                                                        </t>
+                                                        <t t-if="session.state == 'cancel'">
+                                                            <td style="color:red;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right" colspan="3"><t t-esc="session.date" t-options='{"widget": "date"}'/></td>
+                                                            <td style="color:red;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="2"><t t-esc="session.product_id.name"/></td>
+                                                            <td style="color:red;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                                                <t t-set="staffs" t-value="''"/>
+                                                                <t t-if="session.staff_ids" t-foreach="session.staff_ids" t-as='each'>
+                                                                    <t t-set="staffs" t-value="staffs + each.name + ', '"/>
+                                                                </t>
+                                                                <t t-esc="staffs"/></td>
+                                                            <td style="color:red;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left" colspan="2">
+                                                                Cancelled
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="6"><strong>Total</strong></td>
+                                    <td style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><strong><t t-esc="count"/></strong></td>
+                                    <td style="background-color: #949ea3;color:white;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><strong><t t-esc="'%.2f'% amount_sum"/></strong></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </center>
+                </div>
+            </t>
+        </t>
+    </template>
+</data>
+</openerp>

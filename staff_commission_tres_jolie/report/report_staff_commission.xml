@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="staff_commission_report_pdf">
+            <t t-call="report.html_container">
+                <t t-call="report.internal_layout">
+                    <div class="page">
+                        <style>
+                            .commission_row {
+                                border-top: 1px solid black;
+                                border-left: 1px solid black;
+                                border-right: 1px solid black;
+                                border-bottom:1px solid #000000;
+                            }
+                            .commission_row_th {
+                                color:white;
+                                background-color: #009688;
+                                border-top: 1px solid black;
+                                border-left: 1px solid black;
+                                border-right: 1px solid black;
+                                border-bottom:1px solid #000000;
+                                padding: 3px;
+                            }
+                            .commission_row_td {
+                                color: black;
+                                border-top: 1px solid black;
+                                border-left: 1px solid black;
+                                border-right: 1px solid black;
+                                border-bottom:1px solid #000000;
+                                padding: 3px;
+                            }
+                        </style>
+                        <div class="row">
+                            <div style="color:#009688;" class="text-center">
+                                <h2>
+                                    <b>Staff Commission Report</b>
+                                </h2>
+                            </div>
+                            <center>
+                                <table name="master" width="100%">
+                                    <colgroup>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                        <col width='25%'/>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th/>
+                                            <th/>
+                                            <th/>
+                                            <th/>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="patient_invoice_tbody">
+                                        <tr>
+                                            <td style="color:#009688;">
+                                                <strong>Period From</strong>
+                                            </td>
+                                            <td>:
+                                                <span t-esc="date_start" t-options='{"widget": "date"}'/>
+                                            </td>
+                                            <td style="color:#009688;">
+                                                <strong>Report Date</strong>
+                                            </td>
+                                            <td>:
+                                                <span t-esc="datetime.datetime.now()"
+                                                      t-options='{"widget": "datetime"}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:#009688;">
+                                                <strong>Period To</strong>
+                                            </td>
+                                            <td>:
+                                                <span t-esc="date_end" t-options='{"widget": "date"}'/>
+                                            </td>
+                                            <td style="color:#009688;">
+                                                <strong>Employee</strong>
+                                            </td>
+                                            <td>:
+                                                <t t-if="employee_id">
+                                                    <span t-esc="employee_id[1]"/>
+                                                </t>
+                                                <t t-else="">
+                                                    All
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr groups="base.group_multi_company">
+                                            <td style="color:#009688;">
+                                                <strong>Company</strong>
+                                            </td>
+                                            <td>:
+                                                <t t-if="company_id">
+                                                    <span t-esc="company_id[1]"/>
+                                                </t>
+                                            </td>
+                                            <td style="color:#009688;"/>
+                                            <td/>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                            <br/>
+                        </div>
+                        <table class="table table-striped">
+                            <thead class="commission_row">
+                                <tr>
+                                    <th rowspan="1" class="text-center commission_row_th">Employee
+                                    </th>
+                                    <th rowspan="1" class="text-center commission_row_th">Target
+                                    </th>
+                                    <th rowspan="1" class="text-center commission_row_th">Referral Revenue
+                                    </th>
+                                    <th rowspan="1" class="text-center commission_row_th">Served Revenue
+                                    </th>
+                                    <th rowspan="1" class="text-center commission_row_th">Retail Revenue
+                                    </th>
+                                    <th rowspan="1" class="text-center commission_row_th">Total Revenue
+                                    </th>
+                                    <th class="text-center commission_row_th" rowspan="1">Slab
+                                    </th>
+                                    <th class="text-center commission_row_th" rowspan="1">Percentage %
+                                    </th>
+                                    <th class="text-center commission_row_th" rowspan="1">Commission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="profit_sum" t-value="0"/>
+                                <t t-set="commission_sum" t-value="0"/>
+                                <t t-foreach="res" t-as="line">
+                                    <tr class="commission_row">
+                                        <t t-set="profit_sum" t-value="profit_sum+line['total_revenue']"/>
+                                        <t t-set="commission_sum" t-value="commission_sum+line['commission']"/>
+                                        <td class="text-center commission_row_td">
+                                            <t t-esc="line['name']"/>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['target']"/>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['referral_revenue']"/>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['service_revenue']"/>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['retail_revenue']"/>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['total_revenue']"/>
+                                        </td>
+
+                                        <td class="text-center commission_row_td">
+                                            <t t-if="line['achieved_to']">
+                                                <t t-esc="line['achieved_from']"/>-<t t-esc="line['achieved_to']"/>
+                                            </t>
+                                            <t t-if="not line['achieved_to']">>
+                                                <t t-esc="line['achieved_from']"/>
+                                            </t>
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="line['profit_percent']"/> %
+                                        </td>
+                                        <td class="text-right commission_row_td">
+                                            <t t-esc="'%.2f'% line['commission']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr class="commission_row">
+                                    <td class="text-center commission_row_td">
+                                        <b>Total</b>
+                                    </td>
+                                    <td class="text-right commission_row_td" colspan="5">
+                                        <b>
+                                            <t t-esc="'%.2f'% profit_sum"/>
+                                        </b>
+                                    </td>
+                                    <td colspan="3"
+                                        class="text-right commission_row_td">
+                                        <b>
+                                            <t t-esc="'%.2f'% commission_sum"/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report id="staff_commission_report"
+                string="Staff Commission Report"
+                model="staff.commission.wizard"
+                report_type="qweb-pdf"
+                file="staff_commission_tres_jolie.staff_commission_report_pdf"
+                name="staff_commission_tres_jolie.staff_commission_report_pdf"/>
+    </data>
+</odoo>

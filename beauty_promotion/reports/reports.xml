@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+    <record id="beauty_promotion_details_report" model="ir.actions.report.xml">
+        <field name="name">Promotion Summary Report</field>
+        <field name="model">promotion.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">beauty_promotion.report_promotion</field>
+        <field name="paperformat_id" ref="beauty_pos.paperformat_a4_Appointment_Report_report"/>
+    </record>
+
+    </data>
+</openerp>

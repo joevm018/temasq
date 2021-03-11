@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="id_income_report"
+            string="Income Report"
+            model="income.account.report"
+            report_type="qweb-pdf"
+            file="report_account_income.income_report_pdf"
+            name="report_account_income.income_report_pdf"
+            menu="False"
+            />
+    </data>
+</odoo>

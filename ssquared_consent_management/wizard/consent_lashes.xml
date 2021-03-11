@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_consent_lashes_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Eye Lashes
+                    </h1>
+                </div>
+                <field name="type" invisible="1"/>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="l1" string="CONDITION"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="l1"/>
+                        </td>
+                        <td>
+                            <label for="l1"/>
+                        </td>
+                        <td>
+                            <field name="l2"/>
+                        </td>
+                        <td>
+                            <label for="l2"/>
+                        </td>
+                        <td>
+                            <field name="l3"/>
+                        </td>
+                        <td>
+                            <label for="l3"/>
+                        </td>
+                        <td>
+                            <field name="l4"/>
+                        </td>
+                        <td>
+                            <label for="l4"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="l5"/>
+                        </td>
+                        <td>
+                            <label for="l5"/>
+                        </td>
+                        <td>
+                            <field name="l6"/>
+                        </td>
+                        <td>
+                            <label for="l6"/>
+                        </td>
+                        <td>
+                            <field name="l7"/>
+                        </td>
+                        <td>
+                            <label for="l7"/>
+                        </td>
+                        <td>
+                            <field name="l8"/>
+                        </td>
+                        <td>
+                            <label for="l8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="l9"/>
+                        </td>
+                        <td>
+                            <label for="l9"/>
+                        </td>
+                        <td>
+                            <field name="l10"/>
+                        </td>
+                        <td>
+                            <label for="l10"/>
+                        </td>
+                    </tr>
+                </table>
+                <field name="l11" context="{'default_consent_id': id}" nolabel="1" style="text-align: left;">
+                    <tree string="Lashes" editable="bottom" class="my_class">
+                        <field name="lash_date" style="width: 50% !important;"/>
+                        <field name="lash_length"/>
+                        <field name="adhesive"/>
+                        <field name="comments"/>
+                        <field name="consent_id" invisible="0"/>
+                    </tree>
+                </field>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                color: #FFF;background-color: #6EA522;">
+                    <label for="l12"/>
+                </h2>
+                <field name="l12" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;margin-bottom: 4px;
+                width: 94%;"/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">
+                    <center>
+                        <h3>Terms and conditions:الاحكام و الشروط:</h3>
+                    </center>
+                    <br/>
+                    <br/>
+                    I assure that I am over the age of eighteen.
+                    <br/>
+                    اؤكد اني تجاوزت سن الثامنة عشر.
+                    <br/>
+                    <br/>
+
+                    I agree that I will call if I have any concerns or complain within the first week of any
+                    appointment.
+                    <br/>
+                    اوافق على انني ساتصل اذا كان لدي اية مخاوف او شكوى خلال السبوع الاول من الموعد.
+                    <br/>
+                    <br/>
+
+                    I agree that I will tell my lash technician prior to the service if I have any eye diseases or
+                    allergies.
+                    <br/>
+                    اوافق انني ساخبر فني الرموش قبل الخدمة اذا كنت اعاني من امراض في العين او اي حساسية.
+                    <br/>
+                    <br/>
+
+                    I affirmatively confirm that I have no illness or health condition which might be aggravated or
+                    otherwise adversely affected by the service.
+                    <br/>
+                    اؤكد انه ليس لدي اي مرض او اية حالة صحية قد تتفاقم او تتاثر سلبا بالخدمة.
+                    <br/>
+                    <br/>
+
+                    I confirm that I have understood all the information that was explained to me and I have agreed to
+                    do the service at my full responsibility.
+                    <br/>
+                    اؤكد انني فهمت كل المعلومات التي احتاجها و التي تم شرحها لي من قبل الاخصائية, انني قد وافقت على
+                    القيام بالخدمة على كامل مسؤوليتي.
+                    <br/>
+                    <br/>
+
+                    I understood that I must give proper home care to maintain and prolong the life of my lash
+                    extension.
+                    I also understand that when proper home care is not given, the extensions will not look nice, and/or
+                    the lash extensions may fall out as result.
+                    <br/>
+                    لقد فهمت انه يجب الالتزام بالرعاية المنزلية المناسبة للحفاظ على اطالة العمر الافتراضي لوصلات الرموش
+                    كما انني قي فهمت انه عندما لا يتم تقديم الرعاية المنزلية المناسبة لن تبدو الرموش جميلة و قد تتساقط
+                    نتيجة لذلك.
+                    <br/>
+                    <br/>
+
+                    The salon will provide free maintenance if you lost the eyelashes within seven days of their
+                    installation. But if the period mentioned above has passed, any maintenance will have a free
+                    determined by the salon according to the price list.
+                    <br/>
+                    ان الصالون سيؤمن صيانة مجانية في حالة فقدان الرموش خلال سبعة ايام من تركيبها. اما بعد ذلك فان اي
+                    صيانة سيكون لها مقابل مادي يحدده الصالون حسب قائمة الاسعار.
+                    <br/>
+                    <br/>
+
+
+                </h4>
+
+
+                <br/>
+                <br/>
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="l70"/>
+                        </td>
+                        <td>
+                            <field name="l70" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="l71"/>
+                        </td>
+                        <td>
+                            <field name="l71" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_consent_lashes" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_lashes_wizard"/>
+        <field name="context">{'default_type':'lashes'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_lashes" name="LASHES" action="action_consent_lashes"
+              groups="ssquared_consent_management.group_consent_user" sequence="51"/>
+
+</odoo>

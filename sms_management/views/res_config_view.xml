@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_sale_config_settings_form_sms" model="ir.ui.view">
+            <field name="name">sms.config.settings.form</field>
+            <field name="model">sms.config.settings</field>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link" special="cancel"/>
+                    </header>
+                    <group string="Configure SMS alert settings">
+                        <label for="appointment_alert"/>
+                        <div>
+                            <div>
+                                <field name="appointment_alert" style="width: 8%%"/>
+                                <label for="appointment_alert" string=" minutes"  style="width:20%%"/>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="action_sms_configuration" model="ir.actions.act_window">
+            <field name="name">Configure SMS</field>
+            <field name="res_model">sms.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+    <menuitem id="menu_sms_configuration" name="Configuration" parent="menu_sms_management" sequence="60"/>
+    <menuitem id="menu_sms_global_settings" name="Settings"
+            parent="menu_sms_configuration" sequence="3" action="action_sms_configuration"/>
+</odoo>

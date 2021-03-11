@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_pos_combo">
+        <field name="name">pos.order.combo</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="combo_packs_management.view_pos_combo"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='combo_sessions']" position="attributes">
+                <attribute name="string">Packages/Offers Sessions</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="combo_session_form">
+        <field name="name">combo.session</field>
+        <field name="model">combo.session</field>
+        <field name="inherit_id" ref="combo_packs_management.combo_session_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Packages/Offers Sessions</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_combo_session_search">
+        <field name="name">combo.session</field>
+        <field name="model">combo.session</field>
+        <field name="inherit_id" ref="combo_packs_management.view_combo_session_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="attributes">
+                <attribute name="string">Packages/Offers Sessions</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.menu" id="combo_packs_management.menu_combo_session">
+        <field name='name'>Packages/Offers Sessions</field>
+    </record>
+
+    <record id="combo_packs_management.action_combo_session" model="ir.actions.act_window">
+      <field name="name">Packages/Offers Sessions</field>
+    </record>
+
+    <record model="ir.ui.menu" id="combo_packs_management.menu_combo_packs">
+        <field name='name'>Packages/Offers</field>
+    </record>
+
+    <record id="combo_packs_management.action_combo_packs" model="ir.actions.act_window">
+      <field name="name">Packages/Offers</field>
+    </record>
+
+    <record model="ir.ui.menu" id="combo_packs_management.combo_report_menu">
+        <field name='name'>Packages/Offers Report</field>
+    </record>
+
+    <record id="combo_packs_management.action_combo_report" model="ir.actions.act_window">
+      <field name="name">Packages/Offers Report</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_combo_report_wizard">
+        <field name="name">combo.report.wizard</field>
+        <field name="model">combo.report.wizard</field>
+        <field name="inherit_id" ref="combo_packs_management.view_combo_report_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Packages/Offers Report</attribute>
+            </xpath>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="combo_pack_form">
+        <field name="name">product.template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="combo_packs_management.combo_pack_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sub_items']" position="attributes">
+                <attribute name="string">Packages/Offers Items</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <template id="report_combo_packs" inherit_id="combo_packs_management.report_combo_packs">
+        <xpath expr="//table[@name='master']/tbody/tr[3]/td" position="replace">
+            <td><strong>Packages/Offers</strong></td>
+        </xpath>
+        <xpath expr="//div[@class='page']/center/h2" position="replace">
+             <h2>Packages/Offers Report</h2>
+        </xpath>
+    </template>
+
+    <record id="combo_packs_management.combo_report" model="ir.actions.report.xml">
+        <field name="name">Packages/Offers Report</field>
+        <field name="model">report.partner.details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">combo_packs_management.report_combo_packs</field>
+    </record>
+
+
+
+
+</odoo>

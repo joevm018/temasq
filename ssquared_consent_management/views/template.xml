@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_assets_common_custom_fonts" name="qweb_fonts less backend assets"
+              inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/ssquared_consent_management/static/src/css/lashes.css"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="id_bank_book_report"
+            string="Bank Book Report"
+            model="bank.book.report"
+            report_type="qweb-pdf"
+            file="report_bank_book.bank_book_report_pdf"
+            name="report_bank_book.bank_book_report_pdf"
+            menu="False"
+            />
+    </data>
+</odoo>

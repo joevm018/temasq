@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_consent_facial_wizard" model="ir.ui.view">
+        <field name="name">consent.facial</field>
+        <field name="model">consent.facial</field>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <form string="Consultation" style="text-align: center;">
+                <div class="oe_title" style="margin: auto;border: 2px solid #7db500;width: 100%;
+                padding: 10px;margin-bottom: 30px;color: #FFF;background-color: #6EA522;float: center;">
+                    <h1>
+                        Facial Consulting
+                    </h1>
+                </div>
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                            <th style="width:5%;"></th>
+                            <th style="width:15%;"></th>
+                            <th style="width:25%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="border: 2px solid #7db500;font-size: 18px !important;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                                <label for="customer_id"/>
+                            </td>
+                            <td>
+                                <field name="customer_id" style="background-color: transparent;
+                                border: 2px solid #7db500;polor: black;margin-left: 3px;margin-right: 3px;
+                                font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                            <td/>
+                            <td style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;
+                            margin-bottom: 5px;color: #FFF;background-color: #6EA522;">
+                                <label for="update_date"/>
+                            </td>
+                            <td style="background-color: transparent;border: 2px solid #7db500;margin-left: 3px;
+                            margin-right: 3px;font-size: 16px;color: black;font-weight: bold;margin-bottom: 4px;">
+                                <field name="update_date" style="background-color: transparent;
+                                border: 2px solid #7db500;margin-left: 3px;margin-right: 3px;font-size: 16px;
+                                color: black;font-weight: bold;margin-bottom: 4px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <field name="type" invisible="1"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-top: 2px;margin-bottom: 5px;
+                color: #FFF;background-color: #6EA522;">
+                    <label for="f1"/>
+                </h2>
+                <field name="f1" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;margin-bottom: 4px;
+                width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f2"/>
+                </h2>
+                <field name="f2" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f3"/>
+                </h2>
+                <field name="f3" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f4"/>
+                </h2>
+                <field name="f4" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f5"/>
+                </h2>
+                <field name="f5" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f51" attrs="{'invisible':[('f5', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f6"/>
+                </h2>
+                <field name="f6" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f61" attrs="{'invisible':[('f6', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f7"/>
+                </h2>
+                <field name="f7" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f71" attrs="{'invisible':[('f7', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f8"/>
+                </h2>
+                <field name="f8" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <field name="f81" attrs="{'invisible':[('f8', '!=', 'yes')]}" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f9"/>
+                </h2>
+                <field name="f9" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f9" string="CONDITION"/>
+                </h2>
+                <table style="width:100%;text-align:left;color: #6EA522;font-weight: bold;">
+                    <tr>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                        <td style="width:1%;"></td>
+                        <td style="width:24%;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="f10"/>
+                        </td>
+                        <td>
+                            <label for="f10"/>
+                        </td>
+                        <td>
+                            <field name="f11"/>
+                        </td>
+                        <td>
+                            <label for="f11"/>
+                        </td>
+                        <td>
+                            <field name="f12"/>
+                        </td>
+                        <td>
+                            <label for="f12"/>
+                        </td>
+                        <td>
+                            <field name="f13"/>
+                        </td>
+                        <td>
+                            <label for="f13"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <field name="f14"/>
+                        </td>
+                        <td>
+                            <label for="f14"/>
+                        </td>
+                        <td>
+                            <field name="f15"/>
+                        </td>
+                        <td>
+                            <label for="f15"/>
+                        </td>
+                        <td>
+                            <field name="f16"/>
+                        </td>
+                        <td>
+                            <label for="f16"/>
+                        </td>
+                        <td>
+                            <field name="f17"/>
+                        </td>
+                        <td>
+                            <label for="f17"/>
+                        </td>
+                    </tr>
+                </table>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f18"/>
+                </h2>
+                <field name="f18" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f19"/>
+                </h2>
+                <field name="f19" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f20"/>
+                </h2>
+                <field name="f20" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f21"/>
+                </h2>
+                <field name="f21" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f22"/>
+                </h2>
+                <field name="f22" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f23"/>
+                </h2>
+                <field name="f23" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f24"/>
+                </h2>
+                <field name="f24" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="f34"/>
+                </h2>
+                <field name="f34" style="border: 2px solid #7db500;color: black;padding: 15px;margin-left: 3px;
+                    margin-right: 3px;height: 19px;font-size: 16px;color: #3a3535;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <h2 style="border: 2px solid #7db500;font-size: 18px;padding: 5px;margin-bottom: 2px;margin-bottom: 5px;
+                        color: #FFF;background-color: #6EA522;">
+                    <label for="survey"/>
+                </h2>
+                <field name="survey" widget="radio" options="{'horizontal': true}" style="color: #6EA522;font-weight: bold;
+                    margin-bottom: 4px;width: 94%;"/>
+                <br/>
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:left;">After treatment, please observe the
+                    following tips:
+                    <br/>
+                    <br/>
+                    - Make-up cannot be applied until 12 hours after the treatment.
+                    <br/>
+                    Exposure to laser after treatment is prohibited.
+                    <br/>
+                    - Hair removal with wax and sweetness is prohibited.
+                    <br/>
+                    Please adhere to the creams recommended for treatment.
+                    <br/>
+                    Please do not expose directly to the sun without a sunblock.
+                    <br/>
+                    Get adequate sleep.
+                    <br/>
+                    Drink enough water.
+                    <br/>
+                    Eat a balanced diet.
+                    <br/>
+                    Permanent cleaning of the skin.
+                    <br/>
+                    - Stay away from smoking.
+                    <br/>
+                    Exercising and doing daily facial and skin massages.
+                    <br/>
+                    Reducing diligence and psychological tension.
+                    <br/>
+                    Treating any hormonal changes with the specialist.
+                    <br/>
+                    Daily skin cleaning at home using powdered milk, toner and lotion.
+                    <br/>
+                    <br/>
+                    Special box for customers:
+                    <br/>
+                    <br/>
+                    * I confirm that all the information I got is correct.
+                    <br/>
+                    * I can confirm that the therapist has given me all the required information regarding the
+                    treatment.
+                    <br/>
+                    * I affirm my commitment to all the advice that was given to me to get a better result.
+                    <br/>
+                    * I agree to all of the above.
+                    <br/>
+                    * I guarantee that I have given all the correct information regarding my skin.
+                </h4>
+
+                <br/>
+                <h4 style="color: #6EA522;font-weight: bold;text-align:right;">
+
+                    بعد العلاج يرجو مراعات النصائح التالية:
+                    <br/>
+                    <br/>
+                    • لا يمكن وضع المكياج الا بعد مضي 12 ساعة على العلاج.
+                    <br/>
+                    • يمنع التعرض للايزر بعد العلاج.
+                    <br/>
+                    • يمنع ازالة الشعر بالشمع و الحلاوة.
+                    <br/>
+                    • يرجى المواظبة على الكريمات التي اوصت بها المعالجة.
+                    <br/>
+                    • يرجى عدم التعرض المباشر للشمس من دون واقي للشمس.
+                    <br/>
+                    • الحصول على النوم الكافي.
+                    <br/>
+                    • شرب كميات كافية من الماء.
+                    <br/>
+                    • اتباع نظام غذائي متوازن.
+                    <br/>
+                    • التنظيف الدائم للبشرة.
+                    <br/>
+                    • الابتعاد عن التدخين.
+                    <br/>
+                    • ممارسة الرياضة و القيام بمساج يومي لعضلات الوجه و البشرة.
+                    <br/>
+                    • التقليل من الاجتهاد و التوتر النفسي.
+                    <br/>
+                    • علاج اي تغيرات هرمونية لدى الطبيب المختص.
+                    <br/>
+                    • التنظيف اليومي للبشرة في المنزل باستخدام الحليب المجفف و التونر و الغسول.
+                    <br/>
+                    <br/>
+                    خانة خاصة بالزبائن:
+                    <br/>
+                    اؤكد ان جميع المعلومات التي حصلت عليها صحيحة.
+                    <br/>
+                    اؤكد ان المعالج قد اعطاني كل المعلومات المطلوبة فيما يتعلق بالعلاج.
+                    <br/>
+                    اؤكد التزامي بجميع النصائح التي اعطيت لي للحصول على نتيجة افضل.
+                    <br/>
+                    اؤكد موافقتي على كل ما سبق.
+                    <br/>
+                    اؤكد بانني اعطيت كل المعلومات الصحيحة فيما يتعلق ببشرتي.
+                </h4>
+                <br/>
+
+                <table style="width:100%;">
+                    <tr>
+                        <th style="width:30%;"></th>
+                        <th style="width:70%;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="customer_signature"/>
+                        </td>
+                        <td>
+                            <field name="customer_signature" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="salon_signature"/>
+                        </td>
+                        <td>
+                            <field name="salon_signature" widget="signature" nolabel="1"/>
+                        </td>
+                    </tr>
+                </table>
+                <footer>
+                    <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                    <button name="action_print" style="text-align: left;" string="Print" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel / إلغاء " class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_consent_facial" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">consent.facial</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_consent_facial_wizard"/>
+        <field name="context">{'default_type':'facial'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_consent_facial" name="FACIAL" action="action_consent_facial" sequence="51"
+              groups="ssquared_consent_management.group_consent_user"/>
+
+</odoo>

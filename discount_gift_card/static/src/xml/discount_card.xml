@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_extend_template" inherit_id="point_of_sale.template">
+
+<t t-extend="ActionpadWidget">
+    <t t-jquery="button.pay" t-operation="after">
+        <button class="purchase_gift_card" style="width:46%;height:45px;"><b>Buy Cards</b></button>
+        <button class="redeem_gift_card" style="width:46%;height:45px;"><b>Redeem Cards</b></button>
+    </t>
+</t>
+
+<t t-name="PurchaseGiftCardPopupWidget">
+    <div class="modal-dialog">
+        <div class="popup popup-textinput">
+            <p class="title">Buy Cards</p>
+            <div style="display:inline-block">
+                <label  style="display:block">Card No:</label>
+                <input class="card_no" type='password' t-att-value="widget.options.card_no"></input>
+            </div>
+            <div style="display:inline-block">
+                <label style="display:block">Amount:</label>
+                <input class="discount_gift_card_amount" type='number' t-att-value="widget.options.discount_gift_card_amount"></input>
+            </div>
+            <div class="footer">
+                <div class="button Purchase_gift_card">
+                    Purchase Card
+                </div>
+                <div class="button cancel">
+                    Cancel
+                </div>
+            </div>
+        </div>
+    </div>
+</t>
+
+    <!--<t t-extend="OrderWidget">-->
+        <!--<t t-jquery="div.subentry" t-operation="after">-->
+            <!--<div class='subentry'><span class="value_vip_percent"></span></div>-->
+        <!--</t>-->
+    <!--</t>-->
+
+    <!--<t t-extend="PosTicket">-->
+        <!--<t t-jquery="tr.emph" t-operation="before">-->
+            <!--<tr>-->
+                <!--<td><b>VIP Treatment:</b></td>-->
+                <!--<td class="pos-right-align">-->
+                    <!--<b><t t-esc="widget.format_currency(order.get_vip_total())"/></b>-->
+                <!--</td>-->
+            <!--</tr>-->
+        <!--</t>-->
+  <!--</t>-->
+</templates>

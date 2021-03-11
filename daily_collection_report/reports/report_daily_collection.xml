@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_daily_collection">
+    <t t-call="report.html_container">
+    <t t-call="beauty_pos.internal_layout">
+            <div class="page" style="font-size: 12px;">
+                <div class="text-center" style="font-size: 14px;">
+                    <h2>Daily Collection Report</h2>
+                    <table name="master" width="90%">
+                            <colgroup>
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <tbody class="patient_invoice_tbody">
+                                <tr>
+                                    <td><strong>Period From</strong></td>
+                                    <td>: <span t-esc="date_from" t-options='{"widget": "date"}'/></td>
+                                    <td><strong>Period To</strong></td>
+                                    <td>: <span t-esc="date_to" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Customer</strong></td>
+                                    <td>:
+                                        <t t-if="partner_name">
+                                            <span t-esc="partner_name"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td><strong>Report Date</strong></td>
+                                    <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cashier</strong></td>
+                                    <td>:
+                                        <t t-if="user_name">
+                                            <span t-esc="user_name"/>
+                                        </t>
+                                        <t t-else="">
+                                            All
+                                        </t>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+
+                <h3>Bills</h3>
+                <table width="100%" class="table table-striped">
+                    <thead >
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sl No</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Ref</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Receipt Ref</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Date</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Cashier</th>
+                            <th t-if="not show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="5" width="20%">Customer</th>
+                            <th t-if="show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                            <th t-if="show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Services</th>
+                            <th t-if="show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>
+                            <th t-if="show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Disc</th>
+                            <th t-if="show_details" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Subtotal</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">By Cash</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="7%" class="text-right">By Card</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="7%" class="text-right">By Credit</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total collected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="sl_no" t-value="0"/>
+                        <t t-set="cash_total" t-value="0"/>
+                        <t t-set="credit_total" t-value="0"/>
+                        <t t-set="pay_later_total" t-value="0"/>
+                        <t t-set="sale_total" t-value="0"/>
+                        <t t-foreach="info['content']" t-as='order'>
+                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-set="sl_no" t-value="sl_no+1"/>
+                                <t t-set="cash_total" t-value="cash_total+order['cash_amt']"/>
+                                <t t-set="credit_total" t-value="credit_total+order['credit_amt']"/>
+                                <t t-set="pay_later_total" t-value="pay_later_total+order['pay_later_amt']"/>
+                                <t t-set="sale_total" t-value="sale_total+order['sale_amt']"/>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="sl_no" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order['order_here'].name" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order['order_here'].pos_reference" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><span t-esc="order['order_here'].date_order" t-options="{'widget': 'datetime'}"/></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order['cashier_name']" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="5">
+                                    <t t-set="order_line_discount" t-value="0"/>
+                                    <t t-foreach="order['order_here'].lines" t-as='order_l'>
+                                        <t t-if="order_l.discount">
+                                            <t t-set="sub_total" t-value="order_l.qty*order_l.price_unit"/>
+                                            <t t-set="o_line_discount" t-value="sub_total-order_l.price_subtotal_incl"/>
+                                            <t t-set="order_line_discount" t-value="order_line_discount+o_line_discount"/>
+                                        </t>
+                                    </t>
+                                    <div style="float:left;width:67%;"><t t-esc="order['order_here'].partner_id.name" /></div>
+                                    <div style="float:right;width:33%;">
+                                        <t t-if="order['order_here'].amt_discount+order_line_discount">
+                                            Disc: <t t-esc="order['order_here'].amt_discount+order_line_discount"/>
+                                        </t>
+                                    </div>
+                                </td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% order['cash_amt']" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% order['credit_amt']" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% order['pay_later_amt']" /></td>
+                                <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><t t-esc="'%.2f'% order['sale_amt']" /></td>
+                            </tr>
+                            <tr t-if="show_details" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-foreach="order['order_here'].lines" t-as='order_l'>
+                                <t t-if="not order['order_here'].negative_entry">
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" colspan="5"/>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><t t-esc="order_l.product_id.name" /></td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><t t-esc="order_l.staff_assigned_id.name" /></td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                        <t t-if="order_l.discount">
+                                            <t t-set="sub_total" t-value="order_l.qty*order_l.price_unit"/>
+                                            <t t-set="line_discount" t-value="sub_total-order_l.price_subtotal_incl"/>
+                                            <t t-esc="'%.2f'% line_discount" />
+                                        </t>
+                                        <t t-else=""></t>
+                                    </td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.price_subtotal_incl" /></td>
+                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" colspan="4"/>
+                                </t>
+                                <t t-if="order['order_here'].negative_entry">
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" colspan="5"/>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><t t-esc="order_l.product_id.name" /></td>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><t t-esc="order_l.staff_assigned_id.name" /></td>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                        <t t-if="order_l.discount">
+                                            <t t-set="sub_total" t-value="order_l.qty*order_l.price_unit"/>
+                                            <t t-set="line_discount" t-value="sub_total-order_l.price_subtotal_incl"/>
+                                            <t t-esc="'%.2f'% line_discount" />
+                                        </t>
+                                        <t t-else=""></t>
+                                    </td>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.price_subtotal_incl" /></td>
+                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" colspan="4"/>
+                                </t>
+
+                            </tr>
+                        </t>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="10"><b>Total </b></td>
+                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% cash_total" /></b></td>
+                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% credit_total" /></b></td>
+                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% pay_later_total" /></b></td>
+                            <td style="background-color: #eed6e3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% sale_total" /></b></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3> Free of Cost(FOC)</h3>
+                <table width="100%" class="table table-striped">
+                    <thead >
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Ref</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Order Date</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Cashier</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Customer</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Service</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Staff</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Qty</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Unit price</th>
+                            <th style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="foc_total" t-value="0"/>
+                        <t t-foreach="info['content']" t-as='info_content'>
+                            <t t-foreach="info_content['order_here']" t-as='real_order'>
+                                <t t-if="real_order.is_order_foc">
+                                    <tr t-foreach="real_order.lines" t-as='order_line' style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <t t-set="foc_total" t-value="foc_total+(order_line.qty*order_line.price_unit)"/>
+                                        <t t-if="not real_order.negative_entry">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.name" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.date_order" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.cashier_name.name" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.partner_id.name" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_line.product_id.name" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_line.staff_assigned_id.name" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_line.qty" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_line.price_unit" /></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="order_line.qty*order_line.price_unit" /></td>
+                                            </t>
+                                            <t t-if="real_order.negative_entry">
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.name" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.date_order" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.cashier_name.name" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.partner_id.name" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_line.product_id.name" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_line.staff_assigned_id.name" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_line.qty" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_line.price_unit" /></td>
+                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="order_line.qty*order_line.price_unit" /></td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <t t-if="not real_order.is_order_foc">
+                                    <t  t-foreach="real_order.lines" t-as='order_l'>
+                                        <t t-if="order_l.is_order_line_foc">
+                                            <t t-set="foc_total" t-value="foc_total+(order_l.qty*order_l.price_unit)"/>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <t t-if="not real_order.negative_entry">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.name" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.date_order" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.cashier_name.name" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.partner_id.name" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_l.product_id.name" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_l.staff_assigned_id.name" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.qty" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.price_unit" /></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="order_l.qty*order_l.price_unit" /></td>
+                                                </t>
+                                                <t t-if="real_order.negative_entry">
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.name" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.date_order" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.cashier_name.name" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="real_order.partner_id.name" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_l.product_id.name" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-center"><t t-esc="order_l.staff_assigned_id.name" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.qty" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="'%.2f'% order_l.price_unit" /></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" class="text-right"><t t-esc="order_l.qty*order_l.price_unit" /></td>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                </t>
+                            </t>
+                            </t>
+                        </t>
+                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" colspan="8"><b>Total </b></td>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><b><t t-esc="'%.2f'% foc_total" /></b></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br/>
+            </div>
+    </t>
+    </t>
+</template>
+</data>
+</openerp>

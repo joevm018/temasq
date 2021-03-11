@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_product_promotion_search" model="ir.ui.view">
+            <field name="name">product.promotion.search.view</field>
+            <field name="model">product.promotion</field>
+            <field name="arch" type="xml">
+                <search string="Promotions">
+                    <field name="name"/>
+                    <field name="promotion_start_date" />
+                    <field name="promotion_end_date" />
+                    <filter string="In-Active" name="in_active" domain="[('active','=',False)]"/>
+                    <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="product_promotion_tree" model="ir.ui.view">
+            <field name="name">view.product.promotion.tree</field>
+            <field name="model">product.promotion</field>
+            <field name="arch" type="xml">
+                <tree string="Promotions">
+                    <field name="name"/>
+                    <field name="promotion_start_date" />
+                    <field name="promotion_end_date" />
+                    <field name="compute_promo_valid" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_promotion_form" model="ir.ui.view">
+            <field name="name">product.promotion.form</field>
+            <field name="model">product.promotion</field>
+            <field name="arch" type="xml">
+                <form string="Promotions">
+                    <!--<header>-->
+                        <!--<field name="state" widget="statusbar" statusbar_visible="draft,done"/>-->
+                    <!--</header>-->
+
+                    <sheet>
+                        <div class="oe_title">
+							<h1>
+								<field name="name"/>
+							</h1>
+						</div>
+                        <group>
+                            <group>
+                                <field name="promotion_start_date"/>
+                                <field name="compute_promo_valid" invisible="1" />
+                            </group>
+                            <group>
+                                <field name="promotion_end_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="promotion" string="Promotion"  >
+                                <field name="promo_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="discount_percent"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                            </group>
+                                            <group>
+                                                <field name="discount_percent"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_promotion" model="ir.actions.act_window">
+            <field name="name">Promotion</field>
+            <field name="res_model">product.promotion</field>
+            <field name="view_type">form</field>
+            <field name="context">{}</field>
+            <!--<field name="context">{'search_default_active':True}</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_product_promotion_search"/>
+        </record>
+
+        <menuitem id="menu_product_promotion_root" name="Promotion" parent="point_of_sale.menu_point_root"
+                  groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" sequence="67" />
+            <menuitem id="menu_product_promotion" name="Promotion" action="action_product_promotion"
+                  parent="menu_product_promotion_root" sequence="1"/>
+
+
+    </data>
+</odoo>

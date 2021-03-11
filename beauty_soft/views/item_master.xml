@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record model="ir.actions.act_window" id="action_consumables">
+           <field name="name">Consumables</field>
+           <field name="res_model">product.template</field>
+           <field name="view_type">form</field>
+           <field name="view_mode">tree,form</field>
+           <field name="domain">[('type', '=', 'consu')]</field>
+           <field name="context">{'default_type':'consu'}</field>
+           <field name="view_id" ref="product.product_template_tree_view"/>
+       </record>
+       <record model="ir.actions.act_window" id="action_products">
+           <field name="name">Retail Products</field>
+           <field name="res_model">product.template</field>
+           <field name="view_type">form</field>
+           <field name="view_mode">tree,form</field>
+           <field name="domain">[('type', '=', 'product')]</field>
+           <field name="context">{'default_type':'product'}</field>
+           <field name="view_id" ref="product.product_template_tree_view"/>
+       </record>
+       <record model="ir.actions.act_window" id="action_services">
+           <field name="name">Services</field>
+           <field name="res_model">product.template</field>
+           <field name="view_type">form</field>
+           <field name="view_mode">tree,form</field>
+           <field name="domain">[('type', '=', 'service')]</field>
+           <field name="context">{'default_type':'service'}</field>
+           <field name="view_id" ref="product.product_template_tree_view"/>
+       </record>
+
+       <menuitem id="point_of_sale.menu_pos_products" name="Products" parent="point_of_sale.menu_point_config_product" sequence="19" />
+       <menuitem id="menu_items" name="Items" parent="sub_menu_master" sequence="55" />
+       <menuitem id="menu_consumables" name="Consumables" parent="menu_items" action="action_consumables" sequence="10" />
+       <menuitem id="menu_products" name="Retail Products" parent="menu_items" action="action_products" sequence="15" />
+       <menuitem id="menu_services" name="Services" parent="menu_items" action="action_services" sequence="20" />
+    </data>
+</odoo>

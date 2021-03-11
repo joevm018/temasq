@@ -1,0 +1,194 @@
+<template>
+    <t t-extend="CalendarView2.quick_create">
+        <t t-jquery="input.customer_new_phone" t-operation="after">
+            <div class="combo_session_ctrl o_hidden">
+                <button class="btn btn-primary choose_combo">Available Sessions</button>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="CalendarView.sidebar.filters">
+        <t t-jquery="div.state_appt_executed" t-operation="after">
+            Last Appointment<div class="status_calendar last_session"></div><br/>
+        </t>
+    </t>
+
+    <div t-name="service_line_box" class="one" t-att-id="'border_class_' + sl_no" t-att-data-combo_id="item.id">
+        <div class="border_class">
+            <div class="service_start_t">
+                <input class="sl_no" readonly="1" type="text" t-att-value="sl_no"
+                       t-att-id="'sl_no_' + sl_no"/>
+                <button class="delete_order" t-att-id="'delete_order_' + sl_no">
+                    <img style="pointer-events: none;" class="close_icon"
+                         src="/calendar_scheduler/static/src/img/close.png" width="28" height="28"/>
+                </button>
+            </div>
+            <div class="service_start">
+                <div class="start_icon_div">
+                    <div class="timer">
+                        <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/timeicon.png"
+                             width="32" height="32"/>
+                    </div>
+                </div>
+                <div class="start_div">
+                    <select class="modal_scheduler_hour" t-att-id="'modal_scheduler_hour_' + sl_no">
+                        <t t-foreach="scheduler_hour" t-as="sh">
+                            <t t-if="hours==sh">
+                                <option selected="True" t-att-value="hours"><t t-esc="hours"/></option>
+                            </t>
+                            <t t-else="">
+                                <option t-att-value="sh"><t t-esc="sh"/></option>
+                            </t>
+                        </t>
+                    </select>
+
+                    <select class="modal_scheduler_minute" t-att-id="'modal_scheduler_minute_' + sl_no">
+                        <t t-foreach="scheduler_minute" t-as="sm">
+                            <t t-if="minutes==sm">
+                                <option selected="True" t-att-value="minutes"><t t-esc="minutes"/></option>
+                            </t>
+                            <t t-else="">
+                                <option t-att-value="sm"><t t-esc="sm"/></option>
+                            </t>
+                        </t>
+                    </select>
+                </div>
+                <div class="duration_icon_div">
+                    <div class="duration_icon">
+                        <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/duration.jpg"
+                             width="32" height="32"/>
+                    </div>
+                </div>
+                <div class="duration_div">
+                    <input class="duration" type="text" t-att-value="current_duration"
+                           t-att-id="'duration_' + sl_no"/>
+                </div>
+            </div>
+            <div class="staff_service">
+                <div class="staff_icon_div">
+                    <div class="staff_icon">
+                        <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/staff.png" width="32"
+                             height="32"/>
+                    </div>
+                </div>
+                <div class="staff_div">
+                    <select class="staff" t-att-id="'staff_' + sl_no">
+                        <t t-if="config_staff_type=='service_based_staff'">
+                            <t t-foreach="staffs" t-as="staff">
+                                <t t-foreach="service_no_1.staff_ids" t-as="st">
+                                    <t t-if="st==staff.id">
+                                        <t t-if="staff_prev">
+                                            <t t-set="staff_prevValue" t-value="staff_prev.options[staff_prev.selectedIndex].value"/>
+                                            <t t-if="staff_prevValue == staff.id">
+                                                <option selected="True" t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                            </t>
+                                            <t t-else="">
+                                                <option t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                        </t>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <t t-foreach="staffs" t-as="staff">
+                                <t t-if="staff.is_beautician">
+                                    <t t-if="staff_prev">
+                                        <t t-set="staff_prevValue" t-value="staff_prev.options[staff_prev.selectedIndex].value"/>
+                                        <t t-if="staff_prevValue == staff.id">
+                                            <option selected="True" t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <option t-att-value="staff.id"><t t-esc="staff.name"/> </option>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                    </select>
+                </div>
+                <div class="existing_service_icon">
+                    <img style="pointer-events: none;" src="/calendar_scheduler/static/src/img/service_icon.png"
+                         width="32" height="32"/>
+                </div>
+                <div class="service_div">
+                    <select class="services" name="services" placeholder="Services" t-att-id="'services_' + sl_no">
+                        <option t-foreach="services" t-as="service" t-att-value="service.id">
+                            <t t-esc="service.name"/>
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="comboModal" tabindex="-1" role="dialog"
+         aria-labelledby="comboModalLabel" t-name="scheduler_extended_tres_jolie.comboModal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Choose Session</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&amp;times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr class="session_header">
+                                        <th>Packages/Offer</th>
+                                        <th>Item</th>
+                                        <th>Select</th>
+                                        <th>Staff</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="combo" t-as="i">
+                                        <t t-set="c" t-value="combo[i]"/>
+                                        <tr t-att-data-id="i" class="session_line">
+                                            <td class="s_col combo_id">
+                                                <span t-if="c.combo_id" t-esc="c.combo_id[1]"/>
+                                            </td>
+                                            <td class="s_col product_id">
+                                                <span t-if="c.product_id" t-esc="c.product_id[1]"/>
+                                            </td>
+                                            <td class="s_col selected">
+                                                <t t-if="c.selected">
+                                                    <input type="checkbox" checked="true" class="selected" name="selected"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <input type="checkbox" class="selected" name="selected"/>
+                                                </t>
+                                            </td>
+                                            <td class="s_col staff_id">
+                                                <select class="staff_id" style="min-width:150px;" name="staff_id">
+                                                    <option value=""/>
+                                                    <t t-foreach="staffs" t-as="staff">
+                                                        <option t-att-value="staff.id"><t t-esc="staff.name"/></option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary apply"  data-dismiss="modal">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

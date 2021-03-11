@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_category_wizard" model="ir.ui.view">
+        <field name="name">category.wizard.form</field>
+        <field name="model">category.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Category Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="staff_id"/>
+                        <field name="data" readonly="1" filename="name" attrs="{'invisible':[('state','=','choose')]}"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="categ_id"/>
+                        <field name="name" invisible="1"/>
+						<field name="state" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_excel_report" string="Excel" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_print_sales_category" model="ir.actions.act_window">
+        <field name="name">Category Report</field>
+        <field name="res_model">category.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_print_sales_category"
+        name="Category Report"
+        parent="point_of_sale.menu_point_rep"
+        sequence="10"
+        action="action_print_sales_category"
+       />
+
+</odoo>

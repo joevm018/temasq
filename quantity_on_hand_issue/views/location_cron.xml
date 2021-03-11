@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record id="ir_cron_update_loc_parent_left_right" model="ir.cron">
+            <field name="name">Quantity on hand- Parent left right recomputing</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2020-12-31 7:00:00</field>
+            <field eval="False" name="doall" />
+            <field name="model">stock.location</field>
+            <field name="function">_update_parent_left_right</field>
+            <field name="args">()</field>
+      </record>
+    </data>
+</odoo>

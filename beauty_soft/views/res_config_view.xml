@@ -1,0 +1,52 @@
+<odoo>
+  <data>
+    <record id="account_config_inherited_view" model="ir.ui.view">
+      <field name="name">account.config.settings.inherited</field>
+      <field name="model">account.config.settings</field>
+      <field name="inherit_id" ref="account.view_account_config_settings"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@name='accounting']" position="after">
+          <group string="Consumable Account" name="Consumable_Income">
+            <label for="id" string="Consumables"/>
+            <div name="Consumable_Income_conf">
+              <div>
+                <label for="consum_income_acc" string="Income"/>
+                <field name="consum_income_acc" class="oe_inline" />
+              </div>
+              <div>
+                <label for="consum_expense_acc" string="Expense"/>
+                <field name="consum_expense_acc" class="oe_inline" />
+              </div>
+            </div>
+          </group>
+          <group string="Retail Account" name="Retail_Income">
+            <label for="id" string="Retails"/>
+            <div name="Retail_Income_conf">
+              <div>
+                <label for="retail_income_acc" string="Income"/>
+                <field name="retail_income_acc" class="oe_inline" />
+              </div>
+              <div>
+                <label for="retail_expense_acc" string="Expense"/>
+                <field name="retail_expense_acc" class="oe_inline" />
+              </div>
+            </div>
+          </group>
+          <group string="Service Account" name="Service_Income">
+            <label for="id" string="Services"/>
+            <div name="Service_Income_conf">
+              <div>
+                <label for="service_income_acc" string="Income"/>
+                <field name="service_income_acc" class="oe_inline" />
+              </div>
+              <div>
+                <label for="service_expense_acc" string="Expense"/>
+                <field name="service_expense_acc" class="oe_inline" />
+              </div>
+            </div>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_website_cart_search" model="ir.ui.view">
+            <field name="name">website.cart.search.view</field>
+            <field name="model">website.cart</field>
+            <field name="arch" type="xml">
+                <search string="Carts">
+                    <field name="partner_id" />
+                </search>
+            </field>
+        </record>
+
+        <record id="website_cart_tree" model="ir.ui.view">
+            <field name="name">view.website.cart.tree</field>
+            <field name="model">website.cart</field>
+            <field name="arch" type="xml">
+                <tree string="Carts">
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_cart_form" model="ir.ui.view">
+            <field name="name">website.cart.form</field>
+            <field name="model">website.cart</field>
+            <field name="arch" type="xml">
+                <form string="Carts">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="carts" string="Cart line"  >
+                                <field name="cart_line">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="price_unit"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="name"/>
+                                            </group>
+                                            <group>
+                                                <field name="product_uom_qty"/>
+                                                <field name="price_unit"/>
+                                                <field name="date_order"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_website_cart" model="ir.actions.act_window">
+            <field name="name">Carts</field>
+            <field name="res_model">website.cart</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_website_cart_search"/>
+        </record>
+
+        <menuitem id="menu_website_cart_root" name="Shopping" parent="website.menu_website_configuration" sequence="2" />
+            <menuitem id="menu_website_cart" name="Carts" action="action_website_cart"
+                  parent="menu_website_cart_root" sequence="1"/>
+
+
+    </data>
+</odoo>

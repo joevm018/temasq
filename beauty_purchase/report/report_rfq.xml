@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- RFQ Print template -->
+        <template id="purchase.report_purchasequotation_document">
+            <t t-call="report.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page" style="font-size: 15px;">
+                    <div class="row mt32 mb32"/>
+                    <table width="100%" class="table table-striped">
+                            <colgroup>
+                                <col width='60%' />
+                                <col width='40%' />
+                            </colgroup>
+                            <tbody>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td colspan="2" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                        <h2>
+                                            <b>Request for Quotation</b>
+                                        </h2>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                        <b>BUYER DETAILS:</b>
+                                        <br/>
+                                        <img src='/web/binary/company_logo'/>
+                                        <br/><span t-field="o.company_id.name"/>
+                                        <br/><span t-field="o.company_id.street"/>,<span t-field="o.company_id.street2"/>
+                                        <br/><span t-field="o.company_id.city"/>-<span t-field="o.company_id.country_id"/>
+                                        <span t-if="o.company_id.phone"><br/>TEL: :&#160;&#160;<span t-field="o.company_id.phone"/></span>
+                                        <br/>EMAIL:&#160;&#160;<span t-field="o.company_id.email"/>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                        <b>SUPPLIER DETAILS:</b>
+                                        <br/><span t-field="o.partner_id.name"/>
+                                        <br/><span t-field="o.partner_id.street"/>
+                                        <br/><span t-field="o.partner_id.street2"/>
+                                        <br/><span t-field="o.partner_id.city"/>-<span t-field="o.partner_id.country_id"/>
+                                        <span t-if="o.partner_id.phone"><br/>TEL :&#160;&#160;<span t-field="o.partner_id.phone"/></span>
+                                        <!--<br/>EMAIL:&#160;&#160;<span t-field="o.partner_id.email"/>-->
+                                        <!--<span t-if="o.partner_id.vat">VAT: :&#160;&#160;<span t-field="o.partner_id.vat"/></span>-->
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td colspan="2" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                        <div  style="width: 100%;">
+                                           <div style="width: 50%;float:left;">
+                                                QUOTATION NUMBER<br/>
+                                               DATE <br/>
+                                               TERM OF PAYMENT <br/>
+                                               VENDOR/OTHER REFERENCE <br/>
+                                                <!--VOUCHER NO:<br/>-->
+                                            </div>
+                                           <div style="width: 45%;float:left;">
+                                                <b><t t-esc="o.name"/></b> <br/>
+                                                <!--<t t-esc="o.partner_ref"/> <br/>-->
+                                                <t t-esc="o.date_order"  t-options='{"widget": "datetime"}'/> <br/>
+                                                <t t-esc="o.payment_term_id.name"/> <br/>
+                                                <t t-esc="o.partner_ref"/> <br/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <p>We are pleased to confirm our purchase of the following items.</p>
+
+                    <table width="100%">
+                            <thead >
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Sr.No</th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Description</th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Qty</th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Expected Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sl_no" t-value="0"/>
+                                <t t-set="product_qty_total" t-value="0"/>
+                                <t t-foreach="o.order_line" t-as='order_line'>
+                                    <t t-set="sl_no" t-value="sl_no+1"/>
+                                    <t t-set="product_qty_total" t-value="product_qty_total+order_line.product_qty"/>
+                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="sl_no" /></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left"><span t-esc="order_line.name"/></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="int(order_line.product_qty)" /></td>
+                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><t t-esc="order_line.date_planned" t-options='{"widget": "datetime"}'/></td>
+                                    </tr>
+                                </t>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td colspan="2" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b>Total </b></td>
+                                    <td style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"><b><t t-esc="int(product_qty_total)" /></b></td>
+                                    <td style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"/>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td colspan="4" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+                                        <br/>
+                                        &#160;&#160;&#160;Terms and conditions:
+                                        <br/>
+                                        &#160;&#160;&#160;Please send us quotation within 2-3 days from date of inquiry
+                                        <br/>
+                                        <br/>
+                                        <b>Authorized signatory:</b>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <div  style="width: 100%;">
+                                           <div style="width: 43%;float:left;">
+                                                .......................<br/>Signature 1
+                                            </div>
+                                           <div style="width: 44%;float:left;">
+                                                .......................<br/>Signature 2
+                                            </div>
+                                            <div style="width: 12%;float:left;">
+                                                .......................<br/>Signature 3
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td colspan="4" style="background-color: #d3d3d3;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                        If you have any question do not hesitate to contact us<br/>
+                                        <t t-esc="o.company_id.phone"/>
+                                        &#160;&#160;Web:&#160;<t t-esc="o.company_id.website"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
